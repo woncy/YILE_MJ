@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="net.gatewayListenServerPort">11030</entry>
+    <entry key="net.sceneListenServerPort">11031</entry>
+    <entry key="net.adminListenServerPort">11032</entry>
+    <entry key="net.zjhSceneListenServerPort">11034</entry>
+    <entry key="net.douniuSceneListenServerPort">11036</entry>
+    <entry key="gatewayUserMaxConnect">8000</entry>
+    <!--#jdbc.url=jdbc:mysql://192.168.8.200:3306/tr_test?autoReconnect=true&amp;characterEncoding=utf-8-->
+    <entry key="jdbc.url">jdbc:mysql://127.0.0.1:3306/boss?autoReconnect=true&amp;characterEncoding=utf-8&amp;useSSL=false</entry>
+    <entry key="jdbc.username">root</entry>
+    <entry key="jdbc.password">123456</entry>
+    <entry key="jdbc.maxNums">20</entry>
+    <entry key="jdbc.minNums">5</entry>
+    <entry key="gmStatus">true</entry>
+    <entry key="titansMaxPlayer">20</entry>
+    <entry key="api.appKey">nXMk8qvf8CpdR2KI</entry>
+    <entry key="api.appId">1104202590</entry>
+    <entry key="api.url">119.147.19.43</entry>
+    <entry key="api.payZoneid">1</entry>
+    <entry key="service.dbThreadNums">10</entry>
+    <entry key="service.asyncThreadNums">4</entry>
+
+    <!--阿里云短信配置-->
+    <entry key="aliyun.accessKeyId">短信</entry>
+    <entry key="aliyun.secret"></entry>
+    <entry key="aliyun.signName">拍拍麻将</entry>
+    <entry key="aliyun.templateCode"></entry>
+
+    <!-- 短信相关配置信息 -->
+    <entry key="sms.platform">chuanglan</entry>
+    <entry key="sms.checkNums">4</entry>
+    <entry key="sms.expireMinutes">15</entry>
+    <entry key="sms.codeLength">4</entry>
+
+	<!-- 微信支付 -->
+	<!--统一下单url  -->
+	<entry key="wxPay.payUrl">https://api.mch.weixin.qq.com/pay/unifiedorder</entry>
+	<!--appid  -->
+	<entry key="wxPay.appid">wx6cd6a382dde4b1b7</entry>
+	
+	<!--商户号  -->
+	<entry key="wxPay.mch_id">1431254302</entry>
+	
+	<!-- <entry key="wxPay.mch_id">1481707432</entry> -->
+
+	<!--支付场景信息提示  -->
+	<entry key="wxPay.body">亲友局-游戏充值</entry>
+	<!--支付回调地址  请勿修改/wxpay部分!-->
+	<entry key="wxPay.notify_url">http://122.114.150.35:8080/wxpay</entry>
+	<!--应用类型 请勿修改!-->
+	<entry key="wxPay.trade_type">APP</entry>
+	<!--支付秘钥  -->
+	<entry key="wxPay.key">6875faaab81cc96b57cbe57add4c9cc8</entry>
+
+
+	<!--支付宝支付-->
+	<!-- 固定值，一般不需要更改 -->
+	<entry key="aliPay.url">https://openapi.alipay.com/gateway.do</entry>
+	<!-- 应用appid -->
+	<entry key="aliPay.app_id">2017061407489600</entry>
+	<!-- 私钥 -->
+	<entry key="aliPay.app_private_key">MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCVzYxNS4wmbwV0kWlSB0flEhCPkMP7AuQGS3/LtdQm7E5ts4hY+RFvLHUMsihM1am9MbMzqXOgq+dzCMROeaj470D1IZ96wMm8IHuYQGQ0MjXDo6QXYQTLm5dIYWM1T8dHEyCieORq/YyijiUJCNRKvvHPaTBU95KIlipk7omrCDkEM32cOZHWhA5XP8t+nl6OYTBe/o950MpiQYeVJZQJ0zWR/Qlz6Y9a6VJZPOwCB/Wx0ykIJEPiWAxT7f2S78aIQAJS3cj96yuo3/KbHrlRBgpKMhBzjItQ+rKrQDbf1fQXNGVrtq2Yifz4X/qFMx6l4Z309c4Jb2kIXseUSL7DAgMBAAECggEAOxGsCyaJAvawHgDgmLnKPadb5GBfBvFi3KCUqczu9NIlMtiiIQNFPqM3HGR7w6BUqAea8/oTX/2o7BE+5vrOCCq/YGl7qzmt0oK0eZqaaIKL9LLoF1foPikCBEZyiikFGR+PtMEawJ1uAQMv01op67dTPkfqCPb+TuF3ogj1O/0NmqiNZAvAe4j1ZLbpYK6HqNkE/0YtOweiDAKYsXReLQn6E2p+KmeLAQsrL27ysJAJYnCCputoaGeKISmixX0SCOOyZBnljfB4pUSiAkTY6Xn2wWw1hMDopfdlLCfde6rJovypacQQwSvuRycWL9GFdlIaYWqQeu4Z0MDmNgnZgQKBgQDGdI+g5mpCe+I05eKt5AqbAxvX3aKINsvSwn/PoBgqPu6ASyQLJKcgBzTiLfeh/c8QTrXFJRuPhOp2ySZ8S99xXM54cEm82mgrMgWDiPOJRs2HxpSZcPr1LeHLZWo1ZNXmkGSXtYxq3Bsl9V8MlqJ1Ucxwkec59Ww2EVebo+7YowKBgQDBPX67jr9lJ7MEjvsPx1CxxzeoHB/ucb/ANiD4mwhibZgFmn3CkL5PTcd0wnXKFzcnLjIz2MAoNjMNV7RYxO986hWEBcNIyXuG0Rt3YiTlNEEvfDISGCkKbdST8es6kMWNhNjp12VqkTHhsyoqjMCsvOBeli8my9lOwPO5zvJDYQKBgApp7WuFC8hnVcxuz8FOORw/QoPGVpQNRA7QNALCJOJ6oOtMhhyrlLWCi0zfGqJ+fhId/z3UH6kdUWxgS8uz84qwUwlQ4x2s3FB/9HgdhKIMfBaG3h9bJWAeQz34GWWp3+uUYiLv3OlymV4ZjR5M/UNownCZx2dsMHx51n4NUSg/AoGBAIt/6FBf8Z2Ftj9RNL8kRQXB6lTq0MZiyWlp6g1uZfQgZ8GL0MO3mBtJ6/ZHN59HeSJIwCcbj0S4M8yrBt+ac8T6e8POITcXdJxTsn9Rk47/VRuBjefwFxiXRwHyf7zMrEDIqYrOW0E+RgNIQuVqrOFGjLbbtnhMarjmpEv7sHqhAoGADxkIjxhMjTc/4xti5J7yyin7tcpQvjvdWLvZxmn5YNCGHuHXdLuPgZoj49YiCdw6eSbAewxdWqvjgbQXoODMdtDax0/3aCz2GZ3om8uDm7nnUPDkyr+aNjqtlGstD6Q/ybYY3uSH9/8wIzHtjJGQ/798T6Uaw8zW05f9VQkri18=</entry>
+	<!-- 公钥 -->
+	<entry key="aliPay.app_public_key">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlc2MTUuMJm8FdJFpUgdH5RIQj5DD+wLkBkt/y7XUJuxObbOIWPkRbyx1DLIoTNWpvTGzM6lzoKvncwjETnmo+O9A9SGfesDJvCB7mEBkNDI1w6OkF2EEy5uXSGFjNU/HRxMgonjkav2Moo4lCQjUSr7xz2kwVPeSiJYqZO6Jqwg5BDN9nDmR1oQOVz/Lfp5ejmEwXv6PedDKYkGHlSWUCdM1kf0Jc+mPWulSWTzsAgf1sdMpCCRD4lgMU+39ku/GiEACUt3I/esrqN/ymx65UQYKSjIQc4yLUPqyq0A239X0FzRla7atmIn8+F/6hTMepeGd9PXOCW9pCF7HlEi+wwIDAQAB</entry>
+	<!-- 合作伙伴 Id-->
+	<entry key="aliPay.partner_id">2088721109580517</entry>
+	<!--支付通知地址，回调地址  -->
+	<entry key="aliPay.notifyurl">122.114.150.35:8080/alipay</entry>
+	<!--  -->
+	<entry key="aliPay.timeoutExpress">30m</entry>
+	<!--  -->
+	<entry key="aliPay.body">亲友局-游戏充值</entry>
+	<!--  -->
+	<entry key="aliPay.subject">购买房卡</entry>
+
+    <!--管理接口私钥-->
+    <entry key="admin.privateKey">MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAI4tfrL9R3uy8eLg8M5SBAyGf0OtaNNTtyF7_wo4rRegi1jw2UCFVd26zzZe-zbrw74aCZ5WY4bBd_GsWB-3kIJDH6iRAzb-pu4pYfUgDclFhsrPYq33fC0dkepIWbC0hy_eTG6lvD26ao_x0GOw9S5728dxt6be7Kzp7noUe-OjAgMBAAECgYAe3C8hCKrIZbntBege0FyCn3rmJLCZFhWs1e4wuMaRV06HupddUtOlchPh-FHMxPXSwHIQBS5LJJk1QrRKBhz-ZXzvHWxDC3xJSeGbaIhklUFosmXRT_JpwIdbO75TDCXBJu-LWIkEpPRwZvcNab6U6vRuTXs4XobaQegGCW_GAQJBAN0PAaeghrmKmUZ7GprDvciuJHry_V7UICqqqaKn7B7tRUZjO0FRWBzKIrRtC9_B3QnHTY3qI0xf5pVYlaEzuqMCQQCkpp-05qX7A1_hEWj6cy7I_VPRxcWxQzjA2mhGEazI1z417PBfNcSg77-xQl3eHz16VYde7OJvvZ7-k0QTSsMBAkAzrMZeQRA9X0DlUPGvLAK5Xrv4YcUI3d2HG837z_VKZXzEL34yjqliUX47XyJfdBoPpx9iBVGrEN_-GW8g986xAkAw2EV0sx_2UU_2QuXztovgkFZ3WsaFCb4iaCia8M9jXYdVFA9TD25fmAA0I84ZAQeJ7SmVnYynPYeXWjTNzFYBAkAxj0SzNblwSAVp7yZ0D4mga4E2Y-kGbl70losoy_fEP-TIG5mjmnqqts_PPj4HHjahNrD_6aqyVe-IUIxPsNH7</entry>
+</properties>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+ "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+ "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+<session-factory>
+ <property name="connection.driver_class">
+  com.mysql.jdbc.Driver
+ </property>
+ <property name="connection.url">
+  jdbc:mysql://localhost:3306/boss?useUnicode=true&amp;characterEncoding=utf8
+ </property>
+ <property name="connection.username">root</property>
+ <property name="connection.password">123456</property>
+ <!-- 显示SQL语句 -->
+ <property name="show_sql">false</property>
+ <property name="format_sql">true</property>
+ <!-- 定义方言 -->
+ <property name="dialect">
+  org.hibernate.dialect.MySQLDialect
+ </property>
+ <!-- <mapping package="game.boss.poker.dao.entiy"/> -->
+ <mapping class="game.boss.poker.dao.entiy.UserDO2"/>
+ <mapping class="game.boss.poker.dao.entiy.TbPkChapterDO"/>
+ <mapping class="game.boss.poker.dao.entiy.TbPkRoomDO"/>
+ <mapping class="game.boss.poker.dao.entiy.TbPkRoomUserDO"/>
+ <mapping class="game.boss.poker.dao.entiy.TbPkUserChapterDO"/>
+</session-factory>
+</hibernate-configuration>

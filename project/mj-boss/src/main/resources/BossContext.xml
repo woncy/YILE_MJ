@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd"
+       default-autowire="byType" default-lazy-init="false">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="game.boss.handler"/>
+    <context:component-scan base-package="game.boss.services"/>
+
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:/BossConfig.xml</value>
+            </list>
+        </property>
+       
+    </bean>
+ 
+  <!--   <import resource="WXPayConfig.xml"/> -->
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <property name="filters" value="stat"/>
+
+        <property name="maxActive" value="${jdbc.maxNums}"/>
+        <property name="initialSize" value="${jdbc.minNums}"/>
+        <property name="maxWait" value="60000"/>
+        <property name="minIdle" value="${jdbc.minNums}"/>
+
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxOpenPreparedStatements" value="200"/>
+        <property name="connectionInitSqls" value="SET NAMES utf8mb4;"/>
+    </bean>
+
+    <import resource="classpath*:game/boss/dao/DaoContext.xml"/>
+
+    <bean id="asyncDbService" class="game.boss.services.AsyncDbService">
+        <constructor-arg value="${service.dbThreadNums}"/>
+    </bean>
+    <bean id="asyncService" class="game.boss.services.AsyncService">
+        <constructor-arg value="${service.asyncThreadNums}"/>
+    </bean>
+    <bean id="gatewayManager" class="game.boss.net.GatewayManager">
+        <property name="gatewayUserMaxConnect" value="${gatewayUserMaxConnect}"/>
+    </bean>
+    <bean id="sceneManager" class="game.boss.net.SceneManager"/>
+    <bean id="bossService" class="game.boss.net.BossService"/>
+    <bean id="messageFactoryImpi" class="mj.net.message.MessageFactoryImpi"/>
+    <bean id="messageHandlerFactory" class="mj.net.handler.MessageHandlerFactory"/>
+
+    <bean id="gatewayListenServer" class="game.boss.net.GatewayListenServer"
+          destroy-method="close">
+        <property name="port" value="${net.gatewayListenServerPort}"/>
+        <property name="messageHandler">
+            <bean class="game.boss.net.GatewayListenHandler">
+                <property name="messageManager">
+                    <bean class="game.boss.net.MessageManager"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="sceneListenServer" class="game.boss.net.SceneListenServer"
+          destroy-method="close">
+        <property name="port" value="${net.sceneListenServerPort}"/>
+        <property name="messageHandler">
+            <bean class="game.boss.net.SceneListenHandler">
+                <property name="messageManager">
+                    <bean class="game.boss.net.SceneMessageManager"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+	<!-- poker -->
+	<bean id="ZJHRoomService" class="game.boss.services.ZJH.ZJHRoomService"></bean>
+	<bean id="ZJHSceneManager" class="game.boss.net.poker.zjh.ZJHSceneManager"></bean>
+	
+	
+	<bean id="ZJHSceneListenServer" class="game.boss.net.poker.zjh.ZJHSceneListenServer" destroy-method="close">
+		<property name="port" value="${net.zjhSceneListenServerPort}"></property>
+		<property name="ZJHSceneListenHandler">
+			<bean id="ZJHSceneListenHandler" class="game.boss.net.poker.zjh.ZJHSceneListenHandler">
+				<property name="ZJHmessageManager">
+					<bean class="game.boss.net.poker.zjh.ZJHSceneMessageManager"></bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 斗牛 -->
+	<bean id="DouniuRoomService" class="game.boss.services.douniu.DouniuRoomService"></bean>
+	<bean id="DouniuSceneManager" class="game.boss.net.poker.douniu.DouniuSceneManager"></bean>
+	
+	<bean id="douniuSceneListenServer" class="game.boss.net.poker.douniu.DouniuSceneListenServer" destroy-method="close">
+		<property name="port" value="${net.douniuSceneListenServerPort}"></property>
+		<property name="douniuSceneListenHandler">
+			<bean id="douniuSceneListenHandler" class="game.boss.net.poker.douniu.DouniuSceneListenHandler">
+				<property name="douniuMessageManager">
+					<bean class="game.boss.net.poker.douniu.DouniuSceneMessageManager"></bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+    <bean id="adminManager" class="game.boss.admin.AdminManager"/>
+    <bean id="adminListenServer" class="game.boss.admin.AdminListenServer"
+          destroy-method="close">
+        <property name="port" value="${net.adminListenServerPort}"/>
+        <property name="messageHandler">
+            <bean class="game.boss.admin.AdminListenHandler">
+                <property name="messageManager">
+                    <bean class="game.boss.admin.AdminMessageManager"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="wxPayConfig" class="game.boss.model.WXPayConfig">
+    	<property name="payUrl" value="${wxPay.payUrl}"></property>
+    	<property name="appid" value="${wxPay.appid}"></property>
+    	<property name="mch_id" value="${wxPay.mch_id}"></property>
+    	<property name="body" value="${wxPay.body}"></property>
+    	<property name="notify_url" value="${wxPay.notify_url}"></property>
+    	<property name="trade_type" value="${wxPay.trade_type}"></property>
+    	<property name="key" value="${wxPay.key}"></property>
+    </bean>
+    <bean id="aliPayConfig" class="game.boss.model.AliPayConfig">
+    	<property name="alipay_Url" value="${aliPay.url}"></property>
+    	<property name="app_id" value="${aliPay.app_id}"></property>
+    	<property name="app_private_key" value="${aliPay.app_private_key}"></property>
+    	<property name="app_public_key" value="${aliPay.app_public_key}"></property>
+    	<property name="partner_id" value="${aliPay.partner_id}"></property>
+    	<property name="body" value="${aliPay.body}"></property>
+    	<property name="subject" value="${aliPay.subject}"></property>
+    	<property name="timeoutExpress" value="${aliPay.timeoutExpress}"></property>
+    	<property name="notifyurl" value="${aliPay.notifyurl}"></property>
+    </bean>
+</beans>

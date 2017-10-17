@@ -1,0 +1,24 @@
+<!--#set(String pack)-->
+<!--#set(Utils utils)-->
+package ${pack};
+
+import com.isnowfox.core.net.message.Message;
+
+<!--#if(utils.config.javaCharacterPackage)-->
+import $!{utils.config.javaCharacterPackage}.$!{utils.config.javaCharacterClassName};
+<!--#end-->
+
+public interface MessageHandler<T extends Message> {
+	/**
+	 * 返回值决定是否把这个对象脱离对象缓冲！
+	 * 
+	 * @param msg
+	 * @return 返回true 表示需要脱离缓冲，不然这个消息的内容可能被覆盖
+	 */
+
+<!--#if(utils.config.javaCharacterPackage)-->
+    boolean handler(T msg, $!{utils.config.javaCharacterClassName} player);
+<!--#else-->
+    boolean handler(T msg);
+<!--#end-->
+}
