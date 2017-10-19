@@ -55,6 +55,8 @@ import mj.net.message.login.CreateRoomRet;
 import mj.net.message.login.DelRoomRet;
 import mj.net.message.login.ExitRoomRet;
 import mj.net.message.login.JoinRoomRet;
+import mj.net.message.login.OptionEntry;
+import mj.net.message.login.Pay;
 import mj.net.message.login.ProxyRoom;
 import mj.net.message.login.ProxyRoomIF;
 import mj.net.message.login.ProxyRoomList;
@@ -152,6 +154,7 @@ public class RoomService extends FrameQueueContainer implements BaseService {
          		user.send(pmsg);
          		return;
          	}
+         	msg.addOptions(new OptionEntry("isProxy","1"));
          	 Config config = new Config(msg);
              {
              	/**
@@ -159,14 +162,18 @@ public class RoomService extends FrameQueueContainer implements BaseService {
              	 */
                    {
                        int max = config.getInt(Config.CHAPTER_MAX);
-                       int gold = (int) Math.ceil(max / 8);
-                       if (userDao.get(user.getUserId()).getGold()< gold) {
+                       int gold = max / 8;
+                       UserDO userDO2 = userDao.get(user.getUserId());
+                       if (userDO2.getGold()< gold) {
                            sendNoGold(user);
                            sendCreateRoomRet(user, false, null);
                            return;
+                       }else{
+                    	   userDO2.setGold(userDO2.getGold()-gold);
+                    	   userDao.update(userDO2);
+                    	   user.send(new Pay(-gold));
                        }
                    }
-                
              }
              //鐢熸垚roomCheckId
              String roomCheckId = getBufferId();
@@ -202,7 +209,7 @@ public class RoomService extends FrameQueueContainer implements BaseService {
                         return;
                  	}
                  }
-                 initRoomData(user, room,userDO.getLevel());
+                 initRoomData(user, room);
                  List<Integer> list = proxyRoom.get(user.getUserId());
                  if(list == null){
                 	 list = new ArrayList<Integer>();
@@ -212,7 +219,6 @@ public class RoomService extends FrameQueueContainer implements BaseService {
                  user.send(new ProxyRoom(roomCheckId));
 //                 sendCreateRoomSuccess(user);
 //                 sendCreateRoomRet(user, true, room.getRoomCheckId());
-             
              });
          });
     }
@@ -223,7 +229,8 @@ public class RoomService extends FrameQueueContainer implements BaseService {
     public void createRoom(CreateRoom msg, User user) {
         run(() -> {
         	UserDO userDO = userDao.get(user.getUserId());
-        	 Config config = new Config(msg);
+        	msg.addOptions(new OptionEntry("isProxy","0"));
+        	Config config = new Config(msg);
             {
             	/**
             	 * 房卡不足时
@@ -281,7 +288,7 @@ public class RoomService extends FrameQueueContainer implements BaseService {
                         return;
                 	}
                 }
-                initRoomData(user, room,userDO.getLevel());
+                initRoomData(user, room);
                 sendCreateRoomSuccess(user);
                 sendCreateRoomRet(user, true, room.getRoomCheckId());
                
@@ -311,10 +318,8 @@ public class RoomService extends FrameQueueContainer implements BaseService {
         if (frameThread != Thread.currentThread()) {
             throw new ServerRuntimeException("鍙兘鍦ㄦ寚瀹氱殑绾跨▼璋冪敤");
         }
-        int createLevel = userDao.get(room.getRoomDO().getCreateUserId()).getLevel();
-        initRoomData(user, room,createLevel);
+        initRoomData(user, room);
         RoomDO roomDO = room.getRoomDO();
-        
         user.setJoinHomeGatewaySuccess(false);
         user.setJoinHomeSceneSuccess(false);
 
@@ -661,7 +666,6 @@ public class RoomService extends FrameQueueContainer implements BaseService {
             }
         });
     }
-
     public void chapterEnd(ChapterEndMsg msg) {
         run(() -> {
             Room room = roomMap.get(msg.getRoomId());
@@ -678,7 +682,6 @@ public class RoomService extends FrameQueueContainer implements BaseService {
                         roomDO.setScore3(score);
                     }
                 });
-
                 roomDO.setChapterNums(roomDO.getChapterNums() + 1);
                 asyncDbService.excuete(() -> {
                     roomDao.update(roomDO);
@@ -784,16 +787,12 @@ public class RoomService extends FrameQueueContainer implements BaseService {
      */
     public void checkUserRoom(User user, Consumer<String> callback) {
         asyncDbService.excuete(user, () -> {
-        	if(user.getUserDO().getLevel()>0){
-        		callback.accept(null);
-        		return;
-        	}
         	Connection conn = null;
         	java.sql.PreparedStatement pst = null;
         	ResultSet rs = null;
 			String querySql = "select id,room_check_id from room "
 					+ "where (user0=? or user1=? or user2=? or user3=?) and start=? and end=? "
-					+ "order by id";
+					+ "order by "+RoomUserDO.Table.START_DATE;
 			String updateSql = "update room set start=?, end=?,version=? where id=?";
         	try {
         		conn = roomDao.getDataSource().getConnection();
@@ -811,7 +810,9 @@ public class RoomService extends FrameQueueContainer implements BaseService {
 					int count = 0;
 					while(rs.next()){
 						int id = rs.getInt("id");
-						if(count==0){
+						RoomDO roomDO = roomDao.get(id);
+						
+						if(count==0 && roomDO!=null && roomDO.getStart()==true){
 							roomCheckId = rs.getString("room_check_id");
 						}else{
 							if(user.getUserDO().getLevel()>0){
@@ -876,20 +877,21 @@ public class RoomService extends FrameQueueContainer implements BaseService {
         return null;
     }
 
-    private void initRoomData(User user, RoomDO roomDO,int level) {
+    private void initRoomData(User user, RoomDO roomDO) {
         run(() -> {
-            initRoomData(user, new Room(roomDO),level);
+            initRoomData(user, new Room(roomDO));
         });
     }
 
-    private boolean initRoomData(User user, Room room,int level) {
+    private boolean initRoomData(User user, Room room) {
         if (frameThread != Thread.currentThread()) {
             throw new ServerRuntimeException("鍙兘鍦ㄦ寚瀹氱殑绾跨▼璋冪敤");
         }
         RoomDO roomDO = room.getRoomDO();
         if (!roomMap.containsKey(roomDO.getId())) {
             checkIdRoomMap.put(roomDO.getRoomCheckId(), room);
-            if(level==0)
+            int isProxy = room.getRoomDO().getConfig().getInt("isProxy");
+            if(isProxy==0)
             	crateUserRoomMap.put(roomDO.getCreateUserId(), room);
             roomMap.put(roomDO.getId(), room);
             return true;

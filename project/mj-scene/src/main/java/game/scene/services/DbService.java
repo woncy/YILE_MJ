@@ -104,17 +104,15 @@ public class DbService {
         if(roomId > 0 ){
         	RoomDO room = roomDao.get(roomId);
         	int max = room.getConfig().getInt(Config.CHAPTER_MAX);
-            int gold = (int) Math.ceil(max / 8);
+            int gold = max / 8;
             if (userId > 0 ) {
                 UserDO userDO = userDao.get(userId);
                 userDO.setGold(userDO.getGold() - gold);
+                asyncDbService.excuete(() -> {
+                    userDao.update(userDO);
+                });
             }
-            asyncDbService.excuete(() -> {
-                userDao.incrementUpdatePartial(
-                        UserDO.Table.GOLD, -gold,
-                        new UserDO.Key(userId)
-                );
-            });
+            
         }
     }
     public void  saveRoomRecord(int roomId , JSONObject data, String checkRoomId, String chapterIndex){

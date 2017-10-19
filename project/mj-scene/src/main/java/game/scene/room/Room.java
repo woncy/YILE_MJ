@@ -30,9 +30,7 @@ public abstract class Room {
     private ScheduledFuture<?> scheduledFuture;
     private RoomAsyncService roomAsyncService;
     protected Config config;
-
     private boolean end = false;
-
     //投票记录
     protected Map<Integer, Integer> voteDelInfo = new HashMap<>();
 

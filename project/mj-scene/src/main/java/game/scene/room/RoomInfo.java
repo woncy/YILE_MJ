@@ -53,6 +53,8 @@ public class RoomInfo {
 	private int state;
 	private int userNum;
 	private boolean ready[];
+	private boolean isProxy;
+	private boolean dingPaoChache[];//配合state==1用
 	
 	
 	
@@ -62,14 +64,26 @@ public class RoomInfo {
         this.roomId = roomId;
         voteDel= new boolean[userNum];
         this.ready = new boolean[userNum];
+        dingPaoChache = new boolean[userNum];
         this.userNum = userNum;
+        isProxy = room.getConfig().getInt("isProxy")==1;
     }
   
 
     public int getUserNum() {
 		return userNum;
 	}
+    
+   
 
+	public boolean isProxy() {
+		return isProxy;
+	}
+
+
+	public void setProxy(boolean isProxy) {
+		this.isProxy = isProxy;
+	}
 
 
 	public GameRoomInfo toMessage(int myLocationIndex) {
@@ -94,9 +108,22 @@ public class RoomInfo {
         g.setState(state);
         return g;
     }
+	
+	
 
     
-    
+	public boolean[] getDingPaoChache() {
+		return dingPaoChache;
+	}
+
+
+	public void clearDingPaoChache(){
+		Arrays.fill(dingPaoChache, false);
+	}
+	
+	public boolean isNeedShowPao(int index){
+		return this.state==1 && (!dingPaoChache[index]);
+	}
 
     public int getState() {
 		return state;

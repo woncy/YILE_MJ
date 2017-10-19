@@ -205,6 +205,25 @@ public class RoomImpi extends Room {
         if(endResult!=null){
         	sceneUser.sendMessage(endResult);
         }
+        if(roomInfo.getState()==1){
+        	UserPlace[] userPlaces = roomInfo.getChapter().getUserPlaces();
+        	boolean[] dingPaoChache = roomInfo.getDingPaoChache();
+        	for (int i = 0; i < dingPaoChache.length; i++) {
+				boolean b = dingPaoChache[i];
+				if(b){
+					if(userPlaces[i]!=null){
+						sceneUser.sendMessage(new OperationDingPaoRet(i, userPlaces[i].getPaoCount()));
+					}
+				}
+				
+			}
+        }
+        
+        if(roomInfo.isNeedShowPao(sceneUser.getLocationIndex())){
+        	sceneUser.sendMessage(new ShowPaoRet());
+        	
+        }
+        
     }
     
     /**
@@ -248,6 +267,8 @@ public class RoomImpi extends Room {
         int dingPaoCount = roomInfo.getDingPaoCount();
         
         if(chapter.isDingPao()){
+        	boolean[] dingPaoChache = roomInfo.getDingPaoChache();
+        	dingPaoChache[user.getLocationIndex()] = true;
         	OperationDingPaoRet msgRet = chapter.dingPao(user,msg);
         	roomInfo.setState(1);
         	sendMessage(msgRet);
@@ -283,10 +304,12 @@ public class RoomImpi extends Room {
     		if(isDingPao && roomInfo.getDingPaoCount()<roomInfo.getChapter().getRules().getUserNum()){
     			if(roomInfo.getChapter().getRules().getXuanPaoCount()==4){
     				if(roomInfo.getChapter().getChapterNums()%4==0){
+    					roomInfo.setState(1);
     					sendMessage(new ShowPaoRet(),null);
         				return;
     				}
     			}else{
+    				roomInfo.setState(1);
     				sendMessage(new ShowPaoRet(),null);
     				return;
     			}
@@ -297,6 +320,7 @@ public class RoomImpi extends Room {
                 	roomInfo.setEndResult(null);
                 	roomInfo.setState(2);
                     roomInfo.setStart(true);
+                    roomInfo.clearDingPaoChache();
                     MajiangChapter chapter = roomInfo.getChapter();
                     chapter.start();
                     roomInfo.setChapterStart(true);
@@ -336,8 +360,7 @@ public class RoomImpi extends Room {
         roomInfo.clearReady();
         RoomResultDO result = dbService.save(endResult, roomInfo.getRoomId(), roomInfo.getRoomCheckId(), roomInfo.getSceneId());
         //如果是第一局的时候,直接的扣掉user gold
-        
-        if(majiangChapter.getChapterNums() == 1 ){
+        if(majiangChapter.getChapterNums() == 1 && !roomInfo.isProxy()){
         	dbService.delGold(roomInfo.getRoomId(), roomInfo.getCreateUserId());
         }
         
@@ -357,16 +380,14 @@ public class RoomImpi extends Room {
             m.setCrateUserId(getRoomInfo().getCreateUserId());
             m.setRoomId(getRoomInfo().getRoomId());
             bossClient.writeAndFlush(m);
-            
             try {
-				Thread.sleep(500);
+				Thread.sleep(300);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
             
           //显示统计结果！
-            sendStaticsResultToAllUser();
+           sendStaticsResultToAllUser();
         }
     }
 
@@ -414,6 +435,7 @@ public class RoomImpi extends Room {
      */
     public void sendStaticsResultToAllUser() {
         checkThread();
+        
         int roomId =  getRoomInfo().getRoomId();
         List<RoomResultDO> roomResultDOs =  roomResultDao.find(24,RoomResultDO.Table.ROOM_ID,roomId);
         StaticsResultRet staticsResultRet =  new StaticsResultRet() ;
@@ -513,6 +535,8 @@ public class RoomImpi extends Room {
             staticsResultRet.setScore2(staticsResultRet.getScore2() + roomResultDO.getScore2() );
             staticsResultRet.setScore3(staticsResultRet.getScore3() + roomResultDO.getScore3() );
         }
+       
+        
         roomInfo.setEndResult(staticsResultRet);
         sendMessage(staticsResultRet);
     }

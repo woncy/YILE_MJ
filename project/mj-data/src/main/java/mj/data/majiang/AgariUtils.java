@@ -104,7 +104,6 @@ public class AgariUtils {
             return isHuPai(shouPai, pai);
         } else {
             //会儿需要当做任何牌，现在只能遍历
-        	
             int[] pos = new int[14];
             shouPai.add(pai);
             return checkHuiEr(pos, allPai, shouPai, huiErPai) != null;
@@ -280,7 +279,6 @@ public class AgariUtils {
                 shouPai.stream().mapToInt(Pai::getIndex),
                 IntStream.of(pai.getIndex())
         ).toArray();
-
         int[] n = AgariIndex.analyse(paiIndexs);
         int[] ret = AgariIndex.agari(n);
         return !ArrayUtils.isEmpty(ret);

@@ -16,8 +16,8 @@ public class Room {
     private RoomDO roomDO;
     private Map<Integer, UserDO> map = new HashMap<>();
     private boolean start;
-
-    public Room(RoomDO roomDO) {
+    
+	public Room(RoomDO roomDO) {
         this.roomDO = roomDO;
     }
     public void removeUser(int userId) {
@@ -59,7 +59,6 @@ public class Room {
         m.setJoinGatewayId(user.getGatewayId());
         m.setJoinSessionId(user.getSessionId());
         m.setJoinUserId(user.getUserId());
-
         m.setOptions(roomDO.getConfig().getOptions());
         map.entrySet().stream().map(e -> {
             UserDO userDO = e.getValue();
