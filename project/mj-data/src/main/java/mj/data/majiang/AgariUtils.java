@@ -270,7 +270,6 @@ public class AgariUtils {
         int[] paiIndexs = shouPai.stream().mapToInt(Pai::getIndex).toArray();
         int[] n = AgariIndex.analyse(paiIndexs);
         int[] ret = AgariIndex.agari(n);
-        System.out.println(ret);
         return !ArrayUtils.isEmpty(ret);
     }
 

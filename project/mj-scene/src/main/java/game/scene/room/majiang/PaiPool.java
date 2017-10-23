@@ -1,11 +1,12 @@
 package game.scene.room.majiang;
 
+import java.util.ArrayList;
+
+import org.apache.commons.lang.math.RandomUtils;
+
 import game.scene.room.majiang.rules.Rules;
 import mj.data.Pai;
 import mj.data.UserPlace;
-import org.apache.commons.lang.math.RandomUtils;
-
-import java.util.ArrayList;
 
 /**
  * 发牌的池子
@@ -52,13 +53,16 @@ public class PaiPool {
     	}else{
     		pais.addAll(FaPaiJI.getNotHasFengPai());
     	} 
-		for (int i = 0; i < pais.size(); i++) {
-			int randomIndex = RandomUtils.nextInt(pais.size());
-
-			Pai temp = pais.get(i);
-			pais.set(i, pais.get(randomIndex));
-			pais.set(randomIndex, temp);
+    	
+    	for (int j = 0; j < 3; j++) {
+    		for (int i = 0; i < pais.size(); i++) {
+    			int randomIndex = RandomUtils.nextInt(pais.size());
+    			Pai temp = pais.get(i);
+    			pais.set(i, pais.get(randomIndex));
+    			pais.set(randomIndex, temp);
+    		}
 		}
+		
     }
     
 

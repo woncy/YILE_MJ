@@ -65,8 +65,6 @@ public class IndexController {
     @Autowired
     private AccountService accountService;
     
-    @Value("${alipay.app_public_key}")
-    private String aliPay_app_public_key;
 
     @GetMapping({"/", "/index"})
     private String index(

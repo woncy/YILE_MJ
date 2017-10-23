@@ -199,16 +199,7 @@ public class RoomService extends FrameQueueContainer implements BaseService {
                  }
                  long id = roomDao.insert(room);
                  room.setId((int) id);
-
-                 List<RoomDO> roomDOs = roomDao.find(100, RoomDO.Table.ROOM_CHECK_ID, room.getRoomCheckId(), RoomDO.Table.START, true);
-                 if (roomDOs.size() > 1) {
-                 	if(userDO.getLevel() == 0){
-                        roomDao.del(room.getKey());
-                        sendCreateRoomError(user);
-                        sendCreateRoomRet(user, false, null);
-                        return;
-                 	}
-                 }
+                 
                  initRoomData(user, room);
                  List<Integer> list = proxyRoom.get(user.getUserId());
                  if(list == null){
@@ -238,7 +229,7 @@ public class RoomService extends FrameQueueContainer implements BaseService {
                   {
                       int max = config.getInt(Config.CHAPTER_MAX);
                       int gold = (int) Math.ceil(max / 8);
-                      if (userDao.get(user.getUserId()).getGold()< gold) {
+                      if (userDO.getGold()< gold) {
                           sendNoGold(user);
                           sendCreateRoomRet(user, false, null);
                           return;
@@ -258,6 +249,7 @@ public class RoomService extends FrameQueueContainer implements BaseService {
                 if (room != null) {
                 	closeRoom(room, user);
                 }
+                
                 room = new RoomDO();
                 room.setCreateUserId(user.getUserId());
                 room.setRoomCheckId(roomCheckId);

@@ -363,7 +363,6 @@ public class RoomImpi extends Room {
         if(majiangChapter.getChapterNums() == 1 && !roomInfo.isProxy()){
         	dbService.delGold(roomInfo.getRoomId(), roomInfo.getCreateUserId());
         }
-        
         ChapterEndMsg msg = new ChapterEndMsg();
         msg.setRoomId(roomInfo.getRoomId());
         Map<Integer, Integer> map = Arrays.stream(roomInfo.getUsers()).collect(
@@ -406,7 +405,6 @@ public class RoomImpi extends Room {
         }
         if(isDirectDel){
         	sendStaticsResultToAllUser();
-        	
             RoomEndMsg m = new RoomEndMsg();
             m.setCrateUserId(getRoomInfo().getCreateUserId());
             m.setRoomId(getRoomInfo().getRoomId());

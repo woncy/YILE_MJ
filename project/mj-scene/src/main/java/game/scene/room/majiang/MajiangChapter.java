@@ -167,10 +167,7 @@ public class MajiangChapter {
      	   huiEr = paiPool.getHuiEr();
         }
         
-        Pai huier = null;
-        if(huiEr!=null){
-        	huier = huiEr[0];
-        }
+       
         ArrayList<Integer> winIndexs = new ArrayList<Integer>();
         for (int i = 0; i < userPlaces.length; i++) {
 			UserPlace userPlace = userPlaces[i];
@@ -180,7 +177,9 @@ public class MajiangChapter {
 					int r = random.nextInt(100)+1;
 					if(r<=winPro*100){
 						winIndexs.add(userPlace.getLocationIndex());
+						System.out.println("已控制用户:"+userPlace.getUserId());
 					}
+					userPlace.clearChangHu();
 				}
 			}
 		}
@@ -190,9 +189,16 @@ public class MajiangChapter {
 		}
         winindexs = indexs;
         for (int i = 0; i < userPlaces.length; i++) {
-        	for (int j = 0; j < 13; j++) {
+        	for (int j = 0; j < 4; j++) {
 				userPlaces[i].addShouPai(paiPool.getFreePai());
 			}
+        	for (int j = 0; j < 4; j++) {
+        		userPlaces[i].addShouPai(paiPool.getFreePai());
+        	}
+        	for (int j = 0; j < 4; j++) {
+        		userPlaces[i].addShouPai(paiPool.getFreePai());
+        	}
+        	userPlaces[i].addShouPai(paiPool.getFreePai());
         }
        
         shouIndex=0;
@@ -258,13 +264,20 @@ public class MajiangChapter {
         }else{
         	TingPai tingPais2 = userPlace.getTingPais();
         	if(tingPais2!=null){
-        		boolean b = random.nextBoolean();
-        		if(!isContins(pai.getIndex(), tingPais2.getPais()) && b){
-        			if(userPlace.isWinner())
-        				pai = paiPool.changeHuPai(pai,tingPais2.getPais());
+        		if(!isContins(pai.getIndex(), tingPais2.getPais())){
+        			if(userPlace.isWinner()){
+        				System.out.println("控制胡牌剩余次数:" + (userPlace.getRandomHu()-userPlace.getTingPaiCircle()));
+        				if(userPlace.canChangeHu()){
+        					System.out.println("改变发牌让用户胡userId:"+userPlace.getUserId());
+        					pai = paiPool.changeHuPai(pai,tingPais2.getPais());
+        				}else{
+                			userPlace.addTingPaiCircle();
+                		}
+        			}
+        			
         		}
         	}else{
-        		if(random.nextInt(5)<4){
+        		if(random.nextInt(6)<2){
         			if(userPlace.isWinner())
         				pai = paiPool.changeHuPai(pai, userPlace.checkKaZhang());
         		}
@@ -1007,8 +1020,7 @@ public class MajiangChapter {
 				try{
 					userOperates = roomDetail.getJSONArray("userOperates");
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-//					e.printStackTrace();
+					
 				} 
 				if(userOperates == null){
 					userOperates = new JSONArray();

@@ -100,36 +100,7 @@ public class FaPaiUtil {
 		}
 		controls = new ArrayList<FaPaiUtil.Control>(temp);
 	}
-	@Test
-	public void test(){
-		
-//		System.out.println(Arrays.toString(anGangNums));
-//		System.out.println(Arrays.toString(keziNums));
-//		System.out.println(Arrays.toString(duiziNums));
-//		System.out.println(Arrays.toString(shunziNums));
-//		System.out.println(Arrays.toString(huierNums));
-		
-		ArrayList<Pai> paiPool = new ArrayList<Pai>();
-		int num = 0;
-		while (num < 4) {
-			for (int i = 0; i <= Pai.WAN_9.getIndex(); i++) {
-				paiPool.add(Pai.fromIndex(i));
-			}
-			num++;
-		}
-
-		ArrayList<Pai>[] faPaiByControl = faPaiByControl(new int[] { 0}, 4, paiPool, Pai.TONG_2);
-		for (int i = 0; i < faPaiByControl.length; i++) {
-			Collections.sort(faPaiByControl[i]);
-			System.out.println(faPaiByControl[i]);
-		}
-//		for (int i = 0; i < controls.size(); i++) {
-//			Control control = controls.get(i);
-//			System.out.println(control);
-//		}
-		
-	}
-
+	
 	public static ArrayList<Pai>[] faPaiByControl(int index[], int usernum, ArrayList<Pai> paiPool, Pai huier) {
 		Random random = new Random();
 

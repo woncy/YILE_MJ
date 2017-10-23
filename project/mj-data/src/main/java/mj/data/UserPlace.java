@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Stream;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -757,13 +758,85 @@ public class UserPlace {
 	public void setWinPro(double winPro) {
 		this.winPro = winPro;
 	}
+	
+
 
 	public TingPai getTingPais() {
 		return tingPais;
 	}
+	
+	private boolean isIntArrEqauls(int[] arr1,int arr2[]){
+		if(arr1==null || arr2 ==null){
+			return false;
+		}else{
+			if(arr1.length!=arr2.length){
+				return false;
+			}else{
+				for (int i = 0; i < arr2.length; i++) {
+					int j = arr2[i];
+					if(j!=arr1[i]){
+						return false;
+					}
+					
+				}
+			}
+			return true;
+		}
+	}
+	private int tingPaiCircle = -1;
+	private int randomHu = -1;
+	private Random random = new Random();
+	
+	public void addTingPaiCircle(){
+		tingPaiCircle++;
+	}
+	
+	
+	
+	public int getRandomHu() {
+		return randomHu;
+	}
+
+	public boolean canChangeHu(){
+		if(isWinner()){
+			if(randomHu!=-1 && tingPaiCircle!=-1){
+				return tingPaiCircle == randomHu;
+			}
+		}
+		return false;
+	}
+	
+	
+	
+	public int getTingPaiCircle() {
+		return tingPaiCircle;
+	}
+
+	public void  clearChangHu(){
+		this.tingPais = null;
+		tingPaiCircle = -1;
+		randomHu = -1;
+	}
+	
 
 	public void setTingPais(TingPai tingPais) {
+		if(isWinner()){
+			if(this.tingPais!=null){
+				if(tingPais!=null){
+					boolean isEquals = isIntArrEqauls(this.tingPais.getPais(), tingPais.getPais());
+					if(!isEquals){
+						tingPaiCircle = 0;
+						randomHu = random.nextInt(5)+5;
+					}
+				}
+			}else{
+				tingPaiCircle = 0;
+				randomHu = random.nextInt(5)+5;
+			}
+		}
 		this.tingPais = tingPais;
+		
+		
 	}
 
 	public int[] checkKaZhang() {
