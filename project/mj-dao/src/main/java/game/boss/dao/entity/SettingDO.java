@@ -7,14 +7,18 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import  org.forkjoin.core.dao.EntityObject;
-import  org.forkjoin.core.dao.KeyObject;
-import  org.forkjoin.core.dao.TableInfo;
+
 import org.forkjoin.core.dao.UniqueInfo;
+
+
 import org.springframework.jdbc.core.RowMapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
+
+import  org.forkjoin.core.dao.EntityObject;
+import  org.forkjoin.core.dao.KeyObject;
+import  org.forkjoin.core.dao.TableInfo;
 
 public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 
@@ -29,7 +33,9 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 	/**用户协议*/
 	private String agreement;
 	/**用户默认房卡*/
-	private int initGold;
+	private Integer initGold;
+	/**最低代理级别*/
+	private Integer level;
 
 	public static class Key implements KeyObject<SettingDO, SettingDO.Key>{
     	private int id;
@@ -82,11 +88,6 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 				return id;
 			}
 
-			public void setId(int id) {
-				SettingDO.this.id  = id;
-				SettingDO.this.changeProperty("id",id);
-			}
-
 			@Override
 			public String toString() {
 				return "Setting[id:"+ id+ "]";
@@ -100,13 +101,13 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 	public SettingDO() {
     }
 
-	public SettingDO(int id,String notice,String radio,String payInfo,String agreement,int initGold) {
-		this.id = id;
+	public SettingDO(String notice,String radio,String payInfo,String agreement,Integer initGold,Integer level) {
 		this.notice = notice;
 		this.radio = radio;
 		this.payInfo = payInfo;
 		this.agreement = agreement;
 		this.initGold = initGold;
+		this.level = level;
 	}
 
 
@@ -196,16 +197,31 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 	/**
 	 * 用户默认房卡
 	 **/
-	public int getInitGold() {
+	public Integer getInitGold() {
 		return initGold;
 	}
 
 	/**
 	 * 用户默认房卡
 	 **/
-	public void setInitGold(int initGold) {
+	public void setInitGold(Integer initGold) {
 		this.initGold = initGold;
 		changeProperty("initGold",initGold);
+	}
+
+	/**
+	 * 最低代理级别
+	 **/
+	public Integer getLevel() {
+		return level;
+	}
+
+	/**
+	 * 最低代理级别
+	 **/
+	public void setLevel(Integer level) {
+		this.level = level;
+		changeProperty("level",level);
 	}
 
     @Override
@@ -223,6 +239,8 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
             return agreement;
         case "initGold":
             return initGold;
+        case "level":
+            return level;
         default :
             return null;
         }
@@ -248,7 +266,10 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 			agreement = (String)obj;
 			return true;
 		case "initGold":
-			initGold = (int)obj;
+			initGold = (Integer)obj;
+			return true;
+		case "level":
+			level = (Integer)obj;
 			return true;
 		default :
 			return false;
@@ -257,7 +278,7 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 
 	@Override
 	public String toString() {
-		return "Setting[id:"+ id+",notice:"+ (notice == null ?"null":notice.substring(0, Math.min(notice.length(), 64)))+",radio:"+ (radio == null ?"null":radio.substring(0, Math.min(radio.length(), 64)))+",payInfo:"+ (payInfo == null ?"null":payInfo.substring(0, Math.min(payInfo.length(), 64)))+",agreement:"+ (agreement == null ?"null":agreement.substring(0, Math.min(agreement.length(), 64)))+",initGold:"+ initGold+ "]";
+		return "Setting[id:"+ id+",notice:"+ (notice == null ?"null":notice.substring(0, Math.min(notice.length(), 64)))+",radio:"+ (radio == null ?"null":radio.substring(0, Math.min(radio.length(), 64)))+",payInfo:"+ (payInfo == null ?"null":payInfo.substring(0, Math.min(payInfo.length(), 64)))+",agreement:"+ (agreement == null ?"null":agreement.substring(0, Math.min(agreement.length(), 64)))+",initGold:"+ initGold+",level:"+ level+ "]";
 	}
 
 	@Override
@@ -280,6 +301,7 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 		public static final String PAYINFO = "payInfo";
 		public static final String AGREEMENT = "agreement";
 		public static final String INITGOLD = "initGold";
+		public static final String LEVEL = "level";
 
         public static final String UNIQUE_PRIMARY = "PRIMARY";
 
@@ -290,7 +312,8 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 			super.initProperty("radio", "radio", String.class, new TypeReference<String>() {});
 			super.initProperty("payInfo", "payInfo", String.class, new TypeReference<String>() {});
 			super.initProperty("agreement", "agreement", String.class, new TypeReference<String>() {});
-			super.initProperty("initGold", "initGold", int.class, new TypeReference<Integer>() {});
+			super.initProperty("initGold", "initGold", Integer.class, new TypeReference<Integer>() {});
+			super.initProperty("level", "level", Integer.class, new TypeReference<Integer>() {});
 		}
 
 		@Override public String getKeyUpdatePartialPrefixSql(){
@@ -319,9 +342,6 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 			Object idPtr;
 			idPtr = t.getId();
 
-			if(isSetUnique){
-				ps.setObject(i++, idPtr);
-			}
 			Object noticePtr;
 			noticePtr = t.getNotice();
 
@@ -342,6 +362,10 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 			initGoldPtr = t.getInitGold();
 
 			ps.setObject(i++, initGoldPtr);
+			Object levelPtr;
+			levelPtr = t.getLevel();
+
+			ps.setObject(i++, levelPtr);
 			return i;
 		}
 
@@ -371,6 +395,10 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 				initGoldPtr = t.getInitGold();
 
 			ps.setObject(i++,  initGoldPtr);
+			Object levelPtr;
+				levelPtr = t.getLevel();
+
+			ps.setObject(i++,  levelPtr);
         	return i;
         }
 
@@ -387,21 +415,21 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 		}
 
 		@Override public String getInsertSql(){
-			return "INSERT INTO `setting` (`id`,`notice`,`radio`,`payInfo`,`agreement`,`initGold`) VALUES (?,?,?,?,?,?)";
+			return "INSERT INTO `setting` (`notice`,`radio`,`payInfo`,`agreement`,`initGold`,`level`) VALUES (?,?,?,?,?,?)";
 		}
 
 		@Override public String getReplaceSql(){
-        	return "REPLACE INTO `setting` (`id`,`notice`,`radio`,`payInfo`,`agreement`,`initGold`) VALUES (?,?,?,?,?,?)";
+        	return "REPLACE INTO `setting` (`id`,`notice`,`radio`,`payInfo`,`agreement`,`initGold`,`level`) VALUES (?,?,?,?,?,?,?)";
         }
 
 		@Override public String getFastInsertPrefixSql(){
-			return "INSERT INTO `setting` (`id`,`notice`,`radio`,`payInfo`,`agreement`,`initGold`) VALUES ";
+			return "INSERT INTO `setting` (`notice`,`radio`,`payInfo`,`agreement`,`initGold`,`level`) VALUES ";
 		}
 		@Override public String getFastInsertValueItemsSql(){
 			return " (?,?,?,?,?,?) ";
 		}
 		@Override public String getUpdateSql(){
-			return "UPDATE `setting` SET `id`=?,`notice`=?,`radio`=?,`payInfo`=?,`agreement`=?,`initGold`=? WHERE `id`=?";
+			return "UPDATE `setting` SET `notice`=?,`radio`=?,`payInfo`=?,`agreement`=?,`initGold`=?,`level`=? WHERE `id`=?";
 		}
 
 		@Override public String getSelectByKeySql(){
@@ -437,6 +465,7 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 					o.payInfo = rs.getString("payInfo");
 					o.agreement = rs.getString("agreement");
 					o.initGold = rs.getInt("initGold");
+					o.level = rs.getInt("level");
 					return o;
 				}
 			};
@@ -455,6 +484,7 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 						o.setPayInfo(rs.getString("payInfo"));
 						o.setAgreement(rs.getString("agreement"));
 						o.setInitGold(rs.getInt("initGold"));
+						o.setLevel(rs.getInt("level"));
                         return o;
 					} catch (InstantiationException | IllegalAccessException e) {
 						throw new SQLException("必须实现默认构造函数",e);

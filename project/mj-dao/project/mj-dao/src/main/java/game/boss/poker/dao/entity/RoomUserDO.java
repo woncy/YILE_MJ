@@ -31,6 +31,10 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 	/**房间的check-id,进入id,可以重复,但是不允许同时活跃状态的id 相同*/
 	private String roomCheckId;
 	private int version;
+	/**分数*/
+	private Integer score;
+	/**玩家状态1刚加入房间，2游戏进行中，3，未开始退出 4，已开始退出*/
+	private Integer state;
 
 	public static class Key implements KeyObject<RoomUserDO, RoomUserDO.Key>{
     	private int userId;
@@ -101,7 +105,7 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 	public RoomUserDO() {
     }
 
-	public RoomUserDO(int userId,int locationIndex,Integer roomId,java.util.Date startDate,java.util.Date endDate,String roomCheckId,int version) {
+	public RoomUserDO(int userId,int locationIndex,Integer roomId,java.util.Date startDate,java.util.Date endDate,String roomCheckId,int version,Integer score,Integer state) {
 		this.userId = userId;
 		this.locationIndex = locationIndex;
 		this.roomId = roomId;
@@ -109,6 +113,8 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 		this.endDate = endDate;
 		this.roomCheckId = roomCheckId;
 		this.version = version;
+		this.score = score;
+		this.state = state;
 	}
 
 
@@ -195,6 +201,36 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 		changeProperty("version",version);
 	}
 
+	/**
+	 * 分数
+	 **/
+	public Integer getScore() {
+		return score;
+	}
+
+	/**
+	 * 分数
+	 **/
+	public void setScore(Integer score) {
+		this.score = score;
+		changeProperty("score",score);
+	}
+
+	/**
+	 * 玩家状态1刚加入房间，2游戏进行中，3，未开始退出 4，已开始退出
+	 **/
+	public Integer getState() {
+		return state;
+	}
+
+	/**
+	 * 玩家状态1刚加入房间，2游戏进行中，3，未开始退出 4，已开始退出
+	 **/
+	public void setState(Integer state) {
+		this.state = state;
+		changeProperty("state",state);
+	}
+
     @Override
     public Object get(String dbName){
         switch(dbName){
@@ -212,6 +248,10 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
             return roomCheckId;
         case "version":
             return version;
+        case "score":
+            return score;
+        case "state":
+            return state;
         default :
             return null;
         }
@@ -242,6 +282,12 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 		case "version":
 			version = (int)obj;
 			return true;
+		case "score":
+			score = (Integer)obj;
+			return true;
+		case "state":
+			state = (Integer)obj;
+			return true;
 		default :
 			return false;
 		}
@@ -249,7 +295,7 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 
 	@Override
 	public String toString() {
-		return "RoomUser[userId:"+ userId+",locationIndex:"+ locationIndex+",roomId:"+ roomId+",startDate:"+ startDate+",endDate:"+ endDate+",roomCheckId:"+ (roomCheckId == null ?"null":roomCheckId.substring(0, Math.min(roomCheckId.length(), 64)))+",version:"+ version+ "]";
+		return "RoomUser[userId:"+ userId+",locationIndex:"+ locationIndex+",roomId:"+ roomId+",startDate:"+ startDate+",endDate:"+ endDate+",roomCheckId:"+ (roomCheckId == null ?"null":roomCheckId.substring(0, Math.min(roomCheckId.length(), 64)))+",version:"+ version+",score:"+ score+",state:"+ state+ "]";
 	}
 
 	@Override
@@ -273,6 +319,8 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 		public static final String END_DATE = "end_date";
 		public static final String ROOM_CHECK_ID = "room_check_id";
 		public static final String VERSION = "version";
+		public static final String SCORE = "score";
+		public static final String STATE = "state";
 
         public static final String UNIQUE_PRIMARY = "PRIMARY";
 
@@ -285,6 +333,8 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 			super.initProperty("end_date", "endDate", java.util.Date.class, new TypeReference<java.util.Date>() {});
 			super.initProperty("room_check_id", "roomCheckId", String.class, new TypeReference<String>() {});
 			super.initProperty("version", "version", int.class, new TypeReference<Integer>() {});
+			super.initProperty("score", "score", Integer.class, new TypeReference<Integer>() {});
+			super.initProperty("state", "state", Integer.class, new TypeReference<Integer>() {});
 		}
 
 		@Override public String getKeyUpdatePartialPrefixSql(){
@@ -340,6 +390,14 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 			versionPtr = t.getVersion();
 
 			ps.setObject(i++, versionPtr);
+			Object scorePtr;
+			scorePtr = t.getScore();
+
+			ps.setObject(i++, scorePtr);
+			Object statePtr;
+			statePtr = t.getState();
+
+			ps.setObject(i++, statePtr);
 			return i;
 		}
 
@@ -373,6 +431,14 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 				versionPtr = t.getVersion();
 
 			ps.setObject(i++,  versionPtr);
+			Object scorePtr;
+				scorePtr = t.getScore();
+
+			ps.setObject(i++,  scorePtr);
+			Object statePtr;
+				statePtr = t.getState();
+
+			ps.setObject(i++,  statePtr);
         	return i;
         }
 
@@ -389,21 +455,21 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 		}
 
 		@Override public String getInsertSql(){
-			return "INSERT INTO `room_user` (`user_id`,`location_index`,`room_id`,`start_date`,`end_date`,`room_check_id`,`version`) VALUES (?,?,?,?,?,?,?)";
+			return "INSERT INTO `room_user` (`user_id`,`location_index`,`room_id`,`start_date`,`end_date`,`room_check_id`,`version`,`score`,`state`) VALUES (?,?,?,?,?,?,?,?,?)";
 		}
 
 		@Override public String getReplaceSql(){
-        	return "REPLACE INTO `room_user` (`user_id`,`location_index`,`room_id`,`start_date`,`end_date`,`room_check_id`,`version`) VALUES (?,?,?,?,?,?,?)";
+        	return "REPLACE INTO `room_user` (`user_id`,`location_index`,`room_id`,`start_date`,`end_date`,`room_check_id`,`version`,`score`,`state`) VALUES (?,?,?,?,?,?,?,?,?)";
         }
 
 		@Override public String getFastInsertPrefixSql(){
-			return "INSERT INTO `room_user` (`user_id`,`location_index`,`room_id`,`start_date`,`end_date`,`room_check_id`,`version`) VALUES ";
+			return "INSERT INTO `room_user` (`user_id`,`location_index`,`room_id`,`start_date`,`end_date`,`room_check_id`,`version`,`score`,`state`) VALUES ";
 		}
 		@Override public String getFastInsertValueItemsSql(){
-			return " (?,?,?,?,?,?,?) ";
+			return " (?,?,?,?,?,?,?,?,?) ";
 		}
 		@Override public String getUpdateSql(){
-			return "UPDATE `room_user` SET `user_id`=?,`location_index`=?,`room_id`=?,`start_date`=?,`end_date`=?,`room_check_id`=?,`version`=? WHERE `user_id`=?";
+			return "UPDATE `room_user` SET `user_id`=?,`location_index`=?,`room_id`=?,`start_date`=?,`end_date`=?,`room_check_id`=?,`version`=?,`score`=?,`state`=? WHERE `user_id`=?";
 		}
 
 		@Override public String getSelectByKeySql(){
@@ -440,6 +506,8 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 					o.endDate = rs.getTimestamp("end_date");
 					o.roomCheckId = rs.getString("room_check_id");
 					o.version = rs.getInt("version");
+					o.score = rs.getInt("score");
+					o.state = rs.getInt("state");
 					return o;
 				}
 			};
@@ -459,6 +527,8 @@ public class RoomUserDO extends EntityObject<RoomUserDO, RoomUserDO.Key>{
 						o.setEndDate(rs.getTimestamp("end_date"));
 						o.setRoomCheckId(rs.getString("room_check_id"));
 						o.setVersion(rs.getInt("version"));
+						o.setScore(rs.getInt("score"));
+						o.setState(rs.getInt("state"));
                         return o;
 					} catch (InstantiationException | IllegalAccessException e) {
 						throw new SQLException("必须实现默认构造函数",e);

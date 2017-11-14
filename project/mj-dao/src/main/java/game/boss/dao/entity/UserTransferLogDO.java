@@ -7,38 +7,26 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import  org.forkjoin.core.dao.EntityObject;
-import  org.forkjoin.core.dao.KeyObject;
-import  org.forkjoin.core.dao.TableInfo;
+
 import org.forkjoin.core.dao.UniqueInfo;
+
+
 import org.springframework.jdbc.core.RowMapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 
+import  org.forkjoin.core.dao.EntityObject;
+import  org.forkjoin.core.dao.KeyObject;
+import  org.forkjoin.core.dao.TableInfo;
+
 public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTransferLogDO.Key>{
 
 	private int id;
-	/**用户id*/
-	private int srcUserId;
-	
-	private int destUserId;
-	
+	private Integer srcUserId;
+	private Integer destUserId;
 	private java.util.Date createTime;
-	private int gold;
-	
-	
-
-	public int getGold() {
-		return gold;
-	}
-
-
-
-
-	public void setGold(int gold) {
-		this.gold = gold;
-	}
+	private Integer gold;
 
 	public static class Key implements KeyObject<UserTransferLogDO, UserTransferLogDO.Key>{
     	private int id;
@@ -79,7 +67,7 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 
 		@Override
 		public String toString() {
-			return "UserTransferLogDO[id:"+ id+ "]";
+			return "UserTransferLog[id:"+ id+ "]";
 		}
 	}
 
@@ -93,7 +81,7 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 
 			@Override
 			public String toString() {
-				return "UserTransferLogDO[id:"+ id+ "]";
+				return "UserTransferLog[id:"+ id+ "]";
 			}
 		};
 	}
@@ -104,10 +92,11 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 	public UserTransferLogDO() {
     }
 
-	public UserTransferLogDO(int srcUserId, int destUserId , java.util.Date createTime,java.util.Date logoutDate,Double longitude,Double latitude,String ip,int version,String loginToken) {
+	public UserTransferLogDO(Integer srcUserId,Integer destUserId,java.util.Date createTime,Integer gold) {
 		this.srcUserId = srcUserId;
 		this.destUserId = destUserId;
 		this.createTime = createTime;
+		this.gold = gold;
 	}
 
 
@@ -128,37 +117,23 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 		changeProperty("id",id);
 	}
 
-	/**
-	 * 源用户id
-	 **/
-	public int getSrcUserId() {
+	public Integer getSrcUserId() {
 		return srcUserId;
 	}
 
-	/**
-	 * 源用户id
-	 **/
-	public void setSrcUserId(int srcUserId) {
+	public void setSrcUserId(Integer srcUserId) {
 		this.srcUserId = srcUserId;
 		changeProperty("srcUserId",srcUserId);
 	}
-	
-	/**
-	 * 目的用户id
-	 **/
-	public int getDestUserId() {
+
+	public Integer getDestUserId() {
 		return destUserId;
 	}
 
-	/**
-	 * 目的用户id
-	 **/
-	public void setDestUserId(int destUserId) {
+	public void setDestUserId(Integer destUserId) {
 		this.destUserId = destUserId;
 		changeProperty("destUserId",destUserId);
 	}
-	
-	
 
 	public java.util.Date getCreateTime() {
 		return createTime;
@@ -169,6 +144,15 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 		changeProperty("createTime",createTime);
 	}
 
+	public Integer getGold() {
+		return gold;
+	}
+
+	public void setGold(Integer gold) {
+		this.gold = gold;
+		changeProperty("gold",gold);
+	}
+
     @Override
     public Object get(String dbName){
         switch(dbName){
@@ -176,10 +160,12 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
             return id;
         case "src_user_id":
             return srcUserId;
-		case "dest_user_id":
+        case "dest_user_id":
             return destUserId;
-        case "create_date":
+        case "create_time":
             return createTime;
+        case "gold":
+            return gold;
         default :
             return null;
         }
@@ -193,13 +179,16 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 			id = (int)obj;
 			return true;
 		case "src_user_id":
-			srcUserId = (int)obj;
+			srcUserId = (Integer)obj;
 			return true;
 		case "dest_user_id":
-			destUserId = (int)obj;
+			destUserId = (Integer)obj;
 			return true;
-		case "create_date":
+		case "create_time":
 			createTime = (java.util.Date)obj;
+			return true;
+		case "gold":
+			gold = (Integer)obj;
 			return true;
 		default :
 			return false;
@@ -208,7 +197,7 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 
 	@Override
 	public String toString() {
-		return "UserTransferLog[id:"+ id+",srcUserId:"+ srcUserId+",destUserId:"+ destUserId+",createTime:"+ createTime+"]";
+		return "UserTransferLog[id:"+ id+",srcUserId:"+ srcUserId+",destUserId:"+ destUserId+",createTime:"+ createTime+",gold:"+ gold+ "]";
 	}
 
 	@Override
@@ -229,15 +218,17 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 		public static final String SRC_USER_ID = "src_user_id";
 		public static final String DEST_USER_ID = "dest_user_id";
 		public static final String CREATE_TIME = "create_time";
+		public static final String GOLD = "gold";
 
         public static final String UNIQUE_PRIMARY = "PRIMARY";
 
 		private Table(){
 		    uniqueMap = new HashMap<>();
 			super.initProperty("id", "id", int.class, new TypeReference<Integer>() {});
-			super.initProperty("src_user_id", "srcUserId", int.class, new TypeReference<Integer>() {});
-			super.initProperty("dest_user_id", "destUserId", int.class, new TypeReference<Integer>() {});
+			super.initProperty("src_user_id", "srcUserId", Integer.class, new TypeReference<Integer>() {});
+			super.initProperty("dest_user_id", "destUserId", Integer.class, new TypeReference<Integer>() {});
 			super.initProperty("create_time", "createTime", java.util.Date.class, new TypeReference<java.util.Date>() {});
+			super.initProperty("gold", "gold", Integer.class, new TypeReference<Integer>() {});
 		}
 
 		@Override public String getKeyUpdatePartialPrefixSql(){
@@ -270,7 +261,6 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 			srcUserIdPtr = t.getSrcUserId();
 
 			ps.setObject(i++, srcUserIdPtr);
-			
 			Object destUserIdPtr;
 			destUserIdPtr = t.getDestUserId();
 
@@ -279,6 +269,10 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 			createTimePtr = t.getCreateTime();
 
 			ps.setObject(i++, createTimePtr);
+			Object goldPtr;
+			goldPtr = t.getGold();
+
+			ps.setObject(i++, goldPtr);
 			return i;
 		}
 
@@ -297,10 +291,13 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 
 			ps.setObject(i++,  destUserIdPtr);
 			Object createTimePtr;
-			createTimePtr = t.getCreateTime();
+				createTimePtr = t.getCreateTime();
 
-			ps.setObject(i++, createTimePtr);
-			
+			ps.setObject(i++,  createTimePtr);
+			Object goldPtr;
+				goldPtr = t.getGold();
+
+			ps.setObject(i++,  goldPtr);
         	return i;
         }
 
@@ -317,21 +314,21 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 		}
 
 		@Override public String getInsertSql(){
-			return "INSERT INTO `user_transfer_log` (`src_user_id`,`dest_user_id`,`create_time`) VALUES (?,?,?)";
+			return "INSERT INTO `user_transfer_log` (`src_user_id`,`dest_user_id`,`create_time`,`gold`) VALUES (?,?,?,?)";
 		}
 
 		@Override public String getReplaceSql(){
-        	return "REPLACE INTO `user_transfer_log` (`id`,`src_user_id`,`dest_user_id`,`create_time`) VALUES (?,?,?,?)";
+        	return "REPLACE INTO `user_transfer_log` (`id`,`src_user_id`,`dest_user_id`,`create_time`,`gold`) VALUES (?,?,?,?,?)";
         }
 
 		@Override public String getFastInsertPrefixSql(){
-			return "INSERT INTO `user_transfer_log` (`src_user_id`,`dest_user_id`,`create_time`) VALUES ";
+			return "INSERT INTO `user_transfer_log` (`src_user_id`,`dest_user_id`,`create_time`,`gold`) VALUES ";
 		}
 		@Override public String getFastInsertValueItemsSql(){
-			return " (?,?,?) ";
+			return " (?,?,?,?) ";
 		}
 		@Override public String getUpdateSql(){
-			return "UPDATE `user_transfer_log` SET `src_user_id`=?,`dest_user_id`=?,`create_time`=? WHERE `id`=?";
+			return "UPDATE `user_transfer_log` SET `src_user_id`=?,`dest_user_id`=?,`create_time`=?,`gold`=? WHERE `id`=?";
 		}
 
 		@Override public String getSelectByKeySql(){
@@ -365,6 +362,7 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 					o.srcUserId = rs.getInt("src_user_id");
 					o.destUserId = rs.getInt("dest_user_id");
 					o.createTime = rs.getTimestamp("create_time");
+					o.gold = rs.getInt("gold");
 					return o;
 				}
 			};
@@ -381,6 +379,7 @@ public class UserTransferLogDO extends EntityObject<UserTransferLogDO, UserTrans
 						o.setSrcUserId(rs.getInt("src_user_id"));
 						o.setDestUserId(rs.getInt("dest_user_id"));
 						o.setCreateTime(rs.getTimestamp("create_time"));
+						o.setGold(rs.getInt("gold"));
                         return o;
 					} catch (InstantiationException | IllegalAccessException e) {
 						throw new SQLException("必须实现默认构造函数",e);

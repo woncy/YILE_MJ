@@ -23,7 +23,7 @@ import mj.net.message.MessageFactoryImpi;
 
 public class Client {
 
-	public  final String uri = "ws://127.0.0.1:8010/g";
+	public  final String uri = "ws://127.0.0.1:8030/g";
 	WebSocketClient client;
 	MessageHandler handler;
 	

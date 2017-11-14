@@ -1,6 +1,5 @@
 package majiang.client.portal.admin.api;
 
-import game.boss.dao.entity.UserDO;
 import majiang.client.portal.admin.form.PayForm;
 import majiang.client.portal.admin.model.PageModel;
 import majiang.client.portal.admin.model.UserModel;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import game.boss.dao.entity.UserDO;
 
 import javax.validation.Valid;
 

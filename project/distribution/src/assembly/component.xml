@@ -50,6 +50,26 @@
                 <includeDependencies>false</includeDependencies>
             </binaries>
         </moduleSet>
+        <moduleSet>
+            <useAllReactorProjects>true</useAllReactorProjects>
+            <includes>
+                <include>com.isnowfox.game.mj:mj-scene-douniu</include>
+            </includes>
+            <binaries>
+                <outputDirectory>manager</outputDirectory>
+                <includeDependencies>false</includeDependencies>
+            </binaries>
+        </moduleSet>
+        <moduleSet>
+            <useAllReactorProjects>true</useAllReactorProjects>
+            <includes>
+                <include>com.isnowfox.game.mj:testMessage</include>
+            </includes>
+            <binaries>
+                <outputDirectory>manager</outputDirectory>
+                <includeDependencies>false</includeDependencies>
+            </binaries>
+        </moduleSet>
     </moduleSets>
     <dependencySets>
         <dependencySet>

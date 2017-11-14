@@ -19,13 +19,17 @@ public class GameUserInfo extends AbstractMessage{
 	public static final int ID				 = 8;
 	
 	private String userName;
+	
 	private String avatar;
+//	private Button avatar_btn;
 	/**
 	 * 0:女生,1:男生,2:未知
 	 */
 	private int sex;
-	private int gold;
+	
+	private int gold;//
 	private int score;
+	
 	private int locationIndex;
 	private int userId;
 	private boolean online;

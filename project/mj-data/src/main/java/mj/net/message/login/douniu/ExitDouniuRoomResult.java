@@ -15,8 +15,8 @@ import com.isnowfox.core.net.message.AbstractMessage;
  * @author isnowfox消息生成器
  */
 public class ExitDouniuRoomResult extends AbstractMessage{
-	public static final int TYPE			 = 5;
-	public static final int ID				 = 7;
+	public static final int TYPE			 = 2;
+	public static final int ID				 = 17;
 	
 	int userID;
 	

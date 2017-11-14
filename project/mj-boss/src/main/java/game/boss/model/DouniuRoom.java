@@ -3,18 +3,14 @@ package game.boss.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
-import game.boss.poker.dao.dao.TbPkRoomDao;
-import game.boss.poker.dao.dao.TbPkRoomUserDao;
-import game.boss.poker.dao.entity.TbPkRoomDO;
-import game.boss.poker.dao.entity.TbPkRoomUserDO;
+import game.boss.dao.dao.TbPkRoomUserDao;
+import game.boss.dao.entity.TbPkRoomDO;
+import game.boss.dao.entity.TbPkRoomUserDO;
 import game.boss.dao.entity.UserDO;
-import game.douniu.scene.msg.CheckJoinDouniuRoomMsg;
-import game.douniu.scene.msg.DouniuUserInfo;
+import game.douniu.scene.msg.CheckJoinRoom2Msg;
 import game.scene.msg.UserInfo;
 
 /**
@@ -100,8 +96,8 @@ public class DouniuRoom {
 		this.control = control;
 	}
 
-	public CheckJoinDouniuRoomMsg toMsg(User user) {
-		final CheckJoinDouniuRoomMsg m = new CheckJoinDouniuRoomMsg();
+	public CheckJoinRoom2Msg toMsg(User user) {
+		final CheckJoinRoom2Msg m = new CheckJoinRoom2Msg();
 		m.setUuid(tbPkRoomDO.getUuid());
 		m.setUserMax(tbPkRoomDO.getUserMax());
 		m.setCreateUserId(tbPkRoomDO.getCreateUserId());
@@ -111,12 +107,12 @@ public class DouniuRoom {
 		m.setJoinSessionId(user.getSessionId());
 		m.setJoinUserId(user.getUserId());
 		m.setOptions(tbPkRoomDO.getConfig().getOptions());
-		ArrayList<DouniuUserInfo> userInfos = (ArrayList<DouniuUserInfo>) m.getDouniuUserInfos();
+		ArrayList<UserInfo> userInfos = (ArrayList<UserInfo>) m.getUserInfos();
 		Iterator<Entry<Integer, UserDO>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<Integer, UserDO> e = iterator.next();
 			UserDO userDO = e.getValue();
-			DouniuUserInfo userInfo = new DouniuUserInfo();
+			UserInfo userInfo = new UserInfo();
 
 			userInfo.setUserId(userDO.getId());
 			userInfo.setLocationIndex(e.getKey());
@@ -143,7 +139,7 @@ public class DouniuRoom {
 			
 			userInfos.add(userInfo);
 		}
-		m.setDouniuUserInfos(userInfos);
+		m.setUserInfos(userInfos);
 		/*if(control != null){
 			DouniuUserInfo userInfo = new DouniuUserInfo();
 

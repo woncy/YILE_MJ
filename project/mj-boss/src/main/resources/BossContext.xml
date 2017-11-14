@@ -87,36 +87,8 @@
             </bean>
         </property>
     </bean>
-	<!-- poker -->
-	<bean id="ZJHRoomService" class="game.boss.services.ZJH.ZJHRoomService"></bean>
-	<bean id="ZJHSceneManager" class="game.boss.net.poker.zjh.ZJHSceneManager"></bean>
 	
 	
-	<bean id="ZJHSceneListenServer" class="game.boss.net.poker.zjh.ZJHSceneListenServer" destroy-method="close">
-		<property name="port" value="${net.zjhSceneListenServerPort}"></property>
-		<property name="ZJHSceneListenHandler">
-			<bean id="ZJHSceneListenHandler" class="game.boss.net.poker.zjh.ZJHSceneListenHandler">
-				<property name="ZJHmessageManager">
-					<bean class="game.boss.net.poker.zjh.ZJHSceneMessageManager"></bean>
-				</property>
-			</bean>
-		</property>
-	</bean>
-	
-	<!-- 斗牛 -->
-	<bean id="DouniuRoomService" class="game.boss.services.douniu.DouniuRoomService"></bean>
-	<bean id="DouniuSceneManager" class="game.boss.net.poker.douniu.DouniuSceneManager"></bean>
-	
-	<bean id="douniuSceneListenServer" class="game.boss.net.poker.douniu.DouniuSceneListenServer" destroy-method="close">
-		<property name="port" value="${net.douniuSceneListenServerPort}"></property>
-		<property name="douniuSceneListenHandler">
-			<bean id="douniuSceneListenHandler" class="game.boss.net.poker.douniu.DouniuSceneListenHandler">
-				<property name="douniuMessageManager">
-					<bean class="game.boss.net.poker.douniu.DouniuSceneMessageManager"></bean>
-				</property>
-			</bean>
-		</property>
-	</bean>
 
     <bean id="adminManager" class="game.boss.admin.AdminManager"/>
     <bean id="adminListenServer" class="game.boss.admin.AdminListenServer"

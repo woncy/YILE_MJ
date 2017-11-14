@@ -12,12 +12,8 @@
     <logger name="org.apache">
         <level value="INFO" />
     </logger>
-    <logger name="java.sql">
-        <level value="DEBUG" />
-    </logger>
-    <logger name="java.sql.PreparedStatement">
-        <level value="DEBUG" />
-    </logger>
+
+ 
     <logger name="org.springframework">
         <level value="INFO" />
     </logger>

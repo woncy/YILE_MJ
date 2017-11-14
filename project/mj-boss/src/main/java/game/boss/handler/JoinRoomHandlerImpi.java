@@ -17,7 +17,7 @@ public class JoinRoomHandlerImpi implements JoinRoomHandler<User> {
 
     @Override
     public boolean handler(JoinRoom msg, User user) {
-        roomService.joinRoom(msg.getRoomCheckId(), user);
+        roomService.joinRoom2(msg.getRoomCheckId(), user);
         return false;
     }
 }

@@ -6,26 +6,25 @@
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
 	" default-autowire="byName">
+	<bean id="adminDao" class="game.boss.poker.dao.dao.AdminDao"/>
 	<bean id="agentApplyDao" class="game.boss.poker.dao.dao.AgentApplyDao"/>
 	<bean id="mjAdminDao" class="game.boss.poker.dao.dao.MjAdminDao"/>
+	<bean id="mjAgentsDao" class="game.boss.poker.dao.dao.MjAgentsDao"/>
 	<bean id="mjNodeDao" class="game.boss.poker.dao.dao.MjNodeDao"/>
 	<bean id="mjRoleDao" class="game.boss.poker.dao.dao.MjRoleDao"/>
 	<bean id="mjRoleAdminDao" class="game.boss.poker.dao.dao.MjRoleAdminDao"/>
 	<bean id="mjRoleNodeDao" class="game.boss.poker.dao.dao.MjRoleNodeDao"/>
-	<bean id="onlinePayLogDao" class="game.boss.poker.dao.dao.OnlinePayLogDao"/>
 	<bean id="priceDao" class="game.boss.poker.dao.dao.PriceDao"/>
 	<bean id="proxyUserDao" class="game.boss.poker.dao.dao.ProxyUserDao"/>
 	<bean id="roomDao" class="game.boss.poker.dao.dao.RoomDao"/>
+	<bean id="room2Dao" class="game.boss.poker.dao.dao.Room2Dao"/>
+	<bean id="roomChapterDao" class="game.boss.poker.dao.dao.RoomChapterDao"/>
 	<bean id="roomCheckIdPoolDao" class="game.boss.poker.dao.dao.RoomCheckIdPoolDao"/>
 	<bean id="roomDetailDao" class="game.boss.poker.dao.dao.RoomDetailDao"/>
 	<bean id="roomResultDao" class="game.boss.poker.dao.dao.RoomResultDao"/>
 	<bean id="roomUserDao" class="game.boss.poker.dao.dao.RoomUserDao"/>
 	<bean id="settingDao" class="game.boss.poker.dao.dao.SettingDao"/>
 	<bean id="tbNoticeDao" class="game.boss.poker.dao.dao.TbNoticeDao"/>
-	<bean id="tbPkChapterDao" class="game.boss.poker.dao.dao.TbPkChapterDao"/>
-	<bean id="tbPkRoomDao" class="game.boss.poker.dao.dao.TbPkRoomDao"/>
-	<bean id="tbPkRoomUserDao" class="game.boss.poker.dao.dao.TbPkRoomUserDao"/>
-	<bean id="tbPkUserChapterDao" class="game.boss.poker.dao.dao.TbPkUserChapterDao"/>
 	<bean id="tbWinProDao" class="game.boss.poker.dao.dao.TbWinProDao"/>
 	<bean id="userDao" class="game.boss.poker.dao.dao.UserDao"/>
 	<bean id="userAgentTokenDao" class="game.boss.poker.dao.dao.UserAgentTokenDao"/>

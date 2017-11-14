@@ -32,7 +32,6 @@ public class ShowStartGame extends AbstractMessage{
 
 	@Override
 	public int getMessageType() {
-		// TODO 自动生成的方法存根
 		return TYPE;
 	}
 

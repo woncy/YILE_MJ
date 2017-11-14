@@ -7,14 +7,18 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import  org.forkjoin.core.dao.EntityObject;
-import  org.forkjoin.core.dao.KeyObject;
-import  org.forkjoin.core.dao.TableInfo;
+
 import org.forkjoin.core.dao.UniqueInfo;
+
+
 import org.springframework.jdbc.core.RowMapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
+
+import  org.forkjoin.core.dao.EntityObject;
+import  org.forkjoin.core.dao.KeyObject;
+import  org.forkjoin.core.dao.TableInfo;
 
 public class UserQuestionDO extends EntityObject<UserQuestionDO, UserQuestionDO.Key>{
 
@@ -74,11 +78,6 @@ public class UserQuestionDO extends EntityObject<UserQuestionDO, UserQuestionDO.
 				return id;
 			}
 
-			public void setId(int id) {
-				UserQuestionDO.this.id  = id;
-				UserQuestionDO.this.changeProperty("id",id);
-			}
-
 			@Override
 			public String toString() {
 				return "UserQuestion[id:"+ id+ "]";
@@ -92,8 +91,7 @@ public class UserQuestionDO extends EntityObject<UserQuestionDO, UserQuestionDO.
 	public UserQuestionDO() {
     }
 
-	public UserQuestionDO(int id,int userId,String question,java.util.Date time) {
-		this.id = id;
+	public UserQuestionDO(int userId,String question,java.util.Date time) {
 		this.userId = userId;
 		this.question = question;
 		this.time = time;
@@ -241,9 +239,6 @@ public class UserQuestionDO extends EntityObject<UserQuestionDO, UserQuestionDO.
 			Object idPtr;
 			idPtr = t.getId();
 
-			if(isSetUnique){
-				ps.setObject(i++, idPtr);
-			}
 			Object userIdPtr;
 			userIdPtr = t.getUserId();
 
@@ -293,7 +288,7 @@ public class UserQuestionDO extends EntityObject<UserQuestionDO, UserQuestionDO.
 		}
 
 		@Override public String getInsertSql(){
-			return "INSERT INTO `user_question` (`id`,`user_id`,`question`,`time`) VALUES (?,?,?,?)";
+			return "INSERT INTO `user_question` (`user_id`,`question`,`time`) VALUES (?,?,?)";
 		}
 
 		@Override public String getReplaceSql(){
@@ -301,13 +296,13 @@ public class UserQuestionDO extends EntityObject<UserQuestionDO, UserQuestionDO.
         }
 
 		@Override public String getFastInsertPrefixSql(){
-			return "INSERT INTO `user_question` (`id`,`user_id`,`question`,`time`) VALUES ";
+			return "INSERT INTO `user_question` (`user_id`,`question`,`time`) VALUES ";
 		}
 		@Override public String getFastInsertValueItemsSql(){
-			return " (?,?,?,?) ";
+			return " (?,?,?) ";
 		}
 		@Override public String getUpdateSql(){
-			return "UPDATE `user_question` SET `id`=?,`user_id`=?,`question`=?,`time`=? WHERE `id`=?";
+			return "UPDATE `user_question` SET `user_id`=?,`question`=?,`time`=? WHERE `id`=?";
 		}
 
 		@Override public String getSelectByKeySql(){

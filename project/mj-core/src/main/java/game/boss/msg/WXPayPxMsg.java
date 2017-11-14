@@ -20,7 +20,7 @@ import io.netty.channel.ChannelHandlerContext;
     */
 
 public class WXPayPxMsg extends AbstractSessionPxMsg{
-		public static final int ID = 10;
+		public static final int ID = 9;
 		private short result;
 		private String trade_no;
 		private int money;

@@ -3,7 +3,6 @@ package game.boss.net;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.apache.commons.lang.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -15,7 +14,6 @@ import com.isnowfox.util.collect.ConcurrentArrayList;
 
 import game.boss.ServerException;
 import game.boss.ServerRuntimeException;
-import game.boss.net.poker.zjh.ZJHScene;
 import io.netty.channel.Channel;
 
 

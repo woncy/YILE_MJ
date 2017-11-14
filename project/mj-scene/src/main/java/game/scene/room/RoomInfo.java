@@ -2,6 +2,7 @@ package game.scene.room;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Timer;
 
 import org.springframework.beans.BeanUtils;
 
@@ -17,6 +18,8 @@ import mj.net.message.game.StaticsResultRet;
  * @author zuoge85@gmail.com on 16/10/6.
  */
 public class RoomInfo {
+	
+	public static final long Default_Del_Room_Time = 1000*60*3;
     private short sceneId;
     /**
      * 牌局id
@@ -55,8 +58,10 @@ public class RoomInfo {
 	private boolean ready[];
 	private boolean isProxy;
 	private boolean dingPaoChache[];//配合state==1用
+	private boolean isfirstStart = true;
 	
-	
+	private Timer voteDelRoomTimer;
+	private int currentChapterNum;
 	
     public RoomInfo(Room room,String rulesName,int userNum,int roomId) {
         chapter = new MajiangChapter(room, rulesName,userNum);
@@ -67,10 +72,41 @@ public class RoomInfo {
         dingPaoChache = new boolean[userNum];
         this.userNum = userNum;
         isProxy = room.getConfig().getInt("isProxy")==1;
+        currentChapterNum = 0;
     }
   
+    
+    
 
-    public int getUserNum() {
+    public int getCurrentChapterNum() {
+		return currentChapterNum;
+	}
+
+
+
+
+	public void addCurrentChapterNum() {
+		this.currentChapterNum++;
+	}
+
+
+
+
+	public Timer getVoteDelRoomTimer() {
+		return voteDelRoomTimer;
+	}
+
+
+
+
+	public void setVoteDelRoomTimer(Timer voteDelRoomTimer) {
+		this.voteDelRoomTimer = voteDelRoomTimer;
+	}
+
+
+
+
+	public int getUserNum() {
 		return userNum;
 	}
     
@@ -176,7 +212,7 @@ public class RoomInfo {
         return new Position(latitude0, longitude0).getDistanceToKm(new Position(latitude1, longitude1));
     }
 
-    public void updateUserInfo(SceneUser sceneUser) {
+    public void updateUserInfo(SceneUser sceneUser,boolean isFirst) {
         SceneUser oldUser = users[sceneUser.getLocationIndex()];
         if (oldUser == null) {
             users[sceneUser.getLocationIndex()] = sceneUser;
@@ -190,7 +226,9 @@ public class RoomInfo {
             oldUser.setSex(sceneUser.getSex());
             oldUser.setUserId(sceneUser.getUserId());
         }
-        
+        if(isFirst){
+        	sceneUser.setScore(0);
+        }
         chapter.updateUser(sceneUser);
     }
 
@@ -198,6 +236,14 @@ public class RoomInfo {
         return users[locationIndex];
     }
 
+
+    public boolean isIsfirstStart() {
+		return isfirstStart;
+	}
+
+	public void changeIsfirstStart() {
+		this.isfirstStart = false;
+	}
 
     public boolean removeUserInfo(int userId) {
         for (int i = 0; i < users.length; i++) {
@@ -407,6 +453,21 @@ public class RoomInfo {
 
 	public StaticsResultRet getEndResult() {
 		return endResult;
+	}
+
+
+
+
+	public void exitRoom(int userId) {
+		for (int i = 0; i < users.length; i++) {
+			SceneUser user = users[i];
+			if(user!=null && userId==user.getUserId()){
+				users[i]=null;
+				chapter.exitUser(userId);
+			}
+			
+		}
+		
 	}
 	
 }

@@ -18,7 +18,6 @@ public class ExitRoomRet extends AbstractMessage{
 	public static final int TYPE			 = 7;
 	public static final int ID				 = 5;
 	
-	
 	public ExitRoomRet(){
 		
 	}

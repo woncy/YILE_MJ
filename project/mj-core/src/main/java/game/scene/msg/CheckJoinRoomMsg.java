@@ -32,25 +32,7 @@ public class CheckJoinRoomMsg extends AbstractSessionPxMsg {
     /**
      * 用户0
      */
-    private int user0;
-    /**
-     * 用户1
-     */
-    private int user1;
-    /**
-     * 用户2
-     */
-    private int user2;
-    /**
-     * 用户3
-     */
-    private int user3;
-
-
-    private int score0;
-    private int score1;
-    private int score2;
-    private int score3;
+   
     /**
      * 房间的check-id,进入id,可以重复,但是不允许同时活跃状态的id 相同
      */
@@ -63,7 +45,7 @@ public class CheckJoinRoomMsg extends AbstractSessionPxMsg {
 
     private List<UserInfo> userInfos = new ArrayList<>();
     private Map<String, String> options = new TreeMap<>();
-
+    
     public CheckJoinRoomMsg() {
         super(ID);
     }
@@ -80,19 +62,7 @@ public class CheckJoinRoomMsg extends AbstractSessionPxMsg {
         out.writeInt(userMax);
         /**牌局uuid*/
         writeString(out, uuid);
-        /**用户0*/
-        out.writeInt(user0);
-        /**用户1*/
-        out.writeInt(user1);
-        /**用户2*/
-        out.writeInt(user2);
-        /**用户3*/
-        out.writeInt(user3);
-
-        out.writeInt(score0);
-        out.writeInt(score1);
-        out.writeInt(score2);
-        out.writeInt(score3);
+        
         /**房间的check-id,进入id,可以重复,但是不允许同时活跃状态的id 相同*/
         writeString(out, roomCheckId);
 
@@ -135,24 +105,7 @@ public class CheckJoinRoomMsg extends AbstractSessionPxMsg {
         /**
          * 用户0
          */
-        user0 = in.readInt();
-        /**
-         * 用户1
-         */
-        user1 = in.readInt();
-        /**
-         * 用户2
-         */
-        user2 = in.readInt();
-        /**
-         * 用户3
-         */
-        user3 = in.readInt();
-
-        score0 = in.readInt();
-        score1 = in.readInt();
-        score2 = in.readInt();
-        score3 = in.readInt();
+      
         /**
          * 房间的check-id,进入id,可以重复,但是不允许同时活跃状态的id 相同
          */
@@ -216,37 +169,7 @@ public class CheckJoinRoomMsg extends AbstractSessionPxMsg {
         this.uuid = uuid;
     }
 
-    public int getUser0() {
-        return user0;
-    }
-
-    public void setUser0(int user0) {
-        this.user0 = user0;
-    }
-
-    public int getUser1() {
-        return user1;
-    }
-
-    public void setUser1(int user1) {
-        this.user1 = user1;
-    }
-
-    public int getUser2() {
-        return user2;
-    }
-
-    public void setUser2(int user2) {
-        this.user2 = user2;
-    }
-
-    public int getUser3() {
-        return user3;
-    }
-
-    public void setUser3(int user3) {
-        this.user3 = user3;
-    }
+   
 
     public String getRoomCheckId() {
         return roomCheckId;
@@ -289,38 +212,7 @@ public class CheckJoinRoomMsg extends AbstractSessionPxMsg {
         this.joinUserId = joinUserId;
     }
 
-    public int getScore0() {
-        return score0;
-    }
-
-    public void setScore0(int score0) {
-        this.score0 = score0;
-    }
-
-    public int getScore1() {
-        return score1;
-    }
-
-    public void setScore1(int score1) {
-        this.score1 = score1;
-    }
-
-    public int getScore2() {
-        return score2;
-    }
-
-    public void setScore2(int score2) {
-        this.score2 = score2;
-    }
-
-    public int getScore3() {
-        return score3;
-    }
-
-    public void setScore3(int score3) {
-        this.score3 = score3;
-    }
-
+   
 
     public Map<String, String> getOptions() {
         return options;
@@ -338,14 +230,6 @@ public class CheckJoinRoomMsg extends AbstractSessionPxMsg {
                 ", createUserId=" + createUserId +
                 ", userMax=" + userMax +
                 ", uuid='" + uuid + '\'' +
-                ", user0=" + user0 +
-                ", user1=" + user1 +
-                ", user2=" + user2 +
-                ", user3=" + user3 +
-                ", score0=" + score0 +
-                ", score1=" + score1 +
-                ", score2=" + score2 +
-                ", score3=" + score3 +
                 ", roomCheckId='" + roomCheckId + '\'' +
                 ", joinSessionId=" + joinSessionId +
                 ", joinGatewayId=" + joinGatewayId +

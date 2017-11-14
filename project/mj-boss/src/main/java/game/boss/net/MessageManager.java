@@ -12,11 +12,6 @@ import com.isnowfox.game.proxy.message.PxMsg;
 import com.isnowfox.game.proxy.message.SinglePxMsg;
 
 import game.boss.ServerRuntimeException;
-import game.boss.ZJH.msg.DelZJHRoomMsg;
-import game.boss.ZJH.msg.JoinZJHRoomMsg;
-import game.boss.douniu.msg.DeDouniuRoomMsg;
-import game.boss.douniu.msg.DouniuExitRoomMsg;
-import game.boss.douniu.msg.JoinDouniuRoomMsg;
 import game.boss.model.User;
 import game.boss.msg.DelRoomMsg;
 import game.boss.msg.ExitRoomMsg;
@@ -28,14 +23,10 @@ import game.boss.services.AsyncService;
 import game.boss.services.RoomService;
 import game.boss.services.SettingService;
 import game.boss.services.UserService;
-import game.boss.services.ZJH.ZJHRoomService;
-import game.boss.services.douniu.DouniuRoomService;
-import game.boss.services.pdk.PdkRoomService;
 import mj.net.handler.MessageHandler;
 import mj.net.handler.MessageHandlerFactory;
 import mj.net.message.login.Login;
 import mj.net.message.login.Ping;
-import mj.net.message.login.douniu.JoinDouniuRoomReady;
 import mj.net.message.room.pdk.CreatePdkRoom;
 import mj.net.message.room.pdk.JoinPdkRoomReady;
 
@@ -55,13 +46,6 @@ public class MessageManager {
     private MessageHandlerFactory messageHandlerFactory;
     @Autowired
     private UserService userService;
-    
-    @Autowired
-    private PdkRoomService pdkRoomService;
-    @Autowired
-    private ZJHRoomService zjhRoomService;
-    @Autowired
-    private DouniuRoomService douniuRoomService;
     
     @Autowired
     private RoomService roomService;
@@ -108,51 +92,6 @@ public class MessageManager {
                 sessionId = lm.getSessionId();
                 Gateway gateway = checkGatway(msg);
                 gateway.unReg(lm.getSessionId()); 
-            } else if(msg instanceof JoinDouniuRoomMsg){                 //斗牛加入房间消息boss处理
-            	JoinDouniuRoomMsg lm = (JoinDouniuRoomMsg) msg;
-                final Gateway gateway = checkGatway(msg);  
-                sessionId = lm.getSessionId();
-                Session<UserImpi> userSession = gateway.getSession(sessionId);
-                if (userSession == null) {
-                    log.error("错误消息:{}没有注册的用户！", sessionId);
-                    throw new ServerRuntimeException("没有注册的用户" + sessionId);
-                }
-                UserImpi userImpi = userSession.get();
-                if (userImpi == null) {
-                    log.error("错误消息:{}不存在用户！", sessionId);
-                    return;
-                }
-                	 douniuRoomService.joinRoomGatewaySuccess(userImpi);            
-            } else if(msg instanceof DeDouniuRoomMsg){     //斗牛删除房间消息
-            	DeDouniuRoomMsg lm = (DeDouniuRoomMsg) msg;
-                final Gateway gateway = checkGatway(msg);
-                sessionId = lm.getSessionId();
-                Session<UserImpi> userSession = gateway.getSession(sessionId);
-                if (userSession == null) {
-                    log.error("错误消息:{}没有注册的用户！", sessionId);
-                    return;
-                }
-                UserImpi userImpi = userSession.get();
-                if (userImpi == null) {
-                    log.error("错误消息:{}不存在用户！", sessionId);
-                    return;
-                }
-                douniuRoomService.delRoomGatewaySuccess(userImpi);        
-            }else if (msg instanceof DouniuExitRoomMsg) {  //斗牛退出房间
-            	DouniuExitRoomMsg lm = (DouniuExitRoomMsg) msg;
-                final Gateway gateway = checkGatway(msg);
-                sessionId = lm.getSessionId();
-                Session<UserImpi> userSession = gateway.getSession(sessionId);
-                if (userSession == null) {
-                    log.error("错误消息:{}没有注册的用户！", sessionId);
-                    throw new ServerRuntimeException("没有注册的用户" + sessionId);
-                }
-                UserImpi userImpi = userSession.get();
-                if (userImpi == null) {
-                    log.error("错误消息:{}不存在用户！", sessionId);
-                    return;
-                }
-                douniuRoomService.exitDouniuRoomGatewaySuccess(userImpi);
             }else if (msg instanceof JoinRoomMsg) {
                 JoinRoomMsg lm = (JoinRoomMsg) msg;
                 final Gateway gateway = checkGatway(msg);
@@ -173,22 +112,6 @@ public class MessageManager {
                 	roomService.joinRoomGatewaySuccess(userImpi);
                 }
                 
-            }else if(msg instanceof JoinZJHRoomMsg){//扎金花
-            	JoinZJHRoomMsg lm = (JoinZJHRoomMsg) msg;
-                 final Gateway gateway = checkGatway(msg);
-                 sessionId = lm.getSessionId();
-                 Session<UserImpi> userSession = gateway.getSession(sessionId);
-                 if (userSession == null) {
-                     log.error("错误消息:{}没有注册的用户！", sessionId);
-                     throw new ServerRuntimeException("没有注册的用户" + sessionId);
-                 }
-                 UserImpi userImpi = userSession.get();
-                 if (userImpi == null) {
-                     log.error("错误消息:{}不存在用户！", sessionId);
-                     return;
-                 }
-                 zjhRoomService.joinRoomGatewaySuccess(userImpi);
-            	 
             }else if (msg instanceof ExitRoomMsg) {
                 ExitRoomMsg lm = (ExitRoomMsg) msg;
 
@@ -204,7 +127,11 @@ public class MessageManager {
                     log.error("错误消息:{}不存在用户！", sessionId);
                     return;
                 }
-                roomService.exitRoomGatewaySuccess(userImpi);
+                if(lm.getSceneId()==1003){
+                	
+                }else{
+                	roomService.exitRoomGatewaySuccess(userImpi);
+                }
             } else if (msg instanceof DelRoomMsg) {
                 DelRoomMsg lm = (DelRoomMsg) msg;
                 final Gateway gateway = checkGatway(msg);
@@ -229,24 +156,9 @@ public class MessageManager {
             	handlerZJHMessage(msg,sessionId);
             }else if(msg.getType()==5){
             	handlerDouniuMessage(msg,sessionId); //斗牛
-            }else if(msg instanceof DelZJHRoomMsg){//扎金花删除房间
-            	DelZJHRoomMsg dm = (DelZJHRoomMsg)msg;
-            	 final Gateway gateway = checkGatway(msg);
-                 sessionId = dm.getSessionId();
-                 Session<UserImpi> userSession = gateway.getSession(sessionId);
-                 if (userSession == null) {
-                     log.error("错误消息:{}没有注册的用户！", sessionId);
-                     return;
-                 }
-                 UserImpi userImpi = userSession.get();
-                 if (userImpi == null) {
-                     log.error("错误消息:{}不存在用户！", sessionId);
-                     return;
-                 }
-                 zjhRoomService.delRoomGatewaySuccess(userImpi);
-            } 
+            }
             
-            
+     
             
         } catch (Throwable th) {
             log.error("严重消息错误 " + msg, th);
@@ -323,6 +235,7 @@ public class MessageManager {
         rawMsg.setSession(userSession);
         handlerMessage(rawMsg, userSession.get());
    }
+    
     
 	private Gateway checkGatway(PxMsg msg) {
         Session<Gateway> gatewaySession = msg.getSession();

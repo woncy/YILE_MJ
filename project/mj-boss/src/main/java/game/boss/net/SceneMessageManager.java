@@ -1,17 +1,18 @@
 package game.boss.net;
 
-import com.isnowfox.core.net.Session;
-import com.isnowfox.game.proxy.message.PxMsg;
-import game.boss.ServerRuntimeException;
-import game.boss.services.RoomService;
-import game.boss.services.UserService;
-import game.scene.msg.*;
-import game.zjh.scene.msg.CheckJoinZJHRoomMsg;
-import game.zjh.scene.msg.CheckJoinZJHRoomResult;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.isnowfox.game.proxy.message.PxMsg;
+
+import game.boss.services.RoomService;
+import game.douniu.scene.msg.ChapterEnd2Msg;
+import game.douniu.scene.msg.ChapterStart2Msg;
+import game.douniu.scene.msg.CheckExitRoom2Msg;
+import game.douniu.scene.msg.DelRoom2Msg;
+import game.scene.msg.CheckJoinRoomRetMsg;
+import game.scene.msg.RegSceneMsg;
 
 /**
  * @author zuoge85@gmail.com on 16/9/27.
@@ -23,11 +24,9 @@ public class SceneMessageManager {
     private SceneManager sceneManager;
     @Autowired
     private RoomService roomService;
-    @Autowired
-    private UserService userService;
+   
 
     void handler(PxMsg msg) {
-        short sessionId = -1;
         try {
             switch (msg.getType()){
                 case RegSceneMsg.ID:{
@@ -47,34 +46,10 @@ public class SceneMessageManager {
                     roomService.joinRoomSceneSuccess(checkJoinRoomRetMsg.getJoinUserId(), checkJoinRoomRetMsg.isSucccess());
                     break;
                 }
-                case CheckExitRoomMsg.ID:{
-                    CheckExitRoomMsg checkExitRoomMsg = (CheckExitRoomMsg) msg;
-                    roomService.exitRoomSceneSuccess(checkExitRoomMsg.getUserId(), checkExitRoomMsg.getSceneId(), checkExitRoomMsg.isResult(),checkExitRoomMsg.getRoomId());
-                    break;
-                }
-                case CheckDelRoomMsg.ID:{
-                    CheckDelRoomMsg checkDelRoomMsg = (CheckDelRoomMsg) msg;
-                    roomService.delRoomSceneSuccess(checkDelRoomMsg);
-                    break;
-                }
-                case ChapterEndMsg.ID:{
-                    ChapterEndMsg chapterEndMsg = (ChapterEndMsg) msg;
-                    roomService.chapterEnd(chapterEndMsg);
-                    break;
-                }
-                case RoomEndMsg.ID:{
-                    RoomEndMsg endMsg = (RoomEndMsg) msg;
-                    roomService.delRoom(endMsg.getCrateUserId(), null, true);
-                    break;
-                }
-                case ChapterStartMsg.ID:{
-                    ChapterStartMsg startMsg = (ChapterStartMsg) msg;
-                    roomService.chapterStart(startMsg);
-                    break;
-                }
                 
-               
             }
+            handlerRoom2(msg);
+            
         } catch (Throwable th) {
             log.error("严重消息错误 " + msg, th);
 //            Scene scene = (Scene) msg.getSession().get();
@@ -85,14 +60,29 @@ public class SceneMessageManager {
 //            }
         }
     }
+    
+    
 
-    private Scene checkScene(PxMsg msg) {
-        Session<Scene> sceneSession = msg.getSession();
-        final Scene scene = sceneSession.get();
-        if (scene == null) {
-            log.error("未注册的Scene:{},sceneSession:{}", msg, sceneSession);
-            throw new ServerRuntimeException("未注册的Scene:" + msg + ",sceneSession:" + sceneSession);
-        }
-        return scene;
-    }
+    private void handlerRoom2(PxMsg msg) {
+		switch (msg.getType()) {
+		case ChapterStart2Msg.ID:
+			roomService.douniuChapterStart((ChapterStart2Msg)msg);
+			break;
+		case ChapterEnd2Msg.ID:
+			roomService.douniuChapterEnd((ChapterEnd2Msg)msg);
+			break;
+		case DelRoom2Msg.ID:
+			roomService.douniuDelRoom((DelRoom2Msg)msg);
+			break;
+		case CheckExitRoom2Msg.ID:
+			roomService.douniuExitRoom((CheckExitRoom2Msg)msg);
+			break;
+		default:
+			break;
+		}
+		
+	}
+
+
+
 }

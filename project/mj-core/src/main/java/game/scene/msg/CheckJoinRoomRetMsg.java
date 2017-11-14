@@ -11,7 +11,7 @@ import java.util.Map;
  * @author zuoge85@gmail.com on 2017/1/1.
  */
 public class CheckJoinRoomRetMsg extends AbstractSessionPxMsg {
-    public static final int ID = ChapterEndMsg.ID + 1;
+    public static final int ID = 5 + 1;
     private short sceneId;
     /**
      * 牌局id

@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 import game.boss.admin.AdminListenServer;
 import game.boss.net.GatewayListenServer;
 import game.boss.net.SceneListenServer;
-import game.boss.net.poker.douniu.DouniuSceneListenServer;
-import game.boss.net.poker.zjh.ZJHSceneListenServer;
 
 public class StartWarp {
     public static void start(String[] args) {
@@ -19,13 +17,7 @@ public class StartWarp {
             ioc = IocFactoryProxy.getInstance();
             ioc.init();
             GatewayListenServer gatewayListenServer = ioc.getBean("gatewayListenServer", GatewayListenServer.class);
-            gatewayListenServer.start();
-            
-            DouniuSceneListenServer douniuSceneListenServer=ioc.getBean("douniuSceneListenServer",DouniuSceneListenServer.class);
-            douniuSceneListenServer.start();
-            
-            ZJHSceneListenServer ZJHSceneListenServer  = ioc.getBean("ZJHSceneListenServer",ZJHSceneListenServer.class);
-            ZJHSceneListenServer.start();           
+            gatewayListenServer.start();           
                       
             SceneListenServer sceneListenServer = ioc.getBean("sceneListenServer", SceneListenServer.class);
             sceneListenServer.start();

@@ -2,6 +2,7 @@ package game.boss.model;
 
 import com.isnowfox.core.net.message.Message;
 import com.isnowfox.game.proxy.message.PxMsg;
+
 import game.boss.dao.entity.UserDO;
 import game.boss.dao.entity.UserLoginLogDO;
 import game.type.NoticeType;

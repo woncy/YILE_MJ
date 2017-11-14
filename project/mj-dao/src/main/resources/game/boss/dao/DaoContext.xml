@@ -10,6 +10,7 @@
 	
 	<bean id="adminDao" class="game.boss.dao.dao.AdminDao"/>
 	<bean id="roomDao" class="game.boss.dao.dao.RoomDao"/>
+	<bean id="room2Dao" class="game.boss.dao.dao.Room2Dao"/>
 	<bean id="roomCheckIdPoolDao" class="game.boss.dao.dao.RoomCheckIdPoolDao"/>
 	<bean id="roomResultDao" class="game.boss.dao.dao.RoomResultDao"/>
 	<bean id="roomUserDao" class="game.boss.dao.dao.RoomUserDao"/>
@@ -20,16 +21,11 @@
 	<bean id="userLoginLogDao" class="game.boss.dao.dao.UserLoginLogDao"/>
     <bean id="userTransferLogDao" class="game.boss.dao.dao.UserTransferLogDao"/>
      <!-- poker -->
-    <bean id="TbPkChapterDao" class="game.boss.poker.dao.TbPkChapterDao"/>
-	<bean id="TbPkRoomDao" class="game.boss.poker.dao.TbPkRoomDao"/>
-	<bean id="TbPkRoomUserDao" class="game.boss.poker.dao.TbPkRoomUserDao"/>
-	<bean id="TbPkUserChapterDao" class="game.boss.poker.dao.TbPkUserChapterDao"/>
+
 	<bean id="roomDetailDao" class="game.boss.dao.dao.RoomDetailDao"/>
 
-    <bean id="tbPkChapterDao" class="game.boss.poker.dao.dao.TbPkChapterDao"/>
-    <bean id="tbPkChapterUserDao" class="game.boss.poker.dao.dao.TbPkChapterUserDao"/>
-    <bean id="tbPkRoomDao" class="game.boss.poker.dao.dao.TbPkRoomDao"/>
-    <bean id="tbPkRoomUserDao" class="game.boss.poker.dao.dao.TbPkRoomUserDao"/>
+   
     <bean id="tbWinProDao" class="game.boss.dao.dao.TbWinProDao"/>
+    <bean id="roomChapterDao" class="game.boss.dao.dao.RoomChapterDao"/>
     
 </beans>

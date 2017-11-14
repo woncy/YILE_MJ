@@ -1,15 +1,19 @@
 package game.scene.net;
 
-import com.isnowfox.core.net.message.Message;
-import com.isnowfox.game.proxy.message.PxMsg;
-import game.scene.msg.*;
-import game.scene.net.BossClient;
-import game.scene.room.RoomService;
-import game.zjh.scene.msg.CheckJoinZJHRoomMsg;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.isnowfox.core.net.message.Message;
+import com.isnowfox.game.proxy.message.PxMsg;
+
+import game.boss.msg.ExitRoomMsg;
+import game.douniu.scene.msg.CheckExitRoom2Msg;
+import game.douniu.scene.msg.DelRoom2Msg;
+import game.scene.msg.CheckJoinRoomMsg;
+import game.scene.msg.CheckOfflineRoomMsg;
+import game.scene.msg.RegSceneMsg;
+import game.scene.room.RoomService;
 
 /**
  * 暴露net包内 的较为安全的方法
@@ -46,12 +50,12 @@ public class SceneService {
                 roomService.checkOfflineRoom((CheckOfflineRoomMsg) msg);
                 break;
             }
-            case CheckExitRoomMsg.ID: {
-                roomService.checkExitRoom((CheckExitRoomMsg) msg);
+            case CheckExitRoom2Msg.ID: {
+                roomService.checkExitRoom((CheckExitRoom2Msg) msg);
                 break;
             }
-            case CheckDelRoomMsg.ID: {
-                roomService.checkDelRoom((CheckDelRoomMsg) msg);
+            case DelRoom2Msg.ID: {
+                roomService.checkDelRoom((DelRoom2Msg) msg);
                 break;
             }
             
