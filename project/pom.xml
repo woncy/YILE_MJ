@@ -17,7 +17,8 @@
         <module>mj-client</module>
         <module>mj-manager</module>
     	<module>distribution</module>
-    </modules>
+	
+  </modules>
     <properties>
         <spring.version>4.3.5.RELEASE</spring.version>
         <jackson.version>2.8.5</jackson.version>

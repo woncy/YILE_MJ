@@ -1,10 +1,10 @@
 package game.scene.room;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.isnowfox.core.io.MarkCompressOutput;
 import com.isnowfox.core.io.Output;
 
+import game.boss.SceneUserInfo;
 import game.boss.dao.dao.RoomResultDao;
 import game.boss.dao.entity.RoomResultDO;
-import game.scene.msg.ChapterEndMsg;
-import game.scene.msg.ChapterStartMsg;
-import game.scene.msg.RoomEndMsg;
+import game.douniu.scene.msg.ChapterEnd2Msg;
+import game.douniu.scene.msg.ChapterStart2Msg;
+import game.douniu.scene.msg.ChapterUserMsg;
+import game.douniu.scene.msg.CheckExitRoom2Msg;
+import game.douniu.scene.msg.DelRoom2Msg;
 import game.scene.net.BossClient;
 import game.scene.room.majiang.MajiangChapter;
 import game.scene.services.DbService;
@@ -25,9 +28,11 @@ import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import mj.data.ChapterEndResult;
 import mj.data.Config;
+import mj.data.Pai;
 import mj.data.UserPaiInfo;
 import mj.data.UserPlace;
 import mj.data.UtilByteTransfer;
+import mj.net.message.game.AudioMsg;
 import mj.net.message.game.Chat;
 import mj.net.message.game.ChatRet;
 import mj.net.message.game.GameChapterEnd;
@@ -42,12 +47,14 @@ import mj.net.message.game.OperationFaPaiRet;
 import mj.net.message.game.OperationOutRet;
 import mj.net.message.game.Ready;
 import mj.net.message.game.ShowPaoRet;
+import mj.net.message.game.ShowStartGame;
 import mj.net.message.game.StaticsResultRet;
 import mj.net.message.game.UserOffline;
 import mj.net.message.game.Voice;
 import mj.net.message.game.VoteDelSelect;
 import mj.net.message.game.VoteDelSelectRet;
 import mj.net.message.game.VoteDelStart;
+import mj.net.message.game.douniu.DNGameExitUser;
 
 /**
  * @author zuoge85@gmail.com on 16/10/18.
@@ -82,7 +89,6 @@ public class RoomImpi extends Room {
         prevTime = now;
     }
 
-
     private void innerFrame(long now) {
         //开始游戏逻辑！
         if (roomInfo.isStart()) {
@@ -94,7 +100,7 @@ public class RoomImpi extends Room {
         }
     }
 
-    public void join(SceneUser joinSceneUser, List<SceneUser> sceneUsers, Consumer<Boolean> callback) {
+    public void join(SceneUser joinSceneUser, List<SceneUser> sceneUsers, boolean isFirst,Consumer<Boolean> callback) {
         run(() -> {
             if (isEnd()) {
                 callback.accept(false);
@@ -102,7 +108,7 @@ public class RoomImpi extends Room {
             	
                 for (SceneUser sceneUser : sceneUsers) {
                 	dbService.updateSceneUser(sceneUser);
-                    roomInfo.updateUserInfo(sceneUser);
+                    roomInfo.updateUserInfo(sceneUser,isFirst);
                 }
                 //更新 网管和session
                 SceneUser sceneUser = roomInfo.getUserInfo(joinSceneUser.getLocationIndex());
@@ -120,7 +126,6 @@ public class RoomImpi extends Room {
         super.start();
         startTime = System.currentTimeMillis();
     }
-
     public void exitRoom(int userId, Consumer<Boolean> callback) {
         run(() -> {
             if (roomInfo.isChapterStart()) {
@@ -150,7 +155,6 @@ public class RoomImpi extends Room {
 //				}
 //			}
             
-          
         });
     }
 
@@ -200,11 +204,6 @@ public class RoomImpi extends Room {
         roomInfo.excuteDistanceKm(msg, sceneUser);
         //计算距离
         sendMessage(msg, sceneUser);
-        
-        StaticsResultRet endResult = roomInfo.getEndResult();
-        if(endResult!=null){
-        	sceneUser.sendMessage(endResult);
-        }
         if(roomInfo.getState()==1){
         	UserPlace[] userPlaces = roomInfo.getChapter().getUserPlaces();
         	boolean[] dingPaoChache = roomInfo.getDingPaoChache();
@@ -221,8 +220,13 @@ public class RoomImpi extends Room {
         
         if(roomInfo.isNeedShowPao(sceneUser.getLocationIndex())){
         	sceneUser.sendMessage(new ShowPaoRet());
-        	
         }
+        
+        if(roomInfo.isFull() && roomInfo.isIsfirstStart()){
+        	roomInfo.getUsers()[0].sendMessage(new ShowStartGame());
+        }
+        
+        
         
     }
     
@@ -293,36 +297,43 @@ public class RoomImpi extends Room {
     		sendMessage(new Ready(user.getLocationIndex()));
     	}
     }
-
+   
 	public void chapterStart(SceneUser user) {
 		checkThread();
 		
-		bossClient.writeAndFlush(new ChapterStartMsg());
+		bossClient.writeAndFlush(new ChapterEnd2Msg());
         if (user.getUserId() == roomInfo.getUsers()[0].getUserId()) {
-        	roomInfo.getChapter().checkDingPao();
-        	boolean isDingPao = roomInfo.getChapter().isDingPao();
-    		if(isDingPao && roomInfo.getDingPaoCount()<roomInfo.getChapter().getRules().getUserNum()){
-    			if(roomInfo.getChapter().getRules().getXuanPaoCount()==4){
-    				if(roomInfo.getChapter().getChapterNums()%4==0){
-    					roomInfo.setState(1);
-    					sendMessage(new ShowPaoRet(),null);
-        				return;
-    				}
-    			}else{
-    				roomInfo.setState(1);
-    				sendMessage(new ShowPaoRet(),null);
-    				return;
-    			}
-    		}
+//        	String string = this.config.getString("You_Wu_Pao");
+//        	if(string!=null && string.equals("true")){
+        	
+	        	roomInfo.getChapter().checkDingPao();
+	        	boolean isDingPao = roomInfo.getChapter().isDingPao();
+	    		if(isDingPao && roomInfo.getDingPaoCount()<roomInfo.getChapter().getRules().getUserNum()){
+	    			if(roomInfo.getChapter().getRules().getXuanPaoCount()==4){
+	    				if(roomInfo.getChapter().getChapterNums()%4==0){
+	    					roomInfo.setState(1);
+	    					sendMessage(new ShowPaoRet(),null);
+	        				return;
+	    				}
+	    			}else{
+	    				roomInfo.setState(1);
+	    				sendMessage(new ShowPaoRet(),null);
+	    				return;
+	    			}
+	    		}
+//        	}
             
             if (roomInfo.isFull()) {
                 if (!roomInfo.isChapterStart()) {
+                	roomInfo.changeIsfirstStart();
                 	roomInfo.setEndResult(null);
                 	roomInfo.setState(2);
                     roomInfo.setStart(true);
                     roomInfo.clearDingPaoChache();
                     MajiangChapter chapter = roomInfo.getChapter();
                     chapter.start();
+                    roomInfo.addCurrentChapterNum();
+                    gameStartToBoss();
                     roomInfo.setChapterStart(true);
                     for (SceneUser u : roomInfo.getUsers()) {
                         if (u != null && u.isJoinGame()) {
@@ -349,6 +360,47 @@ public class RoomImpi extends Room {
         }
     }
 
+	public static int[] ListToIntArry(List<? extends Pai> pais){
+		if(pais==null){
+			return null;
+		}
+		int [] ret = new int[pais.size()];
+		int i=0;
+		for (Pai pai : pais) {
+			ret[i++] = pai.getIndex();
+		}
+		return ret;
+	}
+	
+	private void chapterEndToBoss(ChapterEndResult result) {
+		ChapterEnd2Msg endMsg = new ChapterEnd2Msg();
+		endMsg.setRoomId(roomInfo.getRoomId());
+		endMsg.setNum(roomInfo.getCurrentChapterNum());
+		endMsg.setZhuangIndex(result.getZhuangIndex());
+		endMsg.setZhuangUserId(roomInfo.getChapter().getUserPlaces()[result.getZhuangIndex()].getUserId());
+		List<ChapterUserMsg> userResults = new ArrayList<ChapterUserMsg>();
+		UserPaiInfo[] userPaiInfos = result.getUserPaiInfos();
+		if(userPaiInfos!=null){
+			for (int i = 0; i < userPaiInfos.length; i++) {
+				UserPaiInfo userPkResult = userPaiInfos[i];
+				ChapterUserMsg usermsg = new ChapterUserMsg();
+				usermsg.setLocationIndex(userPkResult.getLocationIndex());
+				usermsg.setPais(ListToIntArry(userPkResult.getShouPai()));
+				usermsg.setPaiType(-1);
+				usermsg.setScore(userPkResult.getScore());
+				usermsg.setUserId(roomInfo.getUsers()[userPkResult.getLocationIndex()].getUserId());
+				userResults.add(usermsg);
+			}
+		}
+		endMsg.setChapterUserMsgs(userResults);
+		bossClient.writeAndFlush(endMsg);
+	}
+	private void gameStartToBoss(){
+		ChapterStart2Msg startMsg = new ChapterStart2Msg();
+		startMsg.setRoomId(roomInfo.getRoomId());
+		startMsg.setNum(roomInfo.getCurrentChapterNum());
+		bossClient.writeAndFlush(startMsg);
+	}
 
     @Override
     public void endChapter(ChapterEndResult endResult, MajiangChapter majiangChapter) {
@@ -363,32 +415,36 @@ public class RoomImpi extends Room {
         if(majiangChapter.getChapterNums() == 1 && !roomInfo.isProxy()){
         	dbService.delGold(roomInfo.getRoomId(), roomInfo.getCreateUserId());
         }
-        ChapterEndMsg msg = new ChapterEndMsg();
-        msg.setRoomId(roomInfo.getRoomId());
-        Map<Integer, Integer> map = Arrays.stream(roomInfo.getUsers()).collect(
-                Collectors.toMap(SceneUser::getUserId, SceneUser::getScore)
-        );
-        msg.setUserScoreMap(map);
-
-        bossClient.writeAndFlush(msg);
+        
+        chapterEndToBoss(endResult);
 
         if (majiangChapter.getChapterNums() >= config.getInt(Config.CHAPTER_MAX)) {
-            //房间结束
-            this.setEnd(true);
-            RoomEndMsg m = new RoomEndMsg();
-            m.setCrateUserId(getRoomInfo().getCreateUserId());
-            m.setRoomId(getRoomInfo().getRoomId());
-            bossClient.writeAndFlush(m);
-            try {
-				Thread.sleep(300);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-            
-          //显示统计结果！
-           sendStaticsResultToAllUser();
+            delRoom();
         }
     }
+    
+    private void delRoom(){
+    	sendStaticsResultToAllUser();
+		List<SceneUserInfo> infos = new ArrayList<SceneUserInfo>();
+		for (int i = 0; i < roomInfo.getUsers().length; i++) {
+			SceneUser sceneUser = roomInfo.getUsers()[i];
+			if(sceneUser!=null){
+				SceneUserInfo userInfo = new SceneUserInfo();
+				userInfo.setGatewayId(sceneUser.getGatewayId());
+				userInfo.setSessionId((short)sceneUser.getSessionId());
+				userInfo.setScore(sceneUser.getScore());
+				userInfo.setUserId(sceneUser.getUserId());
+				infos.add(userInfo);
+			}
+		}
+		
+		DelRoom2Msg msg = new DelRoom2Msg();
+		msg.setCreateUserId(roomInfo.getCreateUserId());
+		msg.setInfos(infos);
+		msg.setRoomId(roomInfo.getRoomId());
+		msg.setSceneId(roomInfo.getSceneId());
+		bossClient.writeAndFlush(msg);
+	}
 
 
     @Override
@@ -404,30 +460,49 @@ public class RoomImpi extends Room {
             }
         }
         if(isDirectDel){
-        	sendStaticsResultToAllUser();
-            RoomEndMsg m = new RoomEndMsg();
-            m.setCrateUserId(getRoomInfo().getCreateUserId());
-            m.setRoomId(getRoomInfo().getRoomId());
-            bossClient.writeAndFlush(m);
+        	voteRoom();
         }else{
+        	Timer timer = new Timer();
+        	TimerTask task = new TimerTask() {
+				
+				@Override
+				public void run() {
+					voteRoom();
+					
+				}
+			};
+			timer.schedule(task, RoomInfo.Default_Del_Room_Time);
+			roomInfo.setVoteDelRoomTimer(timer);
             roomInfo.voteDel(user);
             sendMessage(new VoteDelSelect(user.getUserId(), user.getUserName()), user);
         }
     }
+    
+    private void voteRoom(){
+    	Timer timer = roomInfo.getVoteDelRoomTimer();
+    	if(timer!=null){
+    		timer.cancel();
+    	}
+    	roomInfo.setVoteDelRoomTimer(null);
+    	delRoom();
+    }
+    
     @Override
     public void voteDelSelect(VoteDelSelectRet msg, SceneUser user) {
         checkThread();
         if (msg.getResult()) {
             if (roomInfo.voteDel(user)) {
-            	sendStaticsResultToAllUser();
-                RoomEndMsg m = new RoomEndMsg();
-                m.setCrateUserId(getRoomInfo().getCreateUserId());
-                m.setRoomId(getRoomInfo().getRoomId());
-                bossClient.writeAndFlush(m);
+            	voteRoom();
             }
+        }else{
+        	Timer timer = roomInfo.getVoteDelRoomTimer();
+        	if(timer!=null){
+        		timer.cancel();
+        		roomInfo.setVoteDelRoomTimer(null);
+        	}
         }
     }
- 
+    
     /**
      * 将统计消息发送给所有的用户。
      */
@@ -437,10 +512,20 @@ public class RoomImpi extends Room {
         int roomId =  getRoomInfo().getRoomId();
         List<RoomResultDO> roomResultDOs =  roomResultDao.find(24,RoomResultDO.Table.ROOM_ID,roomId);
         StaticsResultRet staticsResultRet =  new StaticsResultRet() ;
-        staticsResultRet.setLocationIndex0(0);
-        staticsResultRet.setLocationIndex1(1);
-        staticsResultRet.setLocationIndex2(2);
-        staticsResultRet.setLocationIndex3(3);
+        staticsResultRet.setLocationIndex0(-1);
+        staticsResultRet.setLocationIndex1(-1);
+        staticsResultRet.setLocationIndex2(-1);
+        staticsResultRet.setLocationIndex3(-1);
+        
+        if(roomInfo.getUsers().length>=1 &&roomInfo.getUsers()[0]!=null)
+        	staticsResultRet.setLocationIndex0(0);
+        if(roomInfo.getUsers().length>=2 &&roomInfo.getUsers()[1]!=null)
+        	staticsResultRet.setLocationIndex1(1);
+        if(roomInfo.getUsers().length>=3 &&roomInfo.getUsers()[2]!=null)
+        	staticsResultRet.setLocationIndex2(2);
+        if(roomInfo.getUsers().length>=4 && roomInfo.getUsers()[3]!=null)
+        	staticsResultRet.setLocationIndex3(3);
+        
         
         for(RoomResultDO roomResultDO:roomResultDOs){
             int fangPaoIndex = roomResultDO.getFangPaoIndex();
@@ -566,8 +651,28 @@ public class RoomImpi extends Room {
 		}
     	dbService.saveRoomRecord(roomId, record, checkRoomId, chapterIndex);
     }
-
 	public void voice(Voice msg) {
 		sendMessage(msg);
+	}
+	public void audioMsg(AudioMsg msg, SceneUser user) {
+		msg.setIndex(user.getLocationIndex());
+		sendMessage(msg,null);
+		
+	}
+	public void exitRoom(SceneUser user){
+		if(!roomInfo.isStart()){
+			exitUserToBoss(user);
+			roomInfo.exitRoom(user.getUserId());
+			sendMessage(new DNGameExitUser(user.getLocationIndex()));
+		}
+	}
+	private void exitUserToBoss(SceneUser user) {
+		CheckExitRoom2Msg msg = new CheckExitRoom2Msg();
+		msg.setJoinGatewayId(user.getGatewayId());
+		msg.setSceneId(user.getSessionId());
+		msg.setRoomId(roomInfo.getRoomId());
+		msg.setSceneId(roomInfo.getSceneId());
+		msg.setUserId(user.getUserId());
+		bossClient.writeAndFlush(msg);
 	}
 }

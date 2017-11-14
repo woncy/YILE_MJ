@@ -7,60 +7,55 @@ import io.netty.buffer.ByteBuf;
 public class ChapterUserMsg {
 
 	private int userId;
-	private int winnerId = -1;
+	private int locationIndex;
 	private int score;
-	private int[][] pais;
+	private int [] pais;
+	private int paiType;
+	
+	
+	
+	public ChapterUserMsg() {
+		super();
+	}
+
+	public ChapterUserMsg(int userId, int locationIndex, int score, int[] pais, int paiType) {
+		super();
+		this.userId = userId;
+		this.locationIndex = locationIndex;
+		this.score = score;
+		this.pais = pais;
+		this.paiType = paiType;
+	}
 
 	public void encode(ByteBuf out) {
 		out.writeInt(userId);
-		out.writeInt(winnerId);
+		out.writeInt(locationIndex);
 		out.writeInt(score);
-
-		if (pais == null)
-			out.writeInt(-1);
-		else {
-			int len = pais.length;
-			out.writeInt(len);
-			for (int i = 0; i < pais.length; i++) {
-				int [] j = pais[i];
-				if(j == null){
-					out.writeInt(-1);
-				}else{
-					out.writeInt(j.length);
-					for(int k = 0 ; k < j.length; k++){
-						out.writeInt(j[k]);
-					}
-				}
-				
-			}
+		int len = -1;
+		if(pais!=null){
+			len = pais.length;
 		}
+		out.writeInt(len);
+		for (int i = 0; i < len; i++) {
+			out.writeInt(pais[i]);
+		}
+		out.writeInt(paiType);
 	}
 
 	public void decode(ByteBuf in) {
 		this.userId = in.readInt();
-		this.winnerId = in.readInt();
+		this.locationIndex = in.readInt();
 		this.score = in.readInt();
 		int len = in.readInt();
-		if (len == -1) {
-			pais = null;
-		} else {
-			pais = new int[5][];
+		if(len>-1){
+			this.pais = new int[len];
 			for (int i = 0; i < pais.length; i++) {
-				int pailenth = in.readInt();
-				pais[i] = new int[3];
-				for(int j = 0 ; j < pailenth;j++){
-					pais[i][j] = in.readInt();
-				}
+				 pais[i] = in.readInt();
+				
 			}
 		}
-	}
-
-	public int[][] getPais() {
-		return pais;
-	}
-
-	public void setPais(int[][] pais) {
-		this.pais = pais;
+		this.paiType = in.readInt();
+		
 	}
 
 	public int getUserId() {
@@ -71,12 +66,12 @@ public class ChapterUserMsg {
 		this.userId = userId;
 	}
 
-	public int getWinnerId() {
-		return winnerId;
+	public int getLocationIndex() {
+		return locationIndex;
 	}
 
-	public void setWinnerId(int winnerId) {
-		this.winnerId = winnerId;
+	public void setLocationIndex(int locationIndex) {
+		this.locationIndex = locationIndex;
 	}
 
 	public int getScore() {
@@ -87,11 +82,31 @@ public class ChapterUserMsg {
 		this.score = score;
 	}
 
+	public int[] getPais() {
+		return pais;
+	}
+
+	public void setPais(int[] pais) {
+		this.pais = pais;
+	}
+
+	public int getPaiType() {
+		return paiType;
+	}
+
+	public void setPaiType(int paiType) {
+		this.paiType = paiType;
+	}
+
 	@Override
 	public String toString() {
-		return "ChapterUserMsg [userId=" + userId + ", winnerId=" + winnerId
-				+ ", score=" + score + ", pais=" + Arrays.toString(pais) + "]";
+		return "ChapterUserMsg [userId=" + userId + ", locationIndex=" + locationIndex + ", score=" + score + ", pais="
+				+ Arrays.toString(pais) + ", paiType=" + paiType + "]";
 	}
+	
+	
+
+	
  
 	
 }

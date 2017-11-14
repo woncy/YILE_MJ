@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -19,35 +19,40 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import com.isnowfox.core.thread.FrameQueueContainer;
-import com.isnowfox.util.UUID;
 
+import game.boss.SceneUserInfo;
 import game.boss.ServerRuntimeException;
+import game.boss.dao.dao.Room2Dao;
+import game.boss.dao.dao.RoomChapterDao;
 import game.boss.dao.dao.RoomCheckIdPoolDao;
 import game.boss.dao.dao.RoomDao;
 import game.boss.dao.dao.RoomDetailDao;
 import game.boss.dao.dao.RoomUserDao;
 import game.boss.dao.dao.UserDao;
 import game.boss.dao.dao.UserLinkRoomDao;
+import game.boss.dao.entity.Room2DO;
+import game.boss.dao.entity.RoomChapterDO;
 import game.boss.dao.entity.RoomCheckIdPoolDO;
 import game.boss.dao.entity.RoomDO;
 import game.boss.dao.entity.RoomDetailDO;
 import game.boss.dao.entity.RoomUserDO;
 import game.boss.dao.entity.UserDO;
 import game.boss.dao.entity.UserLinkRoomDO;
-import game.boss.model.Room;
+import game.boss.model.Room2;
+import game.boss.model.Room2.TYPE;
 import game.boss.model.User;
 import game.boss.net.BossService;
 import game.boss.type.RoomCheckIdState;
-import game.scene.msg.ChapterEndMsg;
-import game.scene.msg.ChapterStartMsg;
-import game.scene.msg.CheckDelRoomMsg;
-import game.scene.msg.RoomEndMsg;
+import game.douniu.scene.msg.ChapterEnd2Msg;
+import game.douniu.scene.msg.ChapterStart2Msg;
+import game.douniu.scene.msg.ChapterUserMsg;
+import game.douniu.scene.msg.CheckExitRoom2Msg;
+import game.douniu.scene.msg.DelRoom2Msg;
 import game.utils.DateUtils;
 import mj.data.Config;
 import mj.net.message.login.CreateRoom;
@@ -62,9 +67,9 @@ import mj.net.message.login.ProxyRoomIF;
 import mj.net.message.login.ProxyRoomList;
 import mj.net.message.login.RoomHistory;
 import mj.net.message.login.RoomHistoryListRet;
-import mj.net.message.login.StartGame;
 import mj.net.message.login.UserIF;
 import mj.net.message.login.WangbangPlayBackRet;
+import mj.net.message.login.douniu.JoinRoomResult;
 
 /**
  * 鎴块棿鏈嶅姟
@@ -102,20 +107,32 @@ public class RoomService extends FrameQueueContainer implements BaseService {
     private UserLinkRoomDao userLinkRoomDao;
     @Autowired
     private RoomCheckIdPoolDao roomCheckIdPoolDao;
+    @Autowired
+    private Room2Dao room2Dao;
+    /**
+     * roomid,room2
+     */
+    private HashMap<Integer, Room2> room2Map = new HashMap<Integer, Room2>();
 
+    /**
+     * createuserid,room2
+     */
+    private HashMap<Integer, Room2> createUserRoom2Map = new HashMap<Integer, Room2>();
+
+    private HashMap<String, Room2> checkIdRoom2Map = new HashMap<>();
+    private HashMap<Integer, Room2> joinUserRoomMap = new HashMap<>();
+    
+    
     /**
      * 鎴块棿鏄犲皠
      */
-    private HashMap<Integer, Room> joinUserRoomMap = new HashMap<>();
 
     /**
      * 鍒涘缓
      */
-    private HashMap<Integer, Room> crateUserRoomMap = new HashMap<>();
     /**
      * 鎴块棿鏄犲皠
      */
-    private HashMap<Integer, Room> roomMap = new HashMap<>();
     
     /**
      * 代理id,room
@@ -124,10 +141,12 @@ public class RoomService extends FrameQueueContainer implements BaseService {
     /**
      * 鎴块棿鏄犲皠
      */
-    private HashMap<String, Room> checkIdRoomMap = new HashMap<>();
+    private HashMap<String, Room2> checkIdRoomMap = new HashMap<>();
 
     @Autowired
     private RoomDetailDao roomDetailDao;
+    @Autowired
+    RoomChapterDao roomChapterDao;
     
     public RoomService() {
         super(FRAME_TIME_SPAN, RUN_QUEUE_MAX);
@@ -146,6 +165,181 @@ public class RoomService extends FrameQueueContainer implements BaseService {
         start();
     }
     
+    public void createRoom2(CreateRoom msg,User user,int sceneId){
+//    	UserDO userDO = userDao.get(user.getUserId());
+    	msg.addOptions(new OptionEntry("isProxy","0"));
+    	Config config = new Config(msg);
+    	{
+        	/**
+        	 * 房卡不足时
+        	 */
+//              int max = config.getInt(Config.CHAPTER_MAX);
+//              int gold = (int) Math.ceil(max / 8);
+//              if (userDO.getGold()< gold) {
+//                  sendNoGold(user); 
+//                  sendCreateRoomRet(user, false, null);
+//                  return;
+//              }
+    	}
+         asyncDbService.excuete(user, () -> {
+        	Room2 room2 = createUserRoom2Map.get(user.getUserId());
+        	if(room2!=null){
+        		closeRoom2(room2,user);
+        	}
+    		String roomCheckId = getBufferId();
+    		Room2DO room2do = new Room2DO();
+    		room2do.setRoomCheckId(roomCheckId);
+    		room2do.setConfig(config);
+    		room2do.setCreateUserId(user.getUserId());
+    		room2do.setEnd(false);
+    		room2do.setStart(false);
+    		room2do.setSceneId(sceneId);
+    		room2do.setStartDate(new Date());
+    		room2do.setUserMax(5);
+    		room2 = new Room2(room2do);
+    		room2.setStart(false);
+    		int roomId = (int) room2Dao.insert(room2do);
+    		room2.setRoomId(roomId);
+    		if(sceneId==1003){
+    			room2.setType(TYPE.DN);
+    		}else if(sceneId==1000){
+    			room2.setType(TYPE.MJ);
+    		}
+    		room2Map.put(roomId, room2);
+    		checkIdRoom2Map.put(roomCheckId,room2);
+    		createUserRoom2Map.put(user.getUserId(), room2);
+    		user.send(new CreateRoomRet(true,room2do.getRoomCheckId()));
+        	
+         });
+    }
+    /**
+     * 未完善
+    * @Title: closeRoom2 
+    * @Description: TODO(这里用一句话描述这个方法的作用) 
+    * @param @param room2
+    * @param @param user    设定文件 
+    * @return void    返回类型 
+    * @throws
+     */
+    private void closeRoom2(Room2 room2,User user){
+    	try{
+    	createUserRoom2Map.remove(user.getUserId());
+    	room2Map.remove(room2.getRoomId());
+    	checkIdRoom2Map.remove(room2.getRoomDo().getRoomCheckId());
+    	Room2DO roomDo = room2.getRoomDo();
+    	roomDo.setStart(false);
+    	roomDo.setEnd(true);
+    	roomDo.setEndDate(new Date());
+    	run(()->{
+    		room2Dao.update(roomDo);
+    		roomCheckIdPoolDao.updatePartial(
+                    Collections.singletonMap(RoomCheckIdPoolDO.Table.STATE, RoomCheckIdState.NO_USE.ordinal()),
+                    RoomCheckIdPoolDO.Table.ID, roomDo.getRoomCheckId(),
+                    RoomCheckIdPoolDO.Table.STATE, RoomCheckIdState.BUFFER.ordinal()
+            );
+    	});
+    	}catch (Exception e) {
+			log.error("释放房间 时出错，房间号["+room2.getRoomDo().getRoomCheckId()+"],房间id["+room2.getRoomId()+"]");
+			log.error("释放房间出错原因:["+e.getMessage()+"]");
+		}
+    }
+    
+    public void joinRoom2(String roomNO,User user){
+    	run(()->{
+    		Room2 room2 = checkIdRoom2Map.get(roomNO);
+    		if(room2!=null){
+    			if(room2.isStart()){
+    				user.send(new JoinRoomResult(false, "该房间已经开始了"));
+    				return;
+    			}
+    			final TYPE type = room2.getType();
+    			joinDNRoomDb(room2, user,result->{
+    				if(result){
+    					switch (type) {
+						case MJ:
+							user.send(new JoinRoomResult(true,"MJ"));
+							break;
+						case DN:
+							user.send(new JoinRoomResult(true,"DN"));
+							break;
+						default:
+							break;
+						}
+    					
+    				}
+    			});
+    		}else{
+    			Room2DO roomDo = room2Dao.findObject(Room2DO.Table.ROOM_CHECK_ID,roomNO);
+    			if(roomDo==null){
+    				user.send(new JoinRoomResult(false, "不存在该房间"));
+    				return;
+    			}
+    			if(roomDo.getEnd()){
+    				user.send(new JoinRoomResult(false, "该房间已经结束了"));
+    				return;
+    			}
+    			room2 = new Room2(roomDo);
+    			room2.setRoomId(roomDo.getId());
+//    			room2.setStart(true);
+    			List<RoomUserDO> users = roomUserDao.find(10,RoomUserDO.Table.ROOM_ID,roomDo.getId());
+    			for (int i = 0; i < users.size(); i++) {
+					RoomUserDO roomUserDO = users.get(i);
+					if(roomUserDO.getLocationIndex() >= 0 && roomUserDO.getState()<3 && roomUserDO.getState()>0){
+						if(roomUserDO.getUserId()==user.getUserId())
+							room2.addUser(user);
+						else
+							room2.addUser(userDao.get(roomUserDO.getUserId()));
+					}
+					
+				}
+    			final TYPE type = room2.getType();
+    			joinDNRoomDb(room2, user,result->{
+    				if(result){
+    					switch (type) {
+						case MJ:
+							user.send(new JoinRoomResult(true,"MJ"));
+							break;
+						case DN:
+							user.send(new JoinRoomResult(true,"DN"));
+							break;
+						default:
+							break;
+    					}
+    				}
+    			});
+    			
+    		}
+    		
+    	});
+    }
+    private void joinDNRoomDb(Room2 room2,User user,Consumer<Boolean> callback){
+    	Room2DO roomDO = room2.getRoomDo();
+    	int userId = user.getUserId();
+    	user.setJoinHomeGatewaySuccess(false);
+        user.setJoinHomeSceneSuccess(false);
+        int locationIndex = room2.addUser(user);
+        if(locationIndex==-1){
+        	user.send(new JoinRoomResult(false,"该房间的人已经满了"));
+        	callback.accept(false);
+        	return;
+        }
+        RoomUserDO roomUserDO = roomUserDao.get(userId);
+        if (roomUserDO == null) {
+            roomUserDO = new RoomUserDO();
+        }
+        roomUserDO.setUserId(userId);
+        roomUserDO.setStartDate(new Date());
+        roomUserDO.setRoomId(room2.getRoomId());
+        roomUserDO.setRoomCheckId(roomDO.getRoomCheckId());
+        roomUserDO.setLocationIndex(locationIndex);
+        user.setJoinRoomCallback(callback);
+        joinUserRoomMap.put(user.getUserId(), room2);
+        roomUserDao.replace(roomUserDO);
+        bossService.startJoinScene2(user, room2, user.getSessionId());
+        
+    }
+    
+
     public void proxyCreateRoom(CreateRoom msg,User user){
     	 run(() -> {
          	UserDO userDO = userDao.get(user.getUserId());
@@ -177,17 +371,16 @@ public class RoomService extends FrameQueueContainer implements BaseService {
              }
              //鐢熸垚roomCheckId
              String roomCheckId = getBufferId();
-             int sceneId = bossService.getRandomSceneId();
+             int sceneId = 1000;
              asyncDbService.excuete(user, () -> {
-                 RoomDO room = checkUserCreateRoom(user);
-                 room = new RoomDO();
+                 Room2DO room = checkUserCreateRoom(user);
+                 room = new Room2DO();
                  room.setCreateUserId(user.getUserId());
                  room.setRoomCheckId(roomCheckId);
                  room.setSceneId(sceneId);
                  room.setStart(true);
                  room.setStartDate(new Date());
                  room.setUserMax(config.getInt(Config.USER_NUM));
-                 room.setUuid(UUID.generateNoSep());
                  room.setConfig(config);
                  int isUpdate = roomCheckIdPoolDao.updatePartial(
                          Collections.singletonMap(RoomCheckIdPoolDO.Table.STATE, RoomCheckIdState.USE.ordinal()),
@@ -197,7 +390,7 @@ public class RoomService extends FrameQueueContainer implements BaseService {
                  if (isUpdate < 1) {
                      throw new RuntimeException("id浣跨敤閿欒!,id鐘舵�佷笉瀵�!" + roomCheckId);
                  }
-                 long id = roomDao.insert(room);
+                 long id = room2Dao.insert(room);
                  room.setId((int) id);
                  
                  initRoomData(user, room);
@@ -213,189 +406,13 @@ public class RoomService extends FrameQueueContainer implements BaseService {
              });
          });
     }
+    
 
-    /**
-     * 鍒涘缓鎴块棿
-     */
-    public void createRoom(CreateRoom msg, User user) {
-        run(() -> {
-        	UserDO userDO = userDao.get(user.getUserId());
-        	msg.addOptions(new OptionEntry("isProxy","0"));
-        	Config config = new Config(msg);
-            {
-            	/**
-            	 * 房卡不足时
-            	 */
-                  {
-                      int max = config.getInt(Config.CHAPTER_MAX);
-                      int gold = (int) Math.ceil(max / 8);
-                      if (userDO.getGold()< gold) {
-                          sendNoGold(user);
-                          sendCreateRoomRet(user, false, null);
-                          return;
-                      }
-                  }
-                Room room = crateUserRoomMap.get(user.getUserId());
-                if (room != null) {
-                	closeRoom(room.getRoomDO(),user);
-                }
-            }
-            //鐢熸垚roomCheckId
-            String roomCheckId = getBufferId();
-            int sceneId = bossService.getRandomSceneId();
-            asyncDbService.excuete(user, () -> {
-            	
-                RoomDO room = checkUserCreateRoom(user);
-                if (room != null) {
-                	closeRoom(room, user);
-                }
-                
-                room = new RoomDO();
-                room.setCreateUserId(user.getUserId());
-                room.setRoomCheckId(roomCheckId);
-                room.setSceneId(sceneId);
-                room.setStart(true);
-                room.setStartDate(new Date());
-                room.setUserMax(config.getInt(Config.USER_NUM));
-                room.setUuid(UUID.generateNoSep());
-                room.setConfig(config);
-                int isUpdate = roomCheckIdPoolDao.updatePartial(
-                        Collections.singletonMap(RoomCheckIdPoolDO.Table.STATE, RoomCheckIdState.USE.ordinal()),
-                        RoomCheckIdPoolDO.Table.ID, roomCheckId,
-                        RoomCheckIdPoolDO.Table.STATE, RoomCheckIdState.BUFFER.ordinal()
-                );
 
-                if (isUpdate < 1) {
-                    throw new RuntimeException("id浣跨敤閿欒!,id鐘舵�佷笉瀵�!" + roomCheckId);
-                }
-                long id = roomDao.insert(room);
-                room.setId((int) id);
 
-                List<RoomDO> roomDOs = roomDao.find(100, RoomDO.Table.ROOM_CHECK_ID, room.getRoomCheckId(), RoomDO.Table.START, true);
-                if (roomDOs.size() > 1) {
-                	if(userDO.getLevel() == 0){
-                        roomDao.del(room.getKey());
-                        sendCreateRoomError(user);
-                        sendCreateRoomRet(user, false, null);
-                        return;
-                	}
-                }
-                initRoomData(user, room);
-                sendCreateRoomSuccess(user);
-                sendCreateRoomRet(user, true, room.getRoomCheckId());
-               
-            });
-        });
-    }
-
-    public void closeRoom(RoomDO roomDO,User user) {
-		roomDO.setStart(false);
-		roomDO.setEnd(true);
-		roomDao.update(roomDO);
-		checkIdRoomMap.remove(roomDO.getRoomCheckId());
-		crateUserRoomMap.remove(user.getUserId());
-		joinUserRoomMap.remove(user.getUserId());
-		roomMap.remove(roomDO.getId());
-	}
-
+    
 	private void sendCreateRoomRet(User user, boolean result, String roomCheckId) {
         user.send(new CreateRoomRet(result, roomCheckId));
-    }
-
-    /**
-     * 杩涘叆鎴块棿
-     * 濡傛灉宸茬粡杩涘叆鎴块棿,鍙互閲嶅杩涘叆
-     */
-    private void joinRoom(User user, Room room, Consumer<Boolean> callback) {
-        if (frameThread != Thread.currentThread()) {
-            throw new ServerRuntimeException("鍙兘鍦ㄦ寚瀹氱殑绾跨▼璋冪敤");
-        }
-        initRoomData(user, room);
-        RoomDO roomDO = room.getRoomDO();
-        user.setJoinHomeGatewaySuccess(false);
-        user.setJoinHomeSceneSuccess(false);
-
-        int userId = user.getUserId();
-        int locationIndex = -1;
-        int userNum = roomDO.getConfig().getInt(Config.USER_NUM);
-
-        String userName = user.getUserDO().getName();
-       if (userId ==roomDO.getUser0() ) {
-            roomDO.setUser0(userId);
-            roomDO.setUserName0(userName);
-            locationIndex = 0;
-        } else if (userId == roomDO.getUser1()) {
-            roomDO.setUser1(userId);
-            roomDO.setUserName1(userName);
-            locationIndex = 1;
-        } else if (userId == roomDO.getUser2()) {
-            roomDO.setUser2(userId);
-            roomDO.setUserName2(userName);
-            locationIndex = 2;
-        } else if (userId == roomDO.getUser3()) {
-            roomDO.setUser3(userId);
-            roomDO.setUserName3(userName);
-            locationIndex = 3;
-        } else if(roomDO.getUser0()<1){
-        	roomDO.setUser0(userId);
-            roomDO.setUserName0(userName);
-            locationIndex = 0;
-        }else if (roomDO.getUser1() < 1 && userNum>=2 ) {
-            roomDO.setUser1(userId);
-            roomDO.setUserName1(userName);
-            locationIndex = 1;
-        } else if (roomDO.getUser2() < 1 && userNum>=3) {
-            roomDO.setUser2(userId);
-            roomDO.setUserName2(userName);
-            locationIndex = 2;
-        } else if (roomDO.getUser3() < 1 && userNum>=4) {
-            roomDO.setUser3(userId);
-            roomDO.setUserName3(userName);
-            locationIndex = 3;
-        } else {
-            sendRoomFull(user);
-            callback.accept(false);
-            return;
-        }
-        //
-        int finalLocationIndex = locationIndex;
-        asyncDbService.excuete(user, () -> {
-            RoomUserDO roomUserDO = roomUserDao.get(userId);
-            if (roomUserDO == null) {
-                roomUserDO = new RoomUserDO();
-            }
-            roomUserDO.setUserId(userId);
-            roomUserDO.setStartDate(new Date());
-            roomUserDO.setRoomId(roomDO.getId());
-            roomUserDO.setRoomCheckId(roomDO.getRoomCheckId());
-            roomUserDO.setLocationIndex(finalLocationIndex);
-
-
-            roomUserDao.replace(roomUserDO);
-            roomDO.setVersion(roomUserDO.getVersion() + 1);
-            roomDao.update(roomDO);
-            user.setJoinRoomCallback(callback);
-            joinRoomSuccess(user, room, roomUserDO);
-        });
-    }
-
-    public void checkOffline(User user) {
-        run(() -> {
-            Room room = joinUserRoomMap.get(user.getUserId());
-            if (room != null) {
-                bossService.startOfflineScene(user, room.getRoomDO().getId(),room.getRoomDO().getSceneId(),(int) user.getSessionId());
-            } else {
-                log.info("鐜╁涓嶅湪鎴块棿锛屾棤娉曞彂閫佺绾挎秷鎭紒", user);
-            }
-        });
-    }
-
-    private void joinRoomSuccess(User user, Room room, RoomUserDO roomUserDO) {
-        run(() -> {
-            room.addUser(roomUserDO.getLocationIndex(), user.getUserDO());
-            joinUserRoomMap.put(user.getUserId(), room);
-            bossService.startJoinScene(user, room, roomUserDO, user.getSessionId());
-        });
     }
 
     public void joinRoomGatewaySuccess(User user) {
@@ -406,7 +423,6 @@ public class RoomService extends FrameQueueContainer implements BaseService {
             }
         });
     }
-
     public void joinRoomSceneSuccess(int userId, boolean succcess) {
         userService.handlerUser(userId, user -> {
             run(() -> {
@@ -418,7 +434,8 @@ public class RoomService extends FrameQueueContainer implements BaseService {
                 } else {
                     //杩涘叆澶辫触
                     Consumer<Boolean> callback = user.getJoinRoomCallback();
-                    callback.accept(false);
+                    if(callback!=null)
+                    	callback.accept(false);
                     user.setJoinRoomCallback(null);
                 }
             });
@@ -433,214 +450,29 @@ public class RoomService extends FrameQueueContainer implements BaseService {
         if(callback!=null)
         	callback.accept(true);
         user.setJoinRoomCallback(null);
-
-        user.send(new StartGame());
-    }
-    
-    public void voteDelRoom(RoomEndMsg msg) {
-    	int createUserId = msg.getCrateUserId();
-    	int roomId = msg.getRoomId();
-    	asyncDbService.excuete(msg.getCrateUserId(), () -> {
-            RoomDO room = roomDao.get(roomId);
-            if (room != null) {
-                run(() -> {
-                    bossService.startDelRoomScene(createUserId, room, room.getEnd());
-                });
-                //鍒ゆ柇鍦烘櫙
-            } else {
-               
-            }
-        });
-	}
-
-    public void delRoom(int userId, User user, boolean isEnd) {
-        asyncDbService.excuete(userId, () -> {
-            RoomDO room = roomDao.findObject(
-                    RoomDO.Table.CREATE_USER_ID, userId,
-                    RoomDO.Table.START, true
-            );
-            if (room != null) {
-                run(() -> {
-                    bossService.startDelRoomScene(userId, room, isEnd);
-                });
-                //鍒ゆ柇鍦烘櫙
-            } else {
-                log.error("鍏抽棴鎴块棿閿欒锛乧rateUserId:{}", userId);
-                if (user != null && !isEnd) {
-                    sendAlreadyDelRoom(user);
-                    sendDelRoomRet(user);
-                }
-            }
-        });
-    }
-
-    public void delRoomSceneSuccess(CheckDelRoomMsg msg) {
-        userService.handlerUser(msg.getUserId(), user -> {
-            run(() -> {
-                if (msg.isResult()) {
-                    bossService.startDelRoomGateway(msg.getInfos());
-                    delRoomSuccess(msg.getUserId(), user, msg.isEnd(),msg.getRoomId());
-                } else {
-                    log.error("鎴块棿涓嶈兘鍏抽棴锛乧rateUserId:{}", msg.getUserId());
-                    if (user != null && !msg.isEnd()) {
-                        sendCannotDelRoom(user);
-                    }
-                }
-            });
-        });
-    }
-
-    public void delRoomGatewaySuccess(User user) {
-        run(() -> {
-//            delRoomSuccess(user);
-        });
-    }
-
-
-    private void delRoomSuccess(final int userId, User user, boolean isEnd,int roomId) {
-        if (frameThread != Thread.currentThread()) {
-            throw new ServerRuntimeException("鍙兘鍦ㄦ寚瀹氱殑绾跨▼璋冪敤");
-        }
-        
-        
-        asyncDbService.excuete(userId, () -> {
-            RoomUserDO roomUserDO = roomUserDao.findObject(RoomUserDO.Table.ROOM_ID,roomId);
-         
-            if (roomUserDO != null) {
-                RoomDO room = roomDao.get(roomUserDO.getRoomId());
-                
-                if (room != null) {
-                    run(() -> {
-                    	int createUserId = room.getCreateUserId();
-                    	List<Integer> list = proxyRoom.get(createUserId);
-                    	if(list!=null){
-                    		boolean b = list.remove(new Integer(room.getId()));
-                    	}
-                        room.setEndDate(new Date());
-                        crateUserRoomMap.remove(userId);
-                        roomMap.remove(room.getId());
-                        checkIdRoomMap.remove(room.getRoomCheckId());
-                        joinUserRoomMap.remove(room.getUser0());
-                        joinUserRoomMap.remove(room.getUser1());
-                        joinUserRoomMap.remove(room.getUser2());
-                        joinUserRoomMap.remove(room.getUser3());
-                        //鎴夸富鎵ｉ櫎鎴垮崱
-                        Room roomObj = roomMap.get(room.getId());
-                        if (roomObj == null || roomObj.isStart()) {
-                            userService.minusGold(room.getCreateUserId(), room.getConfig());
-                        }
-
-                        asyncDbService.excuete(userId, () -> {
-                            room.setStart(false);
-                            room.setEnd(isEnd);
-                            room.setVersion(room.getVersion() + 1);
-                            roomDao.update(room);
-                            //鎻掑叆璁板綍
-                            List<UserLinkRoomDO> userLinkRoomDOList = new ArrayList<>();
-                            for (int i = 0; i < 4; i++) {
-                                try {
-                                    int curUserId = (Integer) BeanUtils.getPropertyDescriptor(RoomDO.class, "User" + i).getReadMethod().invoke(room);
-                                    if (curUserId > 0) {
-                                        roomUserDao.del(new RoomUserDO.Key(curUserId));
-                                    }
-                                    if (room.getChapterNums() > 0) {
-                                        UserLinkRoomDO link = new UserLinkRoomDO();
-                                        link.setUserId(curUserId);
-                                        link.setRoomId(room.getId());
-                                        BeanUtils.copyProperties(room, link, "key");
-                                        userLinkRoomDOList.add(link);
-                                    }
-                                } catch (Exception e) {
-                                    throw new ServerRuntimeException(e);
-                                }
-                            }
-                            if (userLinkRoomDOList.size() > 0) {
-                                userLinkRoomDao.insert(userLinkRoomDOList);
-                            }
-                            //閲婃斁checkId
-                            roomCheckIdPoolDao.updatePartial(
-                                    Collections.singletonMap(RoomCheckIdPoolDO.Table.STATE, RoomCheckIdState.NO_USE.ordinal()),
-                                    RoomCheckIdPoolDO.Table.ID, room.getRoomCheckId(),
-                                    RoomCheckIdPoolDO.Table.STATE, RoomCheckIdState.BUFFER.ordinal()
-                            );
-                            if (user != null) {
-                                sendDelRoomRet(user);
-                            }
-                        });
-                    });
-                } else {
-                    if (user != null && !isEnd) {
-                        sendAlreadyDelRoom(user);
-                        sendDelRoomRet(user);
-                    }
-                }
-            } else {
-                if (user != null && !isEnd) {
-                    sendAlreadyDelRoom(user);
-                    sendDelRoomRet(user);
-                }
-            }
-        });
-
-    }
-
-    /**
-     * 鍏堥��鍑哄満鏅湇鍔″櫒锛屽鏋滄垚鍔熷湪閫�鍑虹綉鍏�
-     */
-    @SuppressWarnings("unused")
-	public void exitRoom(User user) {
-
-        asyncDbService.excuete(user, () -> {
-            final int userId = user.getUserId();
-            RoomUserDO roomUserDO = roomUserDao.get(userId);
-            if (roomUserDO != null) {
-                RoomDO room = roomDao.get(roomUserDO.getRoomId());
-//                if(room.getCreateUserId() == userId ){
-//                	//
-//                	UserLinkRoomDO userLinkRoomDO = userLinkRoomDao.findObject(UserLinkRoomDO.Table.ROOM_ID, roomUserDO.getRoomId());
-//                	if(userLinkRoomDO != null){
-//                	int max = room.getConfig().getInt(room.getConfig().CHAPTER_MAX);
-//                    int gold = (int) Math.ceil(max / 2);
-//                	user.send(new Pay(-gold));
-//                	}
-//                }
-                if (room != null) {
-                    run(() -> {
-                        bossService.startExitRoomScene(user, room);
-                    });
-                } else {
-                    sendAlreadyExitRoom(user);
-                    sendExitRoomRet(user);
-                }
-            } else {
-                sendAlreadyExitRoom(user);
-                sendExitRoomRet(user);
-            }
-        });
-    
     }
 
 
     public void exitRoomSceneSuccess(int userId, int sceneId, boolean result,int roomid) {
-        userService.handlerUser(userId, user -> {
-            run(() -> {
-                if (result) {
-                    bossService.startExitRoomGateway(user, sceneId);
-                    Room room = roomMap.get(roomid);
-                    if(room!=null){
-                    	Map<Integer, UserDO> map = room.getMap();
-                    	for (int i = 0; i < 4; i++) {
-							UserDO userDO = map.get(i);
-							if(userDO!=null && userDO.getId()==userId){
-								map.remove(i);
-							}
-						}
-                    }
-                } else {
-                    sendCannotExitRoom(user);
-                }
-            });
-        });
+//        userService.handlerUser(userId, user -> {
+//            run(() -> {
+//                if (result) {
+//                    bossService.startExitRoomGateway(user, sceneId);
+//                    Room2 room = room2Map.get(roomid);
+//                    if(room!=null){
+//                    	Map<Integer, UserDO> map = room.getMap();
+//                    	for (int i = 0; i < 4; i++) {
+//							UserDO userDO = map.get(i);
+//							if(userDO!=null && userDO.getId()==userId){
+//								map.remove(i);
+//							}
+//						}
+//                    }
+//                } else {
+//                    sendCannotExitRoom(user);
+//                }
+//            });
+//        });
     }
 
     public void exitRoomGatewaySuccess(User user) {
@@ -650,125 +482,95 @@ public class RoomService extends FrameQueueContainer implements BaseService {
     }
 
 
-    public void chapterStart(ChapterStartMsg msg) {
-        run(() -> {
-            Room room = roomMap.get(msg.getRoomId());
-            if (room != null) {
-                room.setStart(true);
-            }
-        });
-    }
-    public void chapterEnd(ChapterEndMsg msg) {
-        run(() -> {
-            Room room = roomMap.get(msg.getRoomId());
-            if (room != null) {
-                RoomDO roomDO = room.getRoomDO();
-                msg.getUserScoreMap().forEach((userId, score) -> {
-                    if (userId == roomDO.getUser0()) {
-                        roomDO.setScore0(score);
-                    } else if (userId == roomDO.getUser1()) {
-                        roomDO.setScore1(score);
-                    } else if (userId == roomDO.getUser2()) {
-                        roomDO.setScore2(score);
-                    } else if (userId == roomDO.getUser3()) {
-                        roomDO.setScore3(score);
-                    }
-                });
-                roomDO.setChapterNums(roomDO.getChapterNums() + 1);
-                asyncDbService.excuete(() -> {
-                    roomDao.update(roomDO);
-                });
-            }
-        });
-    }
+
 
 
     private void exitRoomSuccess(User user) {
-        if (frameThread != Thread.currentThread()) {
-            throw new ServerRuntimeException("鍙兘鍦ㄦ寚瀹氱殑绾跨▼璋冪敤");
-        }
-
-        int userId = user.getUserId();
-        Room room = joinUserRoomMap.remove(user.getUserId());
-        if (room != null) {
-            RoomDO roomDO = room.getRoomDO();
-            room.removeUser(userId);
-            if (roomDO.getUser0() == userId) {
-                roomDO.setUser0(0);
-            } else if (roomDO.getUser1() == userId) {
-                roomDO.setUser1(0);
-            } else if (roomDO.getUser2() == userId) {
-                roomDO.setUser2(0);
-            } else if (roomDO.getUser3() == userId) {
-                roomDO.setUser3(0);
-            } else {
-                sendAlreadyExitRoom(user);
-                sendExitRoomRet(user);
-                return;
-            }
-
-            asyncDbService.excuete(user, () -> {
-                roomUserDao.del(new RoomUserDO.Key(userId));
-                roomDO.setVersion(roomDO.getVersion() + 1);
-                roomDao.update(roomDO);
-                sendExitRoomRet(user);
-            });
-        } else {
-            sendAlreadyExitRoom(user);
-            sendExitRoomRet(user);
-        }
+//        if (frameThread != Thread.currentThread()) {
+//            throw new ServerRuntimeException("鍙兘鍦ㄦ寚瀹氱殑绾跨▼璋冪敤");
+//        }
+//
+//        int userId = user.getUserId();
+//        Room room = joinUserRoomMap.remove(user.getUserId());
+//        if (room != null) {
+//            RoomDO roomDO = room.getRoomDO();
+//            room.removeUser(userId);
+//            if (roomDO.getUser0() == userId) {
+//                roomDO.setUser0(0);
+//            } else if (roomDO.getUser1() == userId) {
+//                roomDO.setUser1(0);
+//            } else if (roomDO.getUser2() == userId) {
+//                roomDO.setUser2(0);
+//            } else if (roomDO.getUser3() == userId) {
+//                roomDO.setUser3(0);
+//            } else {
+//                sendAlreadyExitRoom(user);
+//                sendExitRoomRet(user);
+//                return;
+//            }
+//
+//            asyncDbService.excuete(user, () -> {
+//                roomUserDao.del(new RoomUserDO.Key(userId));
+//                roomDO.setVersion(roomDO.getVersion() + 1);
+//                roomDao.update(roomDO);
+//                sendExitRoomRet(user);
+//            });
+//        } else {
+//            sendAlreadyExitRoom(user);
+//            sendExitRoomRet(user);
+//        }
     }
 
-
-    public void joinRoom(String roomCheckId, User user) {
-        run(() -> {
-            if (frameThread != Thread.currentThread()) {
-                throw new ServerRuntimeException("鍙兘鍦ㄦ寚瀹氱殑绾跨▼璋冪敤");
-            }
-
-            {
-                Room room = checkIdRoomMap.get(roomCheckId);
-                if (room != null) {
-                    joinRoom(user, room, result -> {
-                        sendJoinRoomRet(user, result);
-                    });
-                    return;
-                }
-            }
-            asyncDbService.excuete(user, () -> {
-                RoomDO roomDO = roomDao.findObject(
-                        RoomDO.Table.ROOM_CHECK_ID, roomCheckId,
-                        RoomDO.Table.START, true
-                );
-
-                //璇诲彇鍏ㄩ儴杩涘叆娓告垙鐨勭敤鎴蜂俊鎭�
-                if (roomDO != null) {
-                    Room room = new Room(roomDO);
-                    for (int i = 0; i < 4; i++) {
-                        try {
-                            int userId = (Integer) BeanUtils.getPropertyDescriptor(RoomDO.class, "User" + i).getReadMethod().invoke(room.getRoomDO());
-                            if (userId > -1) {
-                                UserDO userDO = userDao.get(userId);
-                                if (userDO != null) {
-                                    room.addUser(i, userDO);
-                                }
-                            }
-                        } catch (Exception e) {
-                            throw new ServerRuntimeException(e);
-                        }
-                    }
-                    run(() -> {
-                        joinRoom(user, room, result -> {
-                            sendJoinRoomRet(user, result);
-                        });
-                    });
-                } else {
-                    sendErrorRoomCheckId(user);
-                    sendJoinRoomRet(user, false);
-                }
-            });
-        });
-    }
+//
+//    public void joinRoom(String roomCheckId, User user) {
+//        run(() -> {
+//            if (frameThread != Thread.currentThread()) {
+//                throw new ServerRuntimeException("鍙兘鍦ㄦ寚瀹氱殑绾跨▼璋冪敤");
+//            }
+//
+//            {
+//                Room2 room = checkIdRoomMap.get(roomCheckId);
+//                if (room != null) {
+//                    joinDNRoomDb( room,user, result -> {
+//                        sendJoinRoomRet(user, result);
+//                    });
+//                    return;
+//                }
+//            }
+//            asyncDbService.excuete(user, () -> {
+//                Room2DO roomDO = room2Dao.findObject(
+//                        RoomDO.Table.ROOM_CHECK_ID, roomCheckId,
+//                        RoomDO.Table.START, true
+//                );
+//
+//                //璇诲彇鍏ㄩ儴杩涘叆娓告垙鐨勭敤鎴蜂俊鎭�
+//                if (roomDO != null) {
+//                    Room2 room = new Room2(roomDO);
+//                    for (int i = 0; i < 4; i++) {
+//                        try {
+//                            int userId = (Integer) BeanUtils.getPropertyDescriptor(RoomDO.class, "User" + i).getReadMethod().invoke(room.getRoomDO());
+//                            if (userId > -1) {
+//                                UserDO userDO = userDao.get(userId);
+//                                if (userDO != null) {
+//                                    room.addUser(i, userDO);
+//                                }
+//                            }
+//                        } catch (Exception e) {
+//                            throw new ServerRuntimeException(e);
+//                        }
+//                    }
+//                    run(() -> {
+//                    	joinDNRoomDb( room,user, result -> {
+//                            sendJoinRoomRet(user, result);
+//                        });
+//                    });
+//                } else {
+//                    sendErrorRoomCheckId(user);
+//                    sendJoinRoomRet(user, false);
+//                }
+//            });
+//        });
+//    }
 
     private void sendJoinRoomRet(User user, boolean result) {
         user.send(new JoinRoomRet(result));
@@ -854,13 +656,13 @@ public class RoomService extends FrameQueueContainer implements BaseService {
      * 涓�鑷存�х殑淇濊瘉鍦ㄤ簬,鍚屼竴涓敤鎴风殑閫昏緫鍙湪涓�涓嚎绋嬪唴
      * !!!!!!!!!!!璇锋敞鎰�
      */
-    private RoomDO checkUserCreateRoom(User user) {
+    private Room2DO checkUserCreateRoom(User user) {
         if (frameThread == Thread.currentThread()) {
             throw new ServerRuntimeException("鍙兘鍦ㄦ寚瀹氱殑绾跨▼璋冪敤,涓嶈兘鍐峳oom 绾跨▼浣跨敤");
         }
-        RoomDO room = roomDao.findObject(
-                RoomDO.Table.CREATE_USER_ID, user.getUserId(),
-                RoomDO.Table.START, true
+        Room2DO room = room2Dao.findObject(
+                Room2DO.Table.CREATE_USER_ID, user.getUserId(),
+                Room2DO.Table.START, true
         );
         if (room != null) {
 //            initRoomData(user, room);
@@ -869,23 +671,23 @@ public class RoomService extends FrameQueueContainer implements BaseService {
         return null;
     }
 
-    private void initRoomData(User user, RoomDO roomDO) {
+    private void initRoomData(User user, Room2DO roomDO) {
         run(() -> {
-            initRoomData(user, new Room(roomDO));
+            initRoomData(user, new Room2(roomDO));
         });
     }
 
-    private boolean initRoomData(User user, Room room) {
+    private boolean initRoomData(User user, Room2 room) {
         if (frameThread != Thread.currentThread()) {
             throw new ServerRuntimeException("鍙兘鍦ㄦ寚瀹氱殑绾跨▼璋冪敤");
         }
-        RoomDO roomDO = room.getRoomDO();
-        if (!roomMap.containsKey(roomDO.getId())) {
+        Room2DO roomDO = room.getRoomDo();
+        if (!room2Map.containsKey(roomDO.getId())) {
             checkIdRoomMap.put(roomDO.getRoomCheckId(), room);
-            int isProxy = room.getRoomDO().getConfig().getInt("isProxy");
+            int isProxy = room.getRoomDo().getConfig().getInt("isProxy");
             if(isProxy==0)
-            	crateUserRoomMap.put(roomDO.getCreateUserId(), room);
-            roomMap.put(roomDO.getId(), room);
+            	createUserRoom2Map.put(roomDO.getCreateUserId(), room);
+            room2Map.put(roomDO.getId(), room);
             return true;
         }
         return false;
@@ -897,9 +699,7 @@ public class RoomService extends FrameQueueContainer implements BaseService {
      * 鐢熸垚涓�涓殢鏈篿d 涓嶉噸澶�!
      */
     private String getBufferId() {
-        if (frameThread != Thread.currentThread()) {
-            throw new ServerRuntimeException("鍙兘鍦ㄦ寚瀹氱殑绾跨▼璋冪敤");
-        }
+
         String id = idBuffer.poll();
         if (id != null) {
             return id;
@@ -960,61 +760,10 @@ public class RoomService extends FrameQueueContainer implements BaseService {
         });
     }
 
-
-    private void sendAlreadyCreateRoom(User user) {
-        user.noticeError("room.alreadyCreateRoom");
-    }
-
     private void sendNoGold(User user) {
         user.noticeError("room.noGold");
     }
-
-    private void sendCreateRoomSuccess(User user) {
-        user.noticeError("room.createRoomSuccess");
-    }
-
-//    private void sendAlreadyJoinRoom(User user) {
-//        user.noticeError("room.alreadyJoinRoom");
-//    }
-
-    private void sendErrorRoomCheckId(User user) {
-        user.noticeError("room.errorRoomCheckId");
-    }
-
-    private void sendRoomFull(User user) {
-        user.noticeError("room.full");
-    }
-
-    private void sendCreateRoomError(User user) {
-        user.noticeError("room.createRoomError");
-    }
-
-
-    private void sendAlreadyExitRoom(User user) {
-        user.noticeError("room.alreadyExitRoom");
-    }
-
-    private void sendAlreadyDelRoom(User user) {
-        user.noticeError("room.alreadyDelRoom");
-    }
-
-
-    private void sendCannotExitRoom(User user) {
-        user.noticeError("room.cannotExitRoom");
-    }
-
-    private void sendCannotDelRoom(User user) {
-        user.send(new DelRoomRet(false));
-        user.noticeError("room.cannotDelRoom");
-    }
-
-    private void sendExitRoomRet(User user) {
-        user.send(new ExitRoomRet());
-    }
-
-    private void sendDelRoomRet(User user) {
-        user.send(new DelRoomRet(true));
-    }
+   
 
     @Override
     protected void threadMethod(int frameCount, long time, long passedTime) {
@@ -1052,7 +801,8 @@ public class RoomService extends FrameQueueContainer implements BaseService {
      * 获取回访记录
      */
   	public void playBack(User user ,String checkRoomId, String chapterIndex) {
-  		List<RoomDetailDO> roomDetailDo=roomDetailDao.getByRoomCheckId(checkRoomId, chapterIndex);  
+  		List<RoomDetailDO> roomDetailDo=roomDetailDao.find(24,RoomDetailDO.Table.CHECK_ROOM_ID,checkRoomId, 
+  				RoomDetailDO.Table.CHEPTER_INDEX,chapterIndex);  
   		if(roomDetailDo != null && roomDetailDo.size() >0 ){
   			RoomDetailDO  roomDetailDO = roomDetailDo.get(0);
   			String  actionDetail = roomDetailDO.getActionDetail();	
@@ -1069,22 +819,24 @@ public class RoomService extends FrameQueueContainer implements BaseService {
 			List<ProxyRoomIF> infos = new ArrayList<ProxyRoomIF>();
 			for (int i = 0; i < list.size(); i++) {
 				Integer roomId = list.get(i);
-				Room room = roomMap.get(roomId);
+				Room2 room = room2Map.get(roomId);
 				if(room == null){
 					boolean b = list.remove(roomId);
 					continue;
 				}
 				ProxyRoomIF roomIF = new ProxyRoomIF();
-				roomIF.setRoomNo(room.getRoomDO().getRoomCheckId());
+				roomIF.setRoomNo(room.getRoomDo().getRoomCheckId());
 				List<UserIF> users = new ArrayList<UserIF>();
-				Map<Integer, UserDO> map = room.getMap();
-				for (int j = 0; j < 4; j++) {
-					UserDO userDO = map.get(j);
-					if(userDO!=null){
-						UserIF userIF = new UserIF();
-						userIF.setHeadUrl(userDO.getAvatar());
-						userIF.setName(userDO.getName());
-						users.add(userIF);
+				UserDO[] map = room.getUsers();
+				if(map!=null){
+					for (int j = 0; j < map.length; j++) {
+						UserDO userDO = map[j];
+						if(userDO!=null){
+							UserIF userIF = new UserIF();
+							userIF.setHeadUrl(userDO.getAvatar());
+							userIF.setName(userDO.getName());
+							users.add(userIF);
+						}
 					}
 				}
 				roomIF.setUsers(users);
@@ -1100,6 +852,139 @@ public class RoomService extends FrameQueueContainer implements BaseService {
 			user.send(msg);
 		}
 		
+	}
+	
+	/**
+	 * 
+	* @Title: douniuChapterStart 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @param msg    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void douniuChapterStart(ChapterStart2Msg msg) {
+		Room2 room2 = room2Map.get(msg.getRoomId());
+		room2.setStart(true);
+		UserDO[] users = room2.getUsers();
+		if(users!=null){
+			for (int i = 0; i < users.length; i++) {
+				UserDO userDO = users[i];
+				if(userDO==null){
+					continue;
+				}
+				RoomChapterDO chapterDO = new RoomChapterDO();
+				chapterDO.setChapterNum(msg.getNum());
+				chapterDO.setRoomId(msg.getRoomId());
+				chapterDO.setStartDate(new Date());
+				chapterDO.setUserId(userDO.getId());
+				chapterDO.setState(1);
+				chapterDO.setUserIndex(i);
+				chapterDO.setUserName(userDO.getName());
+				roomChapterDao.insert(chapterDO);
+			}
+		}
+		
+	}
+
+
+
+	public void douniuChapterEnd(ChapterEnd2Msg msg) {
+		int roomId = msg.getRoomId();
+		int num = msg.getNum();
+		int zhuangIndex = msg.getZhuangIndex();
+		List<ChapterUserMsg> chapterUserMsgs = msg.getChapterUserMsgs();
+		if(chapterUserMsgs!=null){
+			for (ChapterUserMsg chapterUserMsg : chapterUserMsgs) {
+				int locationIndex = chapterUserMsg.getLocationIndex();
+				int userId = chapterUserMsg.getUserId();
+				int[] pais = chapterUserMsg.getPais();
+				int paiType = chapterUserMsg.getPaiType();
+				int score = chapterUserMsg.getScore();
+				RoomChapterDO findObject = roomChapterDao.findObject(RoomChapterDO.Table.ROOM_ID,roomId,
+																		RoomChapterDO.Table.CHAPTER_NUM,num,
+																			RoomChapterDO.Table.USER_ID,userId);
+				findObject.setEndDate(new Date());
+				findObject.setScore(score);
+				findObject.setPais(Arrays.toString(pais) + ";paiType="+paiType);
+				findObject.setState(2);
+				findObject.setIsZhuang(locationIndex==zhuangIndex);
+				roomChapterDao.update(findObject);
+				
+			}
+		}
+	}
+
+
+
+	public void douniuDelRoom(DelRoom2Msg msg) {
+		List<SceneUserInfo> infos = msg.getInfos();
+		int roomId = msg.getRoomId();
+		int sceneId = msg.getSceneId();
+		if(infos!=null){
+			for (int i = 0; i < infos.size(); i++) {
+				SceneUserInfo sceneUserInfo = infos.get(i);
+				Room2 room2 = room2Map.get(msg.getRoomId());
+				String checkId = room2.getRoomDo().getRoomCheckId();
+				createUserRoom2Map.remove(msg.getCreateUserId());
+				checkIdRoom2Map.remove(checkId);
+				int userId = sceneUserInfo.getUserId();
+				int score = sceneUserInfo.getScore();
+				joinUserRoomMap.remove(userId);
+				RoomUserDO findObject = roomUserDao.findObject(RoomUserDO.Table.ROOM_ID,roomId,
+										RoomUserDO.Table.USER_ID,userId);
+				findObject.setEndDate(new Date());
+				findObject.setScore(score);
+				findObject.setState(5);
+				roomUserDao.update(findObject);
+			}
+		}
+		Room2DO room2do = room2Dao.get(roomId);
+		room2do.setStart(false);
+		room2do.setEnd(true);
+		room2do.setEndDate(new Date());
+		room2Dao.update(room2do);
+		
+		bossService.delRoomToScene(sceneId,roomId);
+		bossService.startDelRoomGateway(msg.getInfos());
+		
+	}
+	 public void checkOffline(User user) {
+	        run(() -> {
+	            Room2 room = joinUserRoomMap.get(user.getUserId());
+	            if (room != null) {
+	                bossService.startOfflineScene(user, room.getRoomId(),room.getRoomDo().getSceneId(), user.getSessionId());
+	            } else {
+	                log.info("鐜╁涓嶅湪鎴块棿锛屾棤娉曞彂閫佺绾挎秷鎭紒", user);
+	            }
+	        });
+	    }
+
+
+	public void douniuExitRoom(CheckExitRoom2Msg msg) {
+		userService.handlerUser(msg.getUserId(), (user)->{
+			bossService.startExitRoomGateway(user, msg.getSceneId());
+			Room2 room2 = room2Map.get(msg.getRoomId());
+			UserDO userDO = user.getUserDO();
+			if(userDO==null){
+				userDO = userDao.get(user.getUserId());
+			}
+			room2.removeUser(userDO);
+			user.send(new ExitRoomRet());
+		});
+		RoomUserDO findObject = roomUserDao.findObject(RoomUserDO.Table.USER_ID,msg.getUserId(),
+								RoomUserDO.Table.ROOM_ID,msg.getRoomId());
+		findObject.setEndDate(new Date());
+		findObject.setScore(msg.getScore());
+		findObject.setState(3);
+		findObject.setLocationIndex(-1);
+		roomUserDao.update(findObject);
+		joinUserRoomMap.remove(msg.getUserId());
+		bossService.startDNExitRoomScene(msg);
+		
+	}
+
+	public void delRoomGatewaySuccess(User user) {
+			
 	}
 
 	

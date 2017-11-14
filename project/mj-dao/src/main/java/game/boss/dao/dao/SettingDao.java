@@ -1,9 +1,9 @@
 package game.boss.dao.dao;
 
 import  org.forkjoin.core.dao.impi.BaseDaoImpi;
-import game.boss.dao.entity.SettingDO;
-
 import org.springframework.stereotype.Component;
+
+import game.boss.dao.entity.SettingDO;
 
 @Component
 public class SettingDao extends BaseDaoImpi<SettingDO,SettingDO.Key>  {

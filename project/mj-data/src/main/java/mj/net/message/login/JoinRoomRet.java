@@ -19,11 +19,9 @@ public class JoinRoomRet extends AbstractMessage{
 	public static final int ID				 = 7;
 	
 	private boolean result;
-	
 	public JoinRoomRet(){
 		
 	}
-	
 	public JoinRoomRet(boolean result){
 		this.result = result;
 	}

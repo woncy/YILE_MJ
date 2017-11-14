@@ -3,6 +3,8 @@ package game.scene.room;
 import com.isnowfox.core.net.message.Message;
 import com.isnowfox.core.thread.FrameQueueContainer;
 import game.boss.SceneUserInfo;
+import game.douniu.scene.msg.CheckExitRoom2Msg;
+import game.douniu.scene.msg.DelRoom2Msg;
 import game.scene.msg.*;
 import game.scene.net.BossClient;
 import mj.data.Config;
@@ -91,9 +93,10 @@ public class RoomService extends FrameQueueContainer implements ApplicationConte
         //创建房间
         run(() -> {
         	
+        	boolean isFirst = false;
             RoomImpi room = map.get(msg.getRoomId());
             if (room == null) {
-            	
+            	isFirst = true;
                 Config config = new Config(msg.getOptions());
                 room = new RoomImpi(roomAsyncService, config);
                 int userNum = 0;
@@ -140,17 +143,6 @@ public class RoomService extends FrameQueueContainer implements ApplicationConte
                     joinSceneUser = sceneUser;
                 }
                 sceneUsers.add(sceneUser);
-
-                if (msg.getUser0() == userInfo.getUserId()) {
-                    sceneUser.setScore(msg.getScore0());
-                } else if (msg.getUser1() == userInfo.getUserId()) {
-                    sceneUser.setScore(msg.getScore1());
-                } else if (msg.getUser2() == userInfo.getUserId()) {
-                    sceneUser.setScore(msg.getScore2());
-                } else if (msg.getUser3() == userInfo.getUserId()) {
-                    sceneUser.setScore(msg.getScore3());
-                }
-
                 sceneUserMap.put(userInfo.getUserId(), sceneUser);
             }
 
@@ -158,7 +150,7 @@ public class RoomService extends FrameQueueContainer implements ApplicationConte
             long gatewayIdUnionSessionId = getGatewayIdUnionSessionId(msg.getJoinSessionId(), msg.getJoinGatewayId());
             gatewayIdUnionSessionIdMap.put(gatewayIdUnionSessionId, room);
             gatewayIdUnionSessionIdUserMap.put(gatewayIdUnionSessionId, joinSceneUser);
-            room.join(joinSceneUser, sceneUsers, (r) -> {
+            room.join(joinSceneUser, sceneUsers, isFirst,(r) -> {
                 //进入房间成功
                 CheckJoinRoomRetMsg ret = new CheckJoinRoomRetMsg();
                 ret.setRoomId(msg.getRoomId());
@@ -171,7 +163,7 @@ public class RoomService extends FrameQueueContainer implements ApplicationConte
         });
     }
 
-    public void checkExitRoom(CheckExitRoomMsg msg) {
+    public void checkExitRoom(CheckExitRoom2Msg msg) {
         run(() -> {
             RoomImpi room = map.get(msg.getRoomId());
             if (room == null) {
@@ -192,16 +184,15 @@ public class RoomService extends FrameQueueContainer implements ApplicationConte
         });
     }
 
-    public void checkDelRoom(CheckDelRoomMsg msg) {
+    public void checkDelRoom(DelRoom2Msg msg) {
         run(() -> {
             RoomImpi room = map.get(msg.getRoomId());
             if (room == null) {
                 return;
             }
-            room.delRoom(msg.getUserId(), (ret) -> {
+            room.delRoom(msg.getCreateUserId(), (ret) -> {
                 //进入房间成功
                 run(() -> {
-                    List<SceneUserInfo> userInfos = new ArrayList<SceneUserInfo>();
                     if (ret) {
                         RoomInfo roomInfo = room.getRoomInfo();
                         for (SceneUser u : roomInfo.getUsers()) {
@@ -210,21 +201,12 @@ public class RoomService extends FrameQueueContainer implements ApplicationConte
                                 gatewayIdUnionSessionIdMap.remove(gatewayIdUnionSessionId);
                                 gatewayIdUnionSessionIdUserMap.remove(gatewayIdUnionSessionId);
                                 u.sendMessage(new GameDelRoom(room.isEnd(),room.isStart()));
-                                if(room.isEnd()){
-//                                    u.noticeError("room.endRoom");
-                                }else{
-//                                    u.noticeError("room.delRoom");
-                                }
-                                userInfos.add(new SceneUserInfo((short) u.getSessionId(), u.getGatewayId(), u.getUserId()));
                             }
                         }
                         map.remove(msg.getRoomId()); 
                         room.close();
                         room.setRoomInfo(null);
-                        msg.setInfos(userInfos);
                     }
-                    msg.setResult(ret);
-                    bossClient.writeAndFlush(msg);
                 });
             });
         });

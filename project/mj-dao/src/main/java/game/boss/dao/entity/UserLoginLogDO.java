@@ -7,14 +7,18 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import  org.forkjoin.core.dao.EntityObject;
-import  org.forkjoin.core.dao.KeyObject;
-import  org.forkjoin.core.dao.TableInfo;
+
 import org.forkjoin.core.dao.UniqueInfo;
+
+
 import org.springframework.jdbc.core.RowMapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
+
+import  org.forkjoin.core.dao.EntityObject;
+import  org.forkjoin.core.dao.KeyObject;
+import  org.forkjoin.core.dao.TableInfo;
 
 public class UserLoginLogDO extends EntityObject<UserLoginLogDO, UserLoginLogDO.Key>{
 

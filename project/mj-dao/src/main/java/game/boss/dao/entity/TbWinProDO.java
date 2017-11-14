@@ -23,8 +23,8 @@ import  org.forkjoin.core.dao.TableInfo;
 public class TbWinProDO extends EntityObject<TbWinProDO, TbWinProDO.Key>{
 
 	private int id;
-	private int userId;
-	private int winPro;
+	private Integer userId;
+	private Integer winPro;
 
 	public static class Key implements KeyObject<TbWinProDO, TbWinProDO.Key>{
     	private int id;
@@ -77,11 +77,6 @@ public class TbWinProDO extends EntityObject<TbWinProDO, TbWinProDO.Key>{
 				return id;
 			}
 
-			public void setId(int id) {
-				TbWinProDO.this.id  = id;
-				TbWinProDO.this.changeProperty("id",id);
-			}
-
 			@Override
 			public String toString() {
 				return "TbWinPro[id:"+ id+ "]";
@@ -95,8 +90,7 @@ public class TbWinProDO extends EntityObject<TbWinProDO, TbWinProDO.Key>{
 	public TbWinProDO() {
     }
 
-	public TbWinProDO(int id,int userId,int winPro) {
-		this.id = id;
+	public TbWinProDO(Integer userId,Integer winPro) {
 		this.userId = userId;
 		this.winPro = winPro;
 	}
@@ -119,20 +113,20 @@ public class TbWinProDO extends EntityObject<TbWinProDO, TbWinProDO.Key>{
 		changeProperty("id",id);
 	}
 
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 		changeProperty("userId",userId);
 	}
 
-	public int getWinPro() {
+	public Integer getWinPro() {
 		return winPro;
 	}
 
-	public void setWinPro(int winPro) {
+	public void setWinPro(Integer winPro) {
 		this.winPro = winPro;
 		changeProperty("winPro",winPro);
 	}
@@ -159,10 +153,10 @@ public class TbWinProDO extends EntityObject<TbWinProDO, TbWinProDO.Key>{
 			id = (int)obj;
 			return true;
 		case "user_id":
-			userId = (int)obj;
+			userId = (Integer)obj;
 			return true;
 		case "win_pro":
-			winPro = (int)obj;
+			winPro = (Integer)obj;
 			return true;
 		default :
 			return false;
@@ -197,8 +191,8 @@ public class TbWinProDO extends EntityObject<TbWinProDO, TbWinProDO.Key>{
 		private Table(){
 		    uniqueMap = new HashMap<>();
 			super.initProperty("id", "id", int.class, new TypeReference<Integer>() {});
-			super.initProperty("user_id", "userId", int.class, new TypeReference<Integer>() {});
-			super.initProperty("win_pro", "winPro", int.class, new TypeReference<Integer>() {});
+			super.initProperty("user_id", "userId", Integer.class, new TypeReference<Integer>() {});
+			super.initProperty("win_pro", "winPro", Integer.class, new TypeReference<Integer>() {});
 		}
 
 		@Override public String getKeyUpdatePartialPrefixSql(){
@@ -227,9 +221,6 @@ public class TbWinProDO extends EntityObject<TbWinProDO, TbWinProDO.Key>{
 			Object idPtr;
 			idPtr = t.getId();
 
-			if(isSetUnique){
-				ps.setObject(i++, idPtr);
-			}
 			Object userIdPtr;
 			userIdPtr = t.getUserId();
 
@@ -271,7 +262,7 @@ public class TbWinProDO extends EntityObject<TbWinProDO, TbWinProDO.Key>{
 		}
 
 		@Override public String getInsertSql(){
-			return "INSERT INTO `tb_win_pro` (`id`,`user_id`,`win_pro`) VALUES (?,?,?)";
+			return "INSERT INTO `tb_win_pro` (`user_id`,`win_pro`) VALUES (?,?)";
 		}
 
 		@Override public String getReplaceSql(){
@@ -279,13 +270,13 @@ public class TbWinProDO extends EntityObject<TbWinProDO, TbWinProDO.Key>{
         }
 
 		@Override public String getFastInsertPrefixSql(){
-			return "INSERT INTO `tb_win_pro` (`id`,`user_id`,`win_pro`) VALUES ";
+			return "INSERT INTO `tb_win_pro` (`user_id`,`win_pro`) VALUES ";
 		}
 		@Override public String getFastInsertValueItemsSql(){
-			return " (?,?,?) ";
+			return " (?,?) ";
 		}
 		@Override public String getUpdateSql(){
-			return "UPDATE `tb_win_pro` SET `id`=?,`user_id`=?,`win_pro`=? WHERE `id`=?";
+			return "UPDATE `tb_win_pro` SET `user_id`=?,`win_pro`=? WHERE `id`=?";
 		}
 
 		@Override public String getSelectByKeySql(){

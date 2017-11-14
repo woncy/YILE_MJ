@@ -1,6 +1,7 @@
 package game.scene.room.majiang;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -95,7 +96,6 @@ public class MajiangChapter {
      */
     private boolean operationFaPaiIsGang;
     private boolean is4HurErHU;
-
     private OperationCPGH operationCPGH;
     private OperationOut operationOut;
     public  JSONObject roomDetail = null ; 
@@ -252,6 +252,10 @@ public class MajiangChapter {
             return;
         }
         Pai pai = isGang ? paiPool.getFreeGangPai() : paiPool.getFreePai();
+        if(pai==null){
+        	huangPai();
+        	return;
+        }
         UserPlace userPlace = userPlaces[currentIndex];
         
         ArrayList<Pai> checkHu = (ArrayList<Pai>)userPlace.getShouPai().clone();
@@ -493,12 +497,9 @@ public class MajiangChapter {
 
     private void huPai(UserPlace userPlace, int locationIndex, Pai pai, int fangPaoIndex, 
             boolean isGangShangHua ,boolean isQiDuiHu, boolean is4HuiErHu) {
-//    	if(rules.isFangPao())
-    	
         if (fangPaoIndex > -1) {
             userPlace.addShouPai(pai);
         }
-        
         end(locationIndex, fangPaoIndex, isGangShangHua,isQiDuiHu,is4HuiErHu);
     }
 
@@ -1089,6 +1090,17 @@ public class MajiangChapter {
                 ", isDingPao=" + isDingPao +
                 '}';
     }
+
+	public void exitUser(int userId) {
+		for (int i = 0; i < userPlaces.length; i++) {
+			UserPlace userPlace = userPlaces[i];
+			if(userPlace!=null &&userPlace.getUserId()==userId){
+				userPlaces[i] = null;
+			}
+			
+		}
+		
+	}
 
 	
 

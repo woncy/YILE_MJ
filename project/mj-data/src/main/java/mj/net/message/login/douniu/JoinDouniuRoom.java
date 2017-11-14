@@ -15,19 +15,15 @@ import com.isnowfox.core.net.message.AbstractMessage;
  */
 
 public class JoinDouniuRoom extends AbstractMessage{
-	public static final int TYPE			 = 5;
+	public static final int TYPE			 = 2;
 	public static final int ID				 = 2;
-	
 	private String roomCheckId;
-    public int countPeople; //记录进入房间的次数
 	public JoinDouniuRoom(){
 		
 	}
-	
 	public JoinDouniuRoom(String roomCheckId){
 		this.roomCheckId = roomCheckId;
 	}
-	
 	@Override
 	public void decode(Input in)  throws IOException, ProtocolException {
 		roomCheckId = in.readString();
@@ -39,7 +35,6 @@ public class JoinDouniuRoom extends AbstractMessage{
 	}
 
 	public String getRoomCheckId() {
-		 countPeople++;
 		return roomCheckId;
 	}
 	

@@ -25,6 +25,8 @@ import mj.net.message.game.VoteDelStart;
 public abstract class Room {
     protected static final Logger log = LoggerFactory.getLogger(Room.class);
     public static final int FRAME_DELAY_MILLISECONDS = 50;
+    
+   
 
     protected RoomInfo roomInfo;
     private ScheduledFuture<?> scheduledFuture;
@@ -71,9 +73,12 @@ public abstract class Room {
     protected void run(Runnable runnable) {
         this.roomAsyncService.run(roomInfo.getRoomId(), runnable);
     }
+    
+    
 
-    protected void checkThread() {
-        this.roomAsyncService.checkThread(roomInfo.getRoomId());
+
+	protected void checkThread() {
+       // this.roomAsyncService.checkThread(roomInfo.getRoomId());
     }
 
 

@@ -1,9 +1,9 @@
 package game.boss.dao.dao;
 
 import  org.forkjoin.core.dao.impi.BaseDaoImpi;
-import game.boss.dao.entity.RoomUserDO;
-
 import org.springframework.stereotype.Component;
+
+import game.boss.dao.entity.RoomUserDO;
 
 @Component
 public class RoomUserDao extends BaseDaoImpi<RoomUserDO,RoomUserDO.Key>  {

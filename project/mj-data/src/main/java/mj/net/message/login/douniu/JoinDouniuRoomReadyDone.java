@@ -8,11 +8,10 @@ import com.isnowfox.core.io.ProtocolException;
 import com.isnowfox.core.net.message.AbstractMessage;
 
 public class JoinDouniuRoomReadyDone extends AbstractMessage{
-	public static final int TYPE=5;
-	public static final int ID=5;
+	public static final int TYPE=2;
+	public static final int ID=4;
 	@Override
 	public void decode(Input arg0) throws IOException, ProtocolException {
-		
 	}
 	@Override
 	public void encode(Output arg0) throws IOException, ProtocolException {
@@ -28,8 +27,9 @@ public class JoinDouniuRoomReadyDone extends AbstractMessage{
 	}
 	@Override
 	public String toString() {
-		return "JoinDouniuRoomReadyDone [getMessageId()=" + getMessageId() + ", getMessageType()=" + getMessageType()
-				+ "]";
+		return "JoinDouniuRoomReadyDone []";
 	}
+	
+	
 	
 }

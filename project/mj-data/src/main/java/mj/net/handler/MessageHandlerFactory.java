@@ -50,6 +50,7 @@ public final class MessageHandlerFactory implements ApplicationContextAware {
 		
 		array[1][28] = getBean(mj.net.handler.game.OperationDingPaoHandler.class);
 		array[1][36] = getBean(mj.net.handler.game.VoiceHandler.class);
+		array[1][38] = getBean(mj.net.handler.game.AudioMsgHandler.class);
 		
 		array[7] = new MessageHandler[50];
 
@@ -79,9 +80,8 @@ public final class MessageHandlerFactory implements ApplicationContextAware {
 		array[7][33] = getBean(mj.net.handler.login.JoinClubHandler.class);
 		array[7][37] = getBean(mj.net.handler.login.QuestionHandler.class);
 		array[7][38] = getBean(mj.net.handler.login.WangbangPlayBackHandler.class);
+		array[7][40] = getBean(mj.net.handler.login.LocationHandler.class);
 		array[7][42] = getBean(mj.net.handler.login.QueryProxyRoomListHandler.class);
-		initPdk();
-		initZJH();
 		initDouniu();
 	}
 	private void initZJH() {
@@ -130,43 +130,51 @@ public final class MessageHandlerFactory implements ApplicationContextAware {
 	}
 
 	private void initDouniu() {
-		array[5] = new MessageHandler[52];
+		array[2] = new MessageHandler[52];
 		//创建房间处理器【7,0】
-		array[5][0] = getBean(mj.net.handler.login.douniu.CreateDouniuRoomHandler.class);
+//		array[2][0] = getBean(mj.net.handler.login.douniu.CreateDouniuRoomHandler.class);
 		//加入房間
-		array[5][2] = getBean(mj.net.handler.login.douniu.JoinDouniuRoomHandler.class);
+		array[2][2] = getBean(mj.net.handler.login.douniu.JoinDouniuRoomHandler.class);
 		//退出房間
-		array[5][6] = getBean(mj.net.handler.login.douniu.ExitDouniuRoomHandler.class);
+//		array[2][6] = getBean(mj.net.handler.login.douniu.ExitDouniuRoomHandler.class);
 		//加入房间准备
-		array[5][5] = getBean(mj.net.handler.game.douniu.JoinDouniuRoomReadyDoneHandler.class);
+		array[2][4] = getBean(mj.net.handler.game.douniu.JoinDouniuRoomReadyDoneHandler.class);
+		array[2][8] = getBean(mj.net.handler.game.douniu.DNGameStartHandler.class);
+		array[2][9] = getBean(mj.net.handler.game.douniu.DNGameReadyHandler.class);
+		array[2][10] = getBean(mj.net.handler.game.douniu.DNQiangZhuangHandler.class);
+		array[2][12] = getBean(mj.net.handler.game.douniu.DNKaiPaiHandler.class);
+		array[2][15] = getBean(mj.net.handler.game.douniu.DNXiaZhuHandler.class);
+		array[2][17] = getBean(mj.net.handler.game.douniu.DNExitUserHandler.class);
+		array[2][18] = getBean(mj.net.handler.game.douniu.DNdismissVoteHandler.class);
+		array[2][19] = getBean(mj.net.handler.game.douniu.DNdismissUserResultHandler.class);
 		//加入游戏开始发送房间信息
-		array[5][28] = getBean(mj.net.handler.game.douniu.GameJoinDouniuRoomHandler.class);
+//		array[2][28] = getBean(mj.net.handler.game.douniu.GameJoinDouniuRoomHandler.class);
 		//斗牛开始游戏
-		array[5][8] = getBean(mj.net.handler.game.douniu.DouniuStartGameHandler.class);
+//		array[2][8] = getBean(mj.net.handler.game.douniu.DouniuStartGameHandler.class);
 		//斗牛发牌
-		array[5][11] = getBean(mj.net.handler.game.douniu.DouniuFaPaiRetHandler.class);
+//		array[2][11] = getBean(mj.net.handler.game.douniu.DouniuFaPaiRetHandler.class);
 		//斗牛下注
-		array[5][12] = getBean(mj.net.handler.game.douniu.DouniuZhuHandler.class);
+//		array[2][12] = getBean(mj.net.handler.game.douniu.DouniuZhuHandler.class);
 		//斗牛比牌
-		array[5][15] = getBean(mj.net.handler.game.douniu.DouniuBiCardHandler.class);
+//		array[2][15] = getBean(mj.net.handler.game.douniu.DouniuBiCardHandler.class);
 		//斗牛比牌结果渲染
-		array[5][17] = getBean(mj.net.handler.game.douniu.DouniuBiCardOtherRetHandler.class);		
+//		array[2][17] = getBean(mj.net.handler.game.douniu.DouniuBiCardOtherRetHandler.class);		
 		//斗牛下家说话
-		array[5][19] = getBean(mj.net.handler.game.douniu.DouniuOutRetHandler.class);
+//		array[2][19] = getBean(mj.net.handler.game.douniu.DouniuOutRetHandler.class);
 		//斗牛返回给前端的牌型
-		array[5][37] = getBean(mj.net.handler.game.douniu.DouniuShowHandler.class);
+//		array[2][37] = getBean(mj.net.handler.game.douniu.DouniuShowHandler.class);
 		//斗牛开始解散房间
-		array[5][41] = getBean(mj.net.handler.game.douniu.DouniuVoteDelStartHandler.class);
+//		array[2][41] = getBean(mj.net.handler.game.douniu.DouniuVoteDelStartHandler.class);
 		//斗牛开始投票
-		array[5][43] = getBean(mj.net.handler.game.douniu.DouniuVoteDelSelectRetHandler.class);
+//		array[2][43] = getBean(mj.net.handler.game.douniu.DouniuVoteDelSelectRetHandler.class);
 		
-		array[5][46] = getBean(mj.net.handler.login.douniu.DeDouniuRoomHandler.class);
+//		array[2][46] = getBean(mj.net.handler.login.douniu.DeDouniuRoomHandler.class);
 	     
 		//战绩查询
-		array[5][48] = getBean(mj.net.handler.login.douniu.DouniuRoomHistoryListHandler.class);
+//		array[2][48] = getBean(mj.net.handler.login.douniu.DouniuRoomHistoryListHandler.class);
 		
 		//聊天
-		array[5][50] = getBean(mj.net.handler.game.douniu.DouniuChatHandler.class);
+//		array[2][50] = getBean(mj.net.handler.game.douniu.DouniuChatHandler.class);
 
 	}
 	

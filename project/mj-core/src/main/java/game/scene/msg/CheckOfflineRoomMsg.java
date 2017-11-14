@@ -2,12 +2,11 @@ package game.scene.msg;
 
 import com.isnowfox.game.proxy.message.AbstractSessionPxMsg;
 
-import game.douniu.scene.msg.CheckDelDouniuRoomMsg;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
 public class CheckOfflineRoomMsg extends AbstractSessionPxMsg {
-    public static final int ID = CheckDelRoomMsg.ID + 1;
+    public static final int ID = 6 + 1;
 
     private int sceneId;
     /**

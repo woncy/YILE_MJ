@@ -54,8 +54,8 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 	/**玩家备注*/
 	private String notes;
 	private String notice;
+	private String num;
 	private String idCard;
-	private Integer state;
 
 	public static class Key implements KeyObject<UserDO, UserDO.Key>{
     	private int id;
@@ -121,7 +121,7 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 	public UserDO() {
     }
 
-	public UserDO(String name,String openId,String uuid,String avatar,int sex,java.util.Date createDate,java.util.Date updateDate,int version,int gold,int historyGold,int level,String mobile,String loginToken,String ip,double longitude,double latitude,String password,Integer pid,String notes,String notice,String idCard,Integer state) {
+	public UserDO(String name,String openId,String uuid,String avatar,int sex,java.util.Date createDate,java.util.Date updateDate,int version,int gold,int historyGold,int level,String mobile,String loginToken,String ip,double longitude,double latitude,String password,Integer pid,String notes,String notice,String num,String idCard) {
 		this.name = name;
 		this.openId = openId;
 		this.uuid = uuid;
@@ -142,8 +142,8 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 		this.pid = pid;
 		this.notes = notes;
 		this.notice = notice;
+		this.num = num;
 		this.idCard = idCard;
-		this.state = state;
 	}
 
 
@@ -410,6 +410,15 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 		changeProperty("notice",notice);
 	}
 
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+		changeProperty("num",num);
+	}
+
 	public String getIdCard() {
 		return idCard;
 	}
@@ -417,15 +426,6 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 	public void setIdCard(String idCard) {
 		this.idCard = idCard;
 		changeProperty("idCard",idCard);
-	}
-
-	public Integer getState() {
-		return state;
-	}
-
-	public void setState(Integer state) {
-		this.state = state;
-		changeProperty("state",state);
 	}
 
     @Override
@@ -473,10 +473,10 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
             return notes;
         case "notice":
             return notice;
+        case "num":
+            return num;
         case "idCard":
             return idCard;
-        case "state":
-            return state;
         default :
             return null;
         }
@@ -549,11 +549,11 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 		case "notice":
 			notice = (String)obj;
 			return true;
+		case "num":
+			num = (String)obj;
+			return true;
 		case "idCard":
 			idCard = (String)obj;
-			return true;
-		case "state":
-			state = (Integer)obj;
 			return true;
 		default :
 			return false;
@@ -562,7 +562,7 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 
 	@Override
 	public String toString() {
-		return "User[id:"+ id+",name:"+ (name == null ?"null":name.substring(0, Math.min(name.length(), 64)))+",openId:"+ (openId == null ?"null":openId.substring(0, Math.min(openId.length(), 64)))+",uuid:"+ (uuid == null ?"null":uuid.substring(0, Math.min(uuid.length(), 64)))+",avatar:"+ (avatar == null ?"null":avatar.substring(0, Math.min(avatar.length(), 64)))+",sex:"+ sex+",createDate:"+ createDate+",updateDate:"+ updateDate+",version:"+ version+",gold:"+ gold+",historyGold:"+ historyGold+",level:"+ level+",mobile:"+ (mobile == null ?"null":mobile.substring(0, Math.min(mobile.length(), 64)))+",loginToken:"+ (loginToken == null ?"null":loginToken.substring(0, Math.min(loginToken.length(), 64)))+",ip:"+ (ip == null ?"null":ip.substring(0, Math.min(ip.length(), 64)))+",longitude:"+ longitude+",latitude:"+ latitude+",password:"+ (password == null ?"null":password.substring(0, Math.min(password.length(), 64)))+",pid:"+ pid+",notes:"+ (notes == null ?"null":notes.substring(0, Math.min(notes.length(), 64)))+",notice:"+ (notice == null ?"null":notice.substring(0, Math.min(notice.length(), 64)))+",idCard:"+ (idCard == null ?"null":idCard.substring(0, Math.min(idCard.length(), 64)))+",state:"+ state+ "]";
+		return "User[id:"+ id+",name:"+ (name == null ?"null":name.substring(0, Math.min(name.length(), 64)))+",openId:"+ (openId == null ?"null":openId.substring(0, Math.min(openId.length(), 64)))+",uuid:"+ (uuid == null ?"null":uuid.substring(0, Math.min(uuid.length(), 64)))+",avatar:"+ (avatar == null ?"null":avatar.substring(0, Math.min(avatar.length(), 64)))+",sex:"+ sex+",createDate:"+ createDate+",updateDate:"+ updateDate+",version:"+ version+",gold:"+ gold+",historyGold:"+ historyGold+",level:"+ level+",mobile:"+ (mobile == null ?"null":mobile.substring(0, Math.min(mobile.length(), 64)))+",loginToken:"+ (loginToken == null ?"null":loginToken.substring(0, Math.min(loginToken.length(), 64)))+",ip:"+ (ip == null ?"null":ip.substring(0, Math.min(ip.length(), 64)))+",longitude:"+ longitude+",latitude:"+ latitude+",password:"+ (password == null ?"null":password.substring(0, Math.min(password.length(), 64)))+",pid:"+ pid+",notes:"+ (notes == null ?"null":notes.substring(0, Math.min(notes.length(), 64)))+",notice:"+ (notice == null ?"null":notice.substring(0, Math.min(notice.length(), 64)))+",num:"+ (num == null ?"null":num.substring(0, Math.min(num.length(), 64)))+",idCard:"+ (idCard == null ?"null":idCard.substring(0, Math.min(idCard.length(), 64)))+ "]";
 	}
 
 	@Override
@@ -600,8 +600,8 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 		public static final String PID = "pid";
 		public static final String NOTES = "notes";
 		public static final String NOTICE = "notice";
+		public static final String NUM = "num";
 		public static final String IDCARD = "idCard";
-		public static final String STATE = "state";
 
         public static final String UNIQUE_OPEN_ID = "open_id";
         public static final String UNIQUE_MOBILE = "mobile";
@@ -634,8 +634,8 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 			super.initProperty("pid", "pid", Integer.class, new TypeReference<Integer>() {});
 			super.initProperty("notes", "notes", String.class, new TypeReference<String>() {});
 			super.initProperty("notice", "notice", String.class, new TypeReference<String>() {});
+			super.initProperty("num", "num", String.class, new TypeReference<String>() {});
 			super.initProperty("idCard", "idCard", String.class, new TypeReference<String>() {});
-			super.initProperty("state", "state", Integer.class, new TypeReference<Integer>() {});
 		}
 
 		@Override public String getKeyUpdatePartialPrefixSql(){
@@ -750,14 +750,14 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 			noticePtr = t.getNotice();
 
 			ps.setObject(i++, noticePtr);
+			Object numPtr;
+			numPtr = t.getNum();
+
+			ps.setObject(i++, numPtr);
 			Object idCardPtr;
 			idCardPtr = t.getIdCard();
 
 			ps.setObject(i++, idCardPtr);
-			Object statePtr;
-			statePtr = t.getState();
-
-			ps.setObject(i++, statePtr);
 			return i;
 		}
 
@@ -847,14 +847,14 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 				noticePtr = t.getNotice();
 
 			ps.setObject(i++,  noticePtr);
+			Object numPtr;
+				numPtr = t.getNum();
+
+			ps.setObject(i++,  numPtr);
 			Object idCardPtr;
 				idCardPtr = t.getIdCard();
 
 			ps.setObject(i++,  idCardPtr);
-			Object statePtr;
-				statePtr = t.getState();
-
-			ps.setObject(i++,  statePtr);
         	return i;
         }
 
@@ -871,21 +871,21 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 		}
 
 		@Override public String getInsertSql(){
-			return "INSERT INTO `user` (`name`,`open_id`,`uuid`,`avatar`,`sex`,`create_date`,`update_date`,`version`,`gold`,`history_gold`,`level`,`mobile`,`login_token`,`ip`,`longitude`,`latitude`,`password`,`pid`,`notes`,`notice`,`idCard`,`state`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			return "INSERT INTO `user` (`name`,`open_id`,`uuid`,`avatar`,`sex`,`create_date`,`update_date`,`version`,`gold`,`history_gold`,`level`,`mobile`,`login_token`,`ip`,`longitude`,`latitude`,`password`,`pid`,`notes`,`notice`,`num`,`idCard`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		}
 
 		@Override public String getReplaceSql(){
-        	return "REPLACE INTO `user` (`id`,`name`,`open_id`,`uuid`,`avatar`,`sex`,`create_date`,`update_date`,`version`,`gold`,`history_gold`,`level`,`mobile`,`login_token`,`ip`,`longitude`,`latitude`,`password`,`pid`,`notes`,`notice`,`idCard`,`state`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        	return "REPLACE INTO `user` (`id`,`name`,`open_id`,`uuid`,`avatar`,`sex`,`create_date`,`update_date`,`version`,`gold`,`history_gold`,`level`,`mobile`,`login_token`,`ip`,`longitude`,`latitude`,`password`,`pid`,`notes`,`notice`,`num`,`idCard`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         }
 
 		@Override public String getFastInsertPrefixSql(){
-			return "INSERT INTO `user` (`name`,`open_id`,`uuid`,`avatar`,`sex`,`create_date`,`update_date`,`version`,`gold`,`history_gold`,`level`,`mobile`,`login_token`,`ip`,`longitude`,`latitude`,`password`,`pid`,`notes`,`notice`,`idCard`,`state`) VALUES ";
+			return "INSERT INTO `user` (`name`,`open_id`,`uuid`,`avatar`,`sex`,`create_date`,`update_date`,`version`,`gold`,`history_gold`,`level`,`mobile`,`login_token`,`ip`,`longitude`,`latitude`,`password`,`pid`,`notes`,`notice`,`num`,`idCard`) VALUES ";
 		}
 		@Override public String getFastInsertValueItemsSql(){
 			return " (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 		}
 		@Override public String getUpdateSql(){
-			return "UPDATE `user` SET `name`=?,`open_id`=?,`uuid`=?,`avatar`=?,`sex`=?,`create_date`=?,`update_date`=?,`version`=?,`gold`=?,`history_gold`=?,`level`=?,`mobile`=?,`login_token`=?,`ip`=?,`longitude`=?,`latitude`=?,`password`=?,`pid`=?,`notes`=?,`notice`=?,`idCard`=?,`state`=? WHERE `id`=?";
+			return "UPDATE `user` SET `name`=?,`open_id`=?,`uuid`=?,`avatar`=?,`sex`=?,`create_date`=?,`update_date`=?,`version`=?,`gold`=?,`history_gold`=?,`level`=?,`mobile`=?,`login_token`=?,`ip`=?,`longitude`=?,`latitude`=?,`password`=?,`pid`=?,`notes`=?,`notice`=?,`num`=?,`idCard`=? WHERE `id`=?";
 		}
 
 		@Override public String getSelectByKeySql(){
@@ -936,8 +936,8 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 					o.pid = rs.getInt("pid");
 					o.notes = rs.getString("notes");
 					o.notice = rs.getString("notice");
+					o.num = rs.getString("num");
 					o.idCard = rs.getString("idCard");
-					o.state = rs.getInt("state");
 					return o;
 				}
 			};
@@ -971,8 +971,8 @@ public class UserDO extends EntityObject<UserDO, UserDO.Key>{
 						o.setPid(rs.getInt("pid"));
 						o.setNotes(rs.getString("notes"));
 						o.setNotice(rs.getString("notice"));
+						o.setNum(rs.getString("num"));
 						o.setIdCard(rs.getString("idCard"));
-						o.setState(rs.getInt("state"));
                         return o;
 					} catch (InstantiationException | IllegalAccessException e) {
 						throw new SQLException("必须实现默认构造函数",e);

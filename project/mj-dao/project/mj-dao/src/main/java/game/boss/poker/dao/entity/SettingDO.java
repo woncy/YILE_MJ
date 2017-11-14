@@ -33,7 +33,7 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 	/**用户协议*/
 	private String agreement;
 	/**用户默认房卡*/
-	private int initGold;
+	private Integer initGold;
 	/**最低代理级别*/
 	private Integer level;
 
@@ -88,11 +88,6 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 				return id;
 			}
 
-			public void setId(int id) {
-				SettingDO.this.id  = id;
-				SettingDO.this.changeProperty("id",id);
-			}
-
 			@Override
 			public String toString() {
 				return "Setting[id:"+ id+ "]";
@@ -106,8 +101,7 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 	public SettingDO() {
     }
 
-	public SettingDO(int id,String notice,String radio,String payInfo,String agreement,int initGold,Integer level) {
-		this.id = id;
+	public SettingDO(String notice,String radio,String payInfo,String agreement,Integer initGold,Integer level) {
 		this.notice = notice;
 		this.radio = radio;
 		this.payInfo = payInfo;
@@ -203,14 +197,14 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 	/**
 	 * 用户默认房卡
 	 **/
-	public int getInitGold() {
+	public Integer getInitGold() {
 		return initGold;
 	}
 
 	/**
 	 * 用户默认房卡
 	 **/
-	public void setInitGold(int initGold) {
+	public void setInitGold(Integer initGold) {
 		this.initGold = initGold;
 		changeProperty("initGold",initGold);
 	}
@@ -272,7 +266,7 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 			agreement = (String)obj;
 			return true;
 		case "initGold":
-			initGold = (int)obj;
+			initGold = (Integer)obj;
 			return true;
 		case "level":
 			level = (Integer)obj;
@@ -318,7 +312,7 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 			super.initProperty("radio", "radio", String.class, new TypeReference<String>() {});
 			super.initProperty("payInfo", "payInfo", String.class, new TypeReference<String>() {});
 			super.initProperty("agreement", "agreement", String.class, new TypeReference<String>() {});
-			super.initProperty("initGold", "initGold", int.class, new TypeReference<Integer>() {});
+			super.initProperty("initGold", "initGold", Integer.class, new TypeReference<Integer>() {});
 			super.initProperty("level", "level", Integer.class, new TypeReference<Integer>() {});
 		}
 
@@ -348,9 +342,6 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 			Object idPtr;
 			idPtr = t.getId();
 
-			if(isSetUnique){
-				ps.setObject(i++, idPtr);
-			}
 			Object noticePtr;
 			noticePtr = t.getNotice();
 
@@ -424,7 +415,7 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
 		}
 
 		@Override public String getInsertSql(){
-			return "INSERT INTO `setting` (`id`,`notice`,`radio`,`payInfo`,`agreement`,`initGold`,`level`) VALUES (?,?,?,?,?,?,?)";
+			return "INSERT INTO `setting` (`notice`,`radio`,`payInfo`,`agreement`,`initGold`,`level`) VALUES (?,?,?,?,?,?)";
 		}
 
 		@Override public String getReplaceSql(){
@@ -432,13 +423,13 @@ public class SettingDO extends EntityObject<SettingDO, SettingDO.Key>{
         }
 
 		@Override public String getFastInsertPrefixSql(){
-			return "INSERT INTO `setting` (`id`,`notice`,`radio`,`payInfo`,`agreement`,`initGold`,`level`) VALUES ";
+			return "INSERT INTO `setting` (`notice`,`radio`,`payInfo`,`agreement`,`initGold`,`level`) VALUES ";
 		}
 		@Override public String getFastInsertValueItemsSql(){
-			return " (?,?,?,?,?,?,?) ";
+			return " (?,?,?,?,?,?) ";
 		}
 		@Override public String getUpdateSql(){
-			return "UPDATE `setting` SET `id`=?,`notice`=?,`radio`=?,`payInfo`=?,`agreement`=?,`initGold`=?,`level`=? WHERE `id`=?";
+			return "UPDATE `setting` SET `notice`=?,`radio`=?,`payInfo`=?,`agreement`=?,`initGold`=?,`level`=? WHERE `id`=?";
 		}
 
 		@Override public String getSelectByKeySql(){

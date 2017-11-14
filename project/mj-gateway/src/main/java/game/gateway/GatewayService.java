@@ -21,11 +21,6 @@ import com.isnowfox.game.proxy.message.RangePxMsg;
 import com.isnowfox.game.proxy.message.SinglePxMsg;
 import com.isnowfox.util.collect.primitive.ShortList;
 
-import game.boss.ZJH.msg.DelZJHRoomMsg;
-import game.boss.ZJH.msg.JoinZJHRoomMsg;
-import game.boss.douniu.msg.DeDouniuRoomMsg;
-import game.boss.douniu.msg.DouniuExitRoomMsg;
-import game.boss.douniu.msg.JoinDouniuRoomMsg;
 import game.boss.msg.DelRoomMsg;
 import game.boss.msg.ExitRoomMsg;
 import game.boss.msg.JoinRoomMsg;
@@ -44,8 +39,6 @@ import game.gateway.server.ZJHSceneInfo;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame;
-import mj.net.message.login.Login;
-import mj.net.message.login.Ping;
 import mj.net.message.login.douniu.CreateDouniuRoom;
 import mj.net.message.login.douniu.DeDouniuRoom;
 import mj.net.message.login.douniu.DouniuRoomHistoryList;
@@ -174,18 +167,17 @@ public class GatewayService {
 				}
 			}
 
-		} else if (type == 5) {
+		} else if (type == 2) {
 			if (id == CreateDouniuRoom.ID || id == JoinDouniuRoom.ID
 					|| id == DeDouniuRoom.ID || id == ExitDouniuRoom.ID || id==DouniuRoomHistoryList.ID) {
 				bossClient.writeAndFlush(sm);
 				log.info("转发到boss");
 			} else {
-				DouniuSceneInfo douniuSceneInfo = douniuMap.get(u.getId());
-				if (douniuSceneInfo != null) {
-					douniuSceneClientManger.forwardMessage(sm, douniuSceneInfo);
-					return;
+				SceneInfo sceneInfo = map.get(u.getId());
+				if (sceneInfo != null) {
+					sceneClientManager.forwardMessage(sm, sceneInfo);
 				} else {
-					throw new RuntimeException("未分配的场景");
+//					throw new RuntimeException("未分配场景");s
 				}
 			}
 		}
@@ -279,54 +271,6 @@ public class GatewayService {
 			DelRoomMsg sm = (DelRoomMsg) msg;
 			map.remove(sm.getSessionId());
 			toBoss(sm);
-			break;
-		}
-		case JoinZJHRoomMsg.ID: {
-			JoinZJHRoomMsg ms = (JoinZJHRoomMsg) msg;
-			ZJHSceneInfo info = new ZJHSceneInfo();
-			info.setSceneAddress(ms.getZJHSceneAddress());
-			info.setScenePort(ms.getZJHScenePort());
-			info.setSessionId(ms.getSessionId());
-			info.setZJHsceneId(ms.getZJHSceneId());
-			ZJHmap.put(ms.getSessionId(), info);
-			ZJHSceneClientManager.checkConnect(ms.getZJHSceneId(),
-					ms.getZJHSceneAddress(), ms.getZJHScenePort(), () -> {
-						toBoss(ms);
-					});
-			break;
-		}
-		case JoinDouniuRoomMsg.ID: { // 斗牛加入房间
-			JoinDouniuRoomMsg ms = (JoinDouniuRoomMsg) msg;
-			DouniuSceneInfo info = new DouniuSceneInfo();
-			info.setSceneAddress(ms.getDouniuSceneAddress());
-			info.setScenePort(ms.getDouniuScenePort());
-			info.setSessionId(ms.getSessionId());
-			info.setDouniuSceneId(ms.getDouniuSceneId());
-			douniuMap.put(ms.getSessionId(), info);
-			douniuSceneClientManger.checkConnect(ms.getDouniuSceneId(),
-					ms.getDouniuSceneAddress(), ms.getDouniuScenePort(),
-					() -> {
-						toBoss(ms);
-					});
-			break;
-		}
-		case DeDouniuRoomMsg.ID: { // 斗牛删除房间
-			DeDouniuRoomMsg dm = (DeDouniuRoomMsg) msg;
-			douniuMap.remove(dm.getSessionId());
-			toBoss(dm);
-			break;
-		}
-		case DouniuExitRoomMsg.ID: {
-			// 开始处理玩家退出游戏的情况
-			DouniuExitRoomMsg sm = (DouniuExitRoomMsg) msg;
-			douniuMap.remove(sm.getSessionId());
-			toBoss(sm);
-			break;
-		}
-		case DelZJHRoomMsg.ID: {
-			DelZJHRoomMsg dm = (DelZJHRoomMsg) msg;
-			map.remove(dm.getSessionId());
-			toBoss(dm);
 			break;
 		}
 
