@@ -81,6 +81,7 @@ public final class MessageFactoryImpi extends AbstractMessageFactory {
 		array[1][30] = FastClass.create(mj.net.message.game.ShowPaoRet.class).getConstructor(Constants.EMPTY_CLASS_ARRAY);
 		array[1][35] = FastClass.create(mj.net.message.login.Position.class).getConstructor(Constants.EMPTY_CLASS_ARRAY);
 		array[1][36] = FastClass.create(mj.net.message.game.Ready.class).getConstructor(Constants.EMPTY_CLASS_ARRAY);
+		array[1][37] = FastClass.create(mj.net.message.game.ShowStartGame.class).getConstructor(Constants.EMPTY_CLASS_ARRAY);
 		
 		
 		

@@ -42,6 +42,7 @@ import mj.net.message.game.OperationFaPaiRet;
 import mj.net.message.game.OperationOutRet;
 import mj.net.message.game.Ready;
 import mj.net.message.game.ShowPaoRet;
+import mj.net.message.game.ShowStartGame;
 import mj.net.message.game.StaticsResultRet;
 import mj.net.message.game.UserOffline;
 import mj.net.message.game.Voice;
@@ -222,6 +223,18 @@ public class RoomImpi extends Room {
         if(roomInfo.isNeedShowPao(sceneUser.getLocationIndex())){
         	sceneUser.sendMessage(new ShowPaoRet());
         	
+        }
+        int count = 0;
+        SceneUser[] users = roomInfo.getUsers();
+        for (int i = 0; i < users.length; i++) {
+			SceneUser u = users[i];
+			if(u!=null){
+				count++;
+			}
+			
+		}
+        if(count>=roomInfo.getUserNum()){
+        	roomInfo.getUsers()[0].sendMessage(new ShowStartGame());
         }
         
     }
