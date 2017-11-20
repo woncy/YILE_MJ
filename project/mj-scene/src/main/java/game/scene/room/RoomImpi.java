@@ -202,10 +202,10 @@ public class RoomImpi extends Room {
         //计算距离
         sendMessage(msg, sceneUser);
         
-        StaticsResultRet endResult = roomInfo.getEndResult();
-        if(endResult!=null){
-        	sceneUser.sendMessage(endResult);
-        }
+//        StaticsResultRet endResult = roomInfo.getEndResult();
+//        if(endResult!=null){
+//        	sceneUser.sendMessage(endResult);
+//        }
         if(roomInfo.getState()==1){
         	UserPlace[] userPlaces = roomInfo.getChapter().getUserPlaces();
         	boolean[] dingPaoChache = roomInfo.getDingPaoChache();
