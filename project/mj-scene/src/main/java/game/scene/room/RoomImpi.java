@@ -233,7 +233,7 @@ public class RoomImpi extends Room {
 			}
 			
 		}
-        if(count>=roomInfo.getUserNum()){
+        if(count>=roomInfo.getUserNum()&&roomInfo.getSceneId()<1){
         	roomInfo.getUsers()[0].sendMessage(new ShowStartGame());
         }
         
