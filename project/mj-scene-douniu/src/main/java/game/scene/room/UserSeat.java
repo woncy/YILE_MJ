@@ -15,7 +15,8 @@ public class UserSeat {
 	private int zhu;       //注数
 	private boolean isKaiPai;// 是否开牌了
 	private boolean isPkDone;
-	
+	public UserSeat() {
+	}
 	public int getIndex() {
 		return index;
 	}

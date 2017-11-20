@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Consumer;
 
+import org.apache.velocity.runtime.directive.Foreach;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,6 +21,7 @@ import game.douniu.scene.msg.ChapterStart2Msg;
 import game.douniu.scene.msg.ChapterUserMsg;
 import game.douniu.scene.msg.CheckExitRoom2Msg;
 import game.douniu.scene.msg.DelRoom2Msg;
+import game.scene.model.RoomUserInfo;
 import game.scene.net.BossClient;
 import game.scene.room.majiang.MajiangChapter;
 import game.scene.services.DbService;
@@ -230,14 +232,10 @@ public class RoomImpi extends Room {
 			}
 			
 		}
-        if(count>=roomInfo.getUserNum()){
+        
+        if(count>=roomInfo.getUserNum() && roomInfo.isIsfirstStart()){
         	roomInfo.getUsers()[0].sendMessage(new ShowStartGame());
         }
-        
-        if(roomInfo.isFull() && roomInfo.isIsfirstStart()){
-        	roomInfo.getUsers()[0].sendMessage(new ShowStartGame());
-        }
-        
         
         
     }
@@ -313,7 +311,7 @@ public class RoomImpi extends Room {
 	public void chapterStart(SceneUser user) {
 		checkThread();
 		
-		bossClient.writeAndFlush(new ChapterEnd2Msg());
+//		bossClient.writeAndFlush(new ChapterEnd2Msg());
         if (user.getUserId() == roomInfo.getUsers()[0].getUserId()) {
 //        	String string = this.config.getString("You_Wu_Pao");
 //        	if(string!=null && string.equals("true")){
@@ -417,6 +415,7 @@ public class RoomImpi extends Room {
     @Override
     public void endChapter(ChapterEndResult endResult, MajiangChapter majiangChapter) {
         checkThread();
+        
         roomInfo.setState(0);
         roomInfo.clearDingPao();
         roomInfo.setChapterStart(false);
@@ -427,6 +426,9 @@ public class RoomImpi extends Room {
         if(majiangChapter.getChapterNums() == 1 && !roomInfo.isProxy()){
         	dbService.delGold(roomInfo.getRoomId(), roomInfo.getCreateUserId());
         }
+        this.roomInfo.saveResult(endResult);
+        
+        
         
         chapterEndToBoss(endResult);
 
@@ -520,120 +522,193 @@ public class RoomImpi extends Room {
      */
     public void sendStaticsResultToAllUser() {
         checkThread();
-        
-        int roomId =  getRoomInfo().getRoomId();
-        List<RoomResultDO> roomResultDOs =  roomResultDao.find(24,RoomResultDO.Table.ROOM_ID,roomId);
         StaticsResultRet staticsResultRet =  new StaticsResultRet() ;
         staticsResultRet.setLocationIndex0(-1);
         staticsResultRet.setLocationIndex1(-1);
         staticsResultRet.setLocationIndex2(-1);
         staticsResultRet.setLocationIndex3(-1);
-        
-        if(roomInfo.getUsers().length>=1 &&roomInfo.getUsers()[0]!=null)
-        	staticsResultRet.setLocationIndex0(0);
-        if(roomInfo.getUsers().length>=2 &&roomInfo.getUsers()[1]!=null)
-        	staticsResultRet.setLocationIndex1(1);
-        if(roomInfo.getUsers().length>=3 &&roomInfo.getUsers()[2]!=null)
-        	staticsResultRet.setLocationIndex2(2);
-        if(roomInfo.getUsers().length>=4 && roomInfo.getUsers()[3]!=null)
-        	staticsResultRet.setLocationIndex3(3);
-        
-        
-        for(RoomResultDO roomResultDO:roomResultDOs){
-            int fangPaoIndex = roomResultDO.getFangPaoIndex();
-            int huPaiIndex = roomResultDO.getHuPaiIndex();
-            //判断放炮
-            switch (fangPaoIndex) {
-            //这种情况有流局和自摸两种情况
-            case -1:
-                switch (huPaiIndex) {
-                case -1:
-                    //流局不用管
-                    break;
-                case 0:
-                   staticsResultRet.setZimo0(staticsResultRet.getZimo0()+1);
-                    break;
-                case 1:
-                	staticsResultRet.setZimo1(staticsResultRet.getZimo1()+1);
-                    break;
-                case 2:
-                	staticsResultRet.setZimo2(staticsResultRet.getZimo2()+1);
-                    break;
-                case 3:
-                	staticsResultRet.setZimo3(staticsResultRet.getZimo3()+1);
-                    break;
-                default:
-                    break;
-                }
-                break;
-            case 0:
-                staticsResultRet.setFangpao0(staticsResultRet.getFangpao0()+1);
-                break;
-            case 1:
-                staticsResultRet.setFangpao1(staticsResultRet.getFangpao1()+1);
-                break;
-            case 2:
-                staticsResultRet.setFangpao2(staticsResultRet.getFangpao2()+1);
-                break;
-            case 3:
-                staticsResultRet.setFangpao3(staticsResultRet.getFangpao3()+1);
-                break;
-            default:
-                break;
-            }
-            
-            if(fangPaoIndex>-1){
-                switch (huPaiIndex) {
-                case 0:
-                    staticsResultRet.setJiepao0(staticsResultRet.getJiepao0()+1);
-                    break;
-                case 1:
-                    staticsResultRet.setJiepao1(staticsResultRet.getJiepao1()+1);
-                    break;
-                case 2:
-                    staticsResultRet.setJiepao2(staticsResultRet.getJiepao2()+1);
-                    break;
-                case 3:
-                    staticsResultRet.setJiepao3(staticsResultRet.getJiepao3()+1);
-                    break;
-
-                default:
-                    break;
-                }
-            }
-            
-            UserPaiInfo[] userPaiInfos=roomResultDO.getUserPaiInfos();
-            for(UserPaiInfo userPaiInfo:userPaiInfos){
-                switch (userPaiInfo.getLocationIndex()) {
-                case 0:
-                    staticsResultRet.setAngang0(staticsResultRet.getAngang0() + userPaiInfo.getAnGang().size());
-                    staticsResultRet.setMinggang0(staticsResultRet.getMinggang0()+userPaiInfo.getDaMingGang().size()+userPaiInfo.getXiaoMingGang().size());
-                    break;
-                case 1:
-                    staticsResultRet.setAngang1(staticsResultRet.getAngang1() + userPaiInfo.getAnGang().size());
-                    staticsResultRet.setMinggang1(staticsResultRet.getMinggang1()+userPaiInfo.getDaMingGang().size()+userPaiInfo.getXiaoMingGang().size());
-                    break;
-                case 2:
-                    staticsResultRet.setAngang2(staticsResultRet.getAngang2() + userPaiInfo.getAnGang().size());
-                    staticsResultRet.setMinggang2(staticsResultRet.getMinggang2()+userPaiInfo.getDaMingGang().size()+userPaiInfo.getXiaoMingGang().size());
-                    break;
-                case 3:
-                    staticsResultRet.setAngang3(staticsResultRet.getAngang3() + userPaiInfo.getAnGang().size());
-                    staticsResultRet.setMinggang3(staticsResultRet.getMinggang3()+userPaiInfo.getDaMingGang().size()+userPaiInfo.getXiaoMingGang().size());
-                    break;
-                default:
-                    break;
-                }
-            }
-            staticsResultRet.setScore0( staticsResultRet.getScore0() +  roomResultDO.getScore0());
-            staticsResultRet.setScore1(staticsResultRet.getScore1() + roomResultDO.getScore1() );
-            staticsResultRet.setScore2(staticsResultRet.getScore2() + roomResultDO.getScore2() );
-            staticsResultRet.setScore3(staticsResultRet.getScore3() + roomResultDO.getScore3() );
+        SceneUser[] users = roomInfo.getUsers();
+        MajiangChapter chapter = roomInfo.getChapter();
+        UserPlace[] userPlaces = chapter.getUserPlaces();
+        int userNum = 0;
+        for (int i = 0; i < users.length; i++) {
+        	SceneUser user = users[i];
+			if(user!=null&&user.getLocationIndex()>=0){
+				userNum++;
+			}
+		}
+        for(int i =0;i<userNum;i++){
+			if (i == 0) {
+				staticsResultRet.setLocationIndex0(0);
+			}
+			if (i == 1) {
+				staticsResultRet.setLocationIndex1(1);
+			}
+			if (i == 2) {
+				staticsResultRet.setLocationIndex2(2);
+			}
+			if (i == 3) {
+				staticsResultRet.setLocationIndex3(3);
+			}
         }
-       
-        
+        RoomUserInfo[] infos =  roomInfo.getRoomUserInfos();
+        if(infos!=null){
+        	for (int i = 0; i < userNum; i++) {
+        		RoomUserInfo info = infos[i];
+        		if(info!=null){
+        			if(i==0){
+        				staticsResultRet.setLocationIndex0(0);
+        				staticsResultRet.setAngang0(info.getAngang());
+        				staticsResultRet.setMinggang0(info.getMinggang());
+        				staticsResultRet.setJiepao0(info.getJiepao());
+        				staticsResultRet.setFangpao0(info.getFangpao());
+        				staticsResultRet.setZimo0(info.getZimo());
+        				staticsResultRet.setScore0(info.getScore());
+        				
+        			}
+        			if(i==1){
+        				staticsResultRet.setLocationIndex1(1);
+        				staticsResultRet.setAngang1(info.getAngang());
+        				staticsResultRet.setMinggang1(info.getMinggang());
+        				staticsResultRet.setJiepao1(info.getJiepao());
+        				staticsResultRet.setFangpao1(info.getFangpao());
+        				staticsResultRet.setZimo1(info.getZimo());
+        				staticsResultRet.setScore1(info.getScore());
+        			}
+        			if(i==2){
+        				staticsResultRet.setLocationIndex1(2);
+        				staticsResultRet.setAngang2(info.getAngang());
+        				staticsResultRet.setMinggang2(info.getMinggang());
+        				staticsResultRet.setJiepao2(info.getJiepao());
+        				staticsResultRet.setFangpao2(info.getFangpao());
+        				staticsResultRet.setZimo2(info.getZimo());
+        				staticsResultRet.setScore2(info.getScore());
+        			}
+        			if(i==3){
+        				staticsResultRet.setLocationIndex3(3);
+        				staticsResultRet.setAngang3(info.getAngang());
+        				staticsResultRet.setMinggang3(info.getMinggang());
+        				staticsResultRet.setJiepao3(info.getJiepao());
+        				staticsResultRet.setFangpao3(info.getFangpao());
+        				staticsResultRet.setZimo3(info.getZimo());
+        				staticsResultRet.setScore3(info.getScore());
+        			}
+        		}
+        	}
+        }
         roomInfo.setEndResult(staticsResultRet);
         sendMessage(staticsResultRet);
+        
+//        int roomId =  getRoomInfo().getRoomId();
+//        List<RoomResultDO> roomResultDOs =  roomResultDao.find(24,RoomResultDO.Table.ROOM_ID,roomId);
+//        StaticsResultRet staticsResultRet =  new StaticsResultRet() ;
+//        staticsResultRet.setLocationIndex0(-1);
+//        staticsResultRet.setLocationIndex1(-1);
+//        staticsResultRet.setLocationIndex2(-1);
+//        staticsResultRet.setLocationIndex3(-1);
+//        
+//        if(roomInfo.getUsers().length>=1 &&roomInfo.getUsers()[0]!=null)
+//        	staticsResultRet.setLocationIndex0(0);
+//        if(roomInfo.getUsers().length>=2 &&roomInfo.getUsers()[1]!=null)
+//        	staticsResultRet.setLocationIndex1(1);
+//        if(roomInfo.getUsers().length>=3 &&roomInfo.getUsers()[2]!=null)
+//        	staticsResultRet.setLocationIndex2(2);
+//        if(roomInfo.getUsers().length>=4 && roomInfo.getUsers()[3]!=null)
+//        	staticsResultRet.setLocationIndex3(3);
+//        
+//        
+//        for(RoomResultDO roomResultDO:roomResultDOs){
+//            int fangPaoIndex = roomResultDO.getFangPaoIndex();
+//            int huPaiIndex = roomResultDO.getHuPaiIndex();
+//            //判断放炮
+//            switch (fangPaoIndex) {
+//            //这种情况有流局和自摸两种情况
+//            case -1:
+//                switch (huPaiIndex) {
+//                case -1:
+//                    //流局不用管
+//                    break;
+//                case 0:
+//                   staticsResultRet.setZimo0(staticsResultRet.getZimo0()+1);
+//                    break;
+//                case 1:
+//                	staticsResultRet.setZimo1(staticsResultRet.getZimo1()+1);
+//                    break;
+//                case 2:
+//                	staticsResultRet.setZimo2(staticsResultRet.getZimo2()+1);
+//                    break;
+//                case 3:
+//                	staticsResultRet.setZimo3(staticsResultRet.getZimo3()+1);
+//                    break;
+//                default:
+//                    break;
+//                }
+//                break;
+//            case 0:
+//                staticsResultRet.setFangpao0(staticsResultRet.getFangpao0()+1);
+//                break;
+//            case 1:
+//                staticsResultRet.setFangpao1(staticsResultRet.getFangpao1()+1);
+//                break;
+//            case 2:
+//                staticsResultRet.setFangpao2(staticsResultRet.getFangpao2()+1);
+//                break;
+//            case 3:
+//                staticsResultRet.setFangpao3(staticsResultRet.getFangpao3()+1);
+//                break;
+//            default:
+//                break;
+//            }
+//            
+//            if(fangPaoIndex>-1){
+//                switch (huPaiIndex) {
+//                case 0:
+//                    staticsResultRet.setJiepao0(staticsResultRet.getJiepao0()+1);
+//                    break;
+//                case 1:
+//                    staticsResultRet.setJiepao1(staticsResultRet.getJiepao1()+1);
+//                    break;
+//                case 2:
+//                    staticsResultRet.setJiepao2(staticsResultRet.getJiepao2()+1);
+//                    break;
+//                case 3:
+//                    staticsResultRet.setJiepao3(staticsResultRet.getJiepao3()+1);
+//                    break;
+//
+//                default:
+//                    break;
+//                }
+//            }
+//            
+//            UserPaiInfo[] userPaiInfos=roomResultDO.getUserPaiInfos();
+//            for(UserPaiInfo userPaiInfo:userPaiInfos){
+//                switch (userPaiInfo.getLocationIndex()) {
+//                case 0:
+//                    staticsResultRet.setAngang0(staticsResultRet.getAngang0() + userPaiInfo.getAnGang().size());
+//                    staticsResultRet.setMinggang0(staticsResultRet.getMinggang0()+userPaiInfo.getDaMingGang().size()+userPaiInfo.getXiaoMingGang().size());
+//                    break;
+//                case 1:
+//                    staticsResultRet.setAngang1(staticsResultRet.getAngang1() + userPaiInfo.getAnGang().size());
+//                    staticsResultRet.setMinggang1(staticsResultRet.getMinggang1()+userPaiInfo.getDaMingGang().size()+userPaiInfo.getXiaoMingGang().size());
+//                    break;
+//                case 2:
+//                    staticsResultRet.setAngang2(staticsResultRet.getAngang2() + userPaiInfo.getAnGang().size());
+//                    staticsResultRet.setMinggang2(staticsResultRet.getMinggang2()+userPaiInfo.getDaMingGang().size()+userPaiInfo.getXiaoMingGang().size());
+//                    break;
+//                case 3:
+//                    staticsResultRet.setAngang3(staticsResultRet.getAngang3() + userPaiInfo.getAnGang().size());
+//                    staticsResultRet.setMinggang3(staticsResultRet.getMinggang3()+userPaiInfo.getDaMingGang().size()+userPaiInfo.getXiaoMingGang().size());
+//                    break;
+//                default:
+//                    break;
+//                }
+//            }
+//            staticsResultRet.setScore0( staticsResultRet.getScore0() +  roomResultDO.getScore0());
+//            staticsResultRet.setScore1(staticsResultRet.getScore1() + roomResultDO.getScore1() );
+//            staticsResultRet.setScore2(staticsResultRet.getScore2() + roomResultDO.getScore2() );
+//            staticsResultRet.setScore3(staticsResultRet.getScore3() + roomResultDO.getScore3() );
+//        }
+       
     }
     
     @Override

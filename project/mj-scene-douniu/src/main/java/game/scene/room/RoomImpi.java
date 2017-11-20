@@ -123,7 +123,9 @@ public class RoomImpi extends Room {
 	}
 	public void joinGame(SceneUser user) {
 		if(roomInfo.getState()==STATE.FIRSTSTART){
-			roomInfo.setState(STATE.READYING);
+			if(user.getLocationIndex()>0){
+				roomInfo.setState(STATE.READYING);
+			}
 		}
 		user.sendMessage(roomInfo.toMessage(user.getLocationIndex()));
 		sendMessage(user.toMessage(), user);
@@ -199,10 +201,23 @@ public class RoomImpi extends Room {
 		if(user.getLocationIndex()==0){
 			ready(new DNGameReady(0),user);
 			if(roomInfo.isAllReady()){
-				roomInfo.addCurrentChapter();
+//				roomInfo.addCurrentChapter();
 				roomInfo.setBeforeFirstStart(false);
-				sendMessage(new DNGameStart(true));
-				executeQiangZhuangTimer(); 
+				String zhuang = config.getString("zhuang");
+				System.out.println(zhuang);
+				if(zhuang!=null&&"lunzhuang".equals(zhuang)){
+					SceneUser[] users = roomInfo.getUsers();
+					for (int i = 0; i < users.length; i++) {
+						SceneUser sceneUser = users[i];
+						if(sceneUser!=null){
+							sendMessage(new DNGameStart(false));
+							qiangzhuang(new DNQiangZhuang(sceneUser.getLocationIndex(), true), sceneUser);
+						}
+					}
+				}else{
+					sendMessage(new DNGameStart(true));
+					executeQiangZhuangTimer(); 
+				}
 				gameStartToBoss();
 			}else{
 				sendMessage(new DNGameStart(false)); 
@@ -218,6 +233,7 @@ public class RoomImpi extends Room {
 		sendMessage(msg,null);
 		if(roomInfo.isAllReady()){
 			roomInfo.setState(STATE.QIANG_ZHUANG);
+			roomInfo.addCurrentChapter();
 			gameStart(roomInfo.getUsers()[0]);
 		}
 	}
@@ -233,6 +249,9 @@ public class RoomImpi extends Room {
 		msg.setIndex(user.getLocationIndex());
 		sendMessage(msg,null);
 		boolean isall = roomInfo.qingZhuang(user);
+		if(isall){
+			roomInfo.getChapter().clearSeats();
+		}
 		int zhuangIndex = roomInfo.getChapter().qiangZhuang(user.getLocationIndex(),isall,qiang);
 		if(zhuangIndex>-1){
 			sendMessage(new DNGameZhuang(zhuangIndex),null);
@@ -299,6 +318,7 @@ public class RoomImpi extends Room {
 				userInfo.setScore(sceneUser.getScore());
 				userInfo.setUserId(sceneUser.getUserId());
 				infos.add(userInfo);
+				sceneUser.setScore(0);
 			}
 		}
 		
@@ -367,6 +387,7 @@ public class RoomImpi extends Room {
 			xuanBeiTimer[user.getLocationIndex()].cancel();
 			xuanBeiTimer[user.getLocationIndex()] = null;
 		}
+		roomInfo.getChapter().saveZhu(msg.getZhu(),user.getLocationIndex());
 		msg.setIndex(user.getLocationIndex());
 		sendMessage(msg,null);
 		

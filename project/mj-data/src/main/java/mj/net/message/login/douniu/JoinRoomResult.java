@@ -72,12 +72,12 @@ public class JoinRoomResult extends AbstractMessage{
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "JoinDouniuRoomResult [result=" + result + ", ]";
+		return "JoinRoomResult [result=" + result + ", reason=" + reason + "]";
 	}
-	
+
 	@Override
 	public final int getMessageType() {
 		return TYPE;

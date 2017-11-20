@@ -31,6 +31,7 @@ public class DNGameRoomInfo extends AbstractMessage{
 	private ArrayList<GameUserInfo> users = new ArrayList<GameUserInfo>();
 	private DNChapterInfo chapterInfo;
 	private boolean isBeforeFirstStart;//是不是第一次开始游戏之前
+	private int state;//1未开始，2抢庄，3下注，4亮牌
 	@Override
 	public void decode(Input in) throws IOException, ProtocolException {
 		this.maxChapterNum = in.readInt();
@@ -42,6 +43,7 @@ public class DNGameRoomInfo extends AbstractMessage{
 		this.chapterInfo = new DNChapterInfo();
 		chapterInfo.decode(in);
 		this.isBeforeFirstStart = in.readBoolean();
+		this.state = in.readInt();
 
 	}
 	@Override
@@ -54,6 +56,14 @@ public class DNGameRoomInfo extends AbstractMessage{
 		MessageUtil.encodeList(out, users);
 		chapterInfo.encode(out);
 		out.writeBoolean(isBeforeFirstStart);
+		out.writeInt(state);
+	}
+	
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
 	}
 	public boolean isBeforeFirstStart() {
 		return isBeforeFirstStart;
@@ -119,9 +129,8 @@ public class DNGameRoomInfo extends AbstractMessage{
 	public String toString() {
 		return "DNGameRoomInfo [maxChapterNum=" + maxChapterNum + ", currentChapterNum=" + currentChapterNum
 				+ ", roomNo=" + roomNo + ", roomId=" + roomId + ", createUserId=" + createUserId + ", users=" + users
-				+ ", chapterInfo=" + chapterInfo + ", isBeforeFirstStart=" + isBeforeFirstStart + "]";
+				+ ", chapterInfo=" + chapterInfo + ", isBeforeFirstStart=" + isBeforeFirstStart + ", state=" + state
+				+ "]";
 	}
-	
-	
 
 }

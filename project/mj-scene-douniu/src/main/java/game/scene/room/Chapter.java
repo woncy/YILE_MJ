@@ -19,6 +19,7 @@ import mj.net.message.game.douniu.UserPkResult;
 public class Chapter {
 	public static final Logger log = LoggerFactory.getLogger(Chapter.class);
 	private UserSeat[] seats;
+	private int[] zhus;
 	private int zhuangIndex;
 	private int currentIndex;
 	private List<Integer> qiangZhuangChache = new ArrayList<Integer>();
@@ -27,6 +28,7 @@ public class Chapter {
 	public Chapter(int userNum,Room room) {
 		super();
 		this.seats = new UserSeat[userNum];
+		this.zhus = new int[userNum];
 		this.room = room;
 	} 
 	public UserSeat[] getSeats() {
@@ -53,6 +55,7 @@ public class Chapter {
 		DNChapterInfo info = new DNChapterInfo();
 		info.setCurrentIndex(currentIndex);
 		info.setZhuangIndex(zhuangIndex);
+		info.setCurrentChapterNum(room.roomInfo.getCurrentChapterNum());
 		List<SeatUserInfo> seatsInfos = new ArrayList<SeatUserInfo>();
 		for (int i = 0; i < seats.length; i++) {
 			UserSeat userSeat = seats[i];
@@ -100,11 +103,14 @@ public class Chapter {
 	
 	private void startClear() {
 		qiangZhuangChache.clear();
+		for (int i = 0; i < zhus.length; i++) {
+			 zhus[i] = 0;
+		}
 		for (int i = 0; i < seats.length; i++) {
 			UserSeat userSeat = seats[i];
 			if(userSeat!=null){
 				userSeat.setKaiPai(false);
-				userSeat.setZhu(0);
+//				userSeat.setZhu(0);
 				userSeat.setPai(null);
 				userSeat.setPokers(null);
 			}
@@ -154,6 +160,12 @@ public class Chapter {
 		DNChapterPKResult chapterPKResult = new DNChapterPKResult();
 		List<UserPkResult> pkResults = new ArrayList<UserPkResult>();
 		int zhuangScore = 0;
+//		for (int i = 0; i < seats.length; i++) {
+//			UserSeat userSeat = seats[i];
+//			if(userSeat!=null){
+//				System.out.println(userSeat.getIndex()+"---"+userSeat.getZhu()+"---"+userSeat.getUserid());
+//			}
+//		}
 		for (int i = 0; i < seats.length; i++) {
 			UserSeat userSeat = seats[i];
 			if(userSeat!=null && i!=zhuangIndex){
@@ -163,17 +175,17 @@ public class Chapter {
 				result.setPai(DouniuPoker.toIntArrayFromDouniuArray(upai.getPais()));
 				result.setPaiType(upai.getType().getIndex());
 				result.setZhu(userSeat.getZhu());
-				int score = 1;
+				int score = userSeat.getZhu();
 				int pk = upai.compareTo(pai);
 				if(pk==1){
-					 score = upai.getType().getDoubleCount();
+					 score = upai.getType().getDoubleCount()*score;
 					 result.setScore(score);
 					 zhuangScore -=  score;
 					 result.setPkResult(true);
 				}else if(pk==0){
 					result.setScore(0);
 				}else{
-					score = pai.getType().getDoubleCount();
+					score = pai.getType().getDoubleCount()*score;
 					result.setScore(-score);
 					zhuangScore += score;
 					result.setPkResult(false);
@@ -181,6 +193,12 @@ public class Chapter {
 				pkResults.add(result);
 			}//if(userseat!=null)
 		}//for
+		for (int i = 0; i < seats.length; i++) {
+			UserSeat seat = seats[i];
+			if(seat!=null){
+				seat.setZhu(0);
+			}
+		}
 		chapterPKResult.setPai(DouniuPoker.toIntArrayFromDouniuArray(pai.getPais()));
 		chapterPKResult.setPaiType(pai.getType().getIndex());
 		chapterPKResult.setUserResults(pkResults);
@@ -195,10 +213,19 @@ public class Chapter {
 	}
 	public boolean xiazhu(DNXiaZhu msg, SceneUser user) {
 		int zhuang = getZhuangIndex();
-		seats[user.getLocationIndex()].setZhu(msg.getZhu());
+//		seats[user.getLocationIndex()].setZhu(msg.getZhu());
+//		for (int i = 0; i < seats.length; i++) {
+//			UserSeat userSeat = seats[i];
+//			if(userSeat!=null){
+//				System.out.println(userSeat.getIndex()+"---"+userSeat.getZhu());
+//			}
+//		}
 		for (int i = 0; i < seats.length; i++) {
 			UserSeat userSeat = seats[i];
-			if(userSeat!=null && userSeat.getZhu()<=0 && zhuangIndex!=zhuang){
+//			if(userSeat!=null){
+//				System.out.println(userSeat.getZhu()+"---"+zhuangIndex+"---"+userSeat.getIndex());
+//			}
+			if(userSeat!=null && userSeat.getZhu()<=0 && zhuangIndex!=userSeat.getIndex()){
 				return false;
 			}
 		}
@@ -215,4 +242,29 @@ public class Chapter {
 		}
 		
 	}
+	public void saveZhu(int zhu, int locationIndex) {
+		seats[locationIndex].setZhu(zhu);
+//		for (int i = 0; i < seats.length; i++) {
+//			UserSeat userSeat = seats[i];
+//			if(userSeat!=null){
+//				System.out.println(userSeat.getIndex()+"---"+userSeat.getZhu()+"---"+userSeat.getUserid());
+//			}
+//		}
+	}
+	public int[] getZhus() {
+		return zhus;
+	}
+	public void setZhus(int[] zhus) {
+		this.zhus = zhus;
+	}
+	public void clearSeats() {
+		for (int i = 0; i < seats.length; i++) {
+			UserSeat userSeat = seats[i];
+			if(userSeat!=null){
+				userSeat.setZhu(0);
+			}
+			
+		}
+	}
+	
 }

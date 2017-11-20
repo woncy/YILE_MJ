@@ -8,7 +8,10 @@ import org.springframework.beans.BeanUtils;
 
 import com.github.davidmoten.grumpy.core.Position;
 
+import game.douniu.scene.msg.ChapterUserMsg;
+import game.scene.model.RoomUserInfo;
 import game.scene.room.majiang.MajiangChapter;
+import mj.data.ChapterEndResult;
 import mj.data.UserPaiInfo;
 import mj.net.message.game.GameRoomInfo;
 import mj.net.message.game.GameUserInfo;
@@ -62,8 +65,15 @@ public class RoomInfo {
 	
 	private Timer voteDelRoomTimer;
 	private int currentChapterNum;
+	private RoomUserInfo[] roomUserInfos;//房间用户信息
 	
-    public RoomInfo(Room room,String rulesName,int userNum,int roomId) {
+	
+  
+
+
+
+
+	public RoomInfo(Room room,String rulesName,int userNum,int roomId) {
         chapter = new MajiangChapter(room, rulesName,userNum);
         users =  new SceneUser[userNum];
         this.roomId = roomId;
@@ -73,12 +83,13 @@ public class RoomInfo {
         this.userNum = userNum;
         isProxy = room.getConfig().getInt("isProxy")==1;
         currentChapterNum = 0;
+        roomUserInfos = new RoomUserInfo[userNum];
+        for (int i = 0; i < roomUserInfos.length; i++) {
+			roomUserInfos[i] = new RoomUserInfo();
+		}
     }
-  
-    
-    
-
-    public int getCurrentChapterNum() {
+	
+	public int getCurrentChapterNum() {
 		return currentChapterNum;
 	}
 
@@ -340,7 +351,13 @@ public class RoomInfo {
     public MajiangChapter getChapter() {
         return chapter;
     }
+    public RoomUserInfo[] getRoomUserInfos() {
+  		return roomUserInfos;
+  	}
 
+  	public void setRoomUserInfos(RoomUserInfo[] roomUserInfos) {
+  		this.roomUserInfos = roomUserInfos;
+  	}
     @Override
     public String toString() {
         return "RoomInfo{" +
@@ -466,6 +483,38 @@ public class RoomInfo {
 				chapter.exitUser(userId);
 			}
 			
+		}
+		
+	}
+
+
+
+
+	public void saveResult(ChapterEndResult endResult) {
+		if(endResult.isHuPai()){
+			UserPaiInfo[] userPaiInfos = endResult.getUserPaiInfos();
+			if(userPaiInfos!=null){
+				for (int i = 0; i < userPaiInfos.length; i++) {
+					UserPaiInfo userPkResult = userPaiInfos[i];
+					if(i<roomUserInfos.length){
+						RoomUserInfo info = roomUserInfos[i];
+						info.addAngang(userPkResult.getAnGang().size());
+						info.addMinggang(userPkResult.getDaMingGang().size()+userPkResult.getXiaoMingGang().size());
+//					info.addJiepao();
+//					info.addLocationIndex();
+						if(endResult.isZiMo()&&endResult.getHuPaiIndex()==i){
+							info.addZimo();
+						}
+						if(!endResult.isZiMo()&&endResult.getHuPaiIndex()==i){
+							info.addJiepao();
+						}
+						if(!endResult.isZiMo()&&endResult.getFangPaoIndex()==i){
+							info.addFangpao();
+						}
+						info.addScore(userPkResult.getScore());
+					}
+				}
+			}
 		}
 		
 	}

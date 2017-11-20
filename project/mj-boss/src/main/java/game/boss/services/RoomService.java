@@ -192,7 +192,7 @@ public class RoomService extends FrameQueueContainer implements BaseService {
     		room2do.setConfig(config);
     		room2do.setCreateUserId(user.getUserId());
     		room2do.setEnd(false);
-    		room2do.setStart(false);
+    		room2do.setStart(true);
     		room2do.setSceneId(sceneId);
     		room2do.setStartDate(new Date());
     		room2do.setUserMax(5);
@@ -249,12 +249,26 @@ public class RoomService extends FrameQueueContainer implements BaseService {
     		Room2 room2 = checkIdRoom2Map.get(roomNO);
     		if(room2!=null){
     			if(room2.isStart()){
-    				user.send(new JoinRoomResult(false, "该房间已经开始了"));
-    				return;
+    				boolean  has = false;
+    				int id = room2.getRoomId();
+    				List<RoomUserDO> find = roomUserDao.find(5,RoomUserDO.Table.ROOM_ID,id);
+    				if(find!=null){
+    					for (int i = 0; i < find.size(); i++) {
+    						if(find.get(i).getUserId()==user.getUserId()&&find.get(i).getLocationIndex()>=0){
+    							has = true;
+    						}
+    						
+    					}
+    				}
+    				if(!has){
+    					user.send(new JoinRoomResult(false, "该房间已经开始了"));
+    					return;
+    				}
     			}
     			final TYPE type = room2.getType();
     			joinDNRoomDb(room2, user,result->{
     				if(result){
+    					
     					switch (type) {
 						case MJ:
 							user.send(new JoinRoomResult(true,"MJ"));
@@ -584,27 +598,32 @@ public class RoomService extends FrameQueueContainer implements BaseService {
         	Connection conn = null;
         	java.sql.PreparedStatement pst = null;
         	ResultSet rs = null;
-			String querySql = "select id,room_check_id from room "
-					+ "where (user0=? or user1=? or user2=? or user3=?) and start=? and end=? "
-					+ "order by "+RoomUserDO.Table.START_DATE;
+//			String querySql = "select id,room_check_id from room "
+//					+ "where (user0=? or user1=? or user2=? or user3=?) and start=? and end=? "
+//					+ "order by "+RoomUserDO.Table.START_DATE;
+        	String querySql = "SELECT room2.id AS id,room2.room_check_id AS room_check_id "
+        			+ "FROM room2 INNER JOIN room_user "
+        			+ "ON room2.id = room_user.room_id "
+        			+ "WHERE room2.start = TRUE AND room2.end = FALSE AND room_user.user_id=? and room_user.location_index>=0 "
+        			+ " order by room2.start_date desc";
 			String updateSql = "update room set start=?, end=?,version=? where id=?";
         	try {
-        		conn = roomDao.getDataSource().getConnection();
+        		conn = room2Dao.getDataSource().getConnection();
         		pst = conn.prepareStatement(querySql);
         		int i=1;
-				pst.setInt(i++, user.getUserId());
-				pst.setInt(i++, user.getUserId());
-				pst.setInt(i++, user.getUserId());
-				pst.setInt(i++, user.getUserId());
-				pst.setBoolean(i++, true);
-				pst.setBoolean(i++, false);
+				pst.setInt(1, user.getUserId());
+//				pst.setInt(i++, user.getUserId());
+//				pst.setInt(i++, user.getUserId());
+//				pst.setInt(i++, user.getUserId());
+//				pst.setBoolean(i++, true);
+//				pst.setBoolean(i++, false);
 				rs = pst.executeQuery();
 				String roomCheckId = null;
 				if(rs!=null){
 					int count = 0;
 					while(rs.next()){
 						int id = rs.getInt("id");
-						RoomDO roomDO = roomDao.get(id);
+						Room2DO roomDO = room2Dao.get(id);
 						
 						if(count==0 && roomDO!=null && roomDO.getStart()==true){
 							roomCheckId = rs.getString("room_check_id");

@@ -13,11 +13,11 @@ public class StaticsResultRet extends AbstractMessage {
 	public static final int ID				 = 26;
 	
 	private int locationIndex0;
-	private int zimo0;
-	private int fangpao0;
-	private int jiepao0;	//选跑分
-	private int angang0;	//暗杠分
-	private int minggang0;	//明杠分
+	private int zimo0;		//自摸次数
+	private int fangpao0;	//放炮次数
+	private int jiepao0;	//接炮次数
+	private int angang0;	//暗杠次数
+	private int minggang0;	//明杠次数
 	private int score0 = 0  ;
 	
 	private int locationIndex1;

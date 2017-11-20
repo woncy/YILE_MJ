@@ -74,6 +74,7 @@ public class RoomInfo {
 		}
         Config config = room.getConfig();
         this.maxChapterNum = config.getInt("jushu");
+//        System.out.println("最大局数是："+maxChapterNum);
         this.currentChapterNum = 0;
         pkResults = new DNChapterPKResult[maxChapterNum];
         voteDelSelect = new boolean[userNum];
@@ -98,6 +99,18 @@ public class RoomInfo {
 		roomInfo.setRoomId(this.roomId);
 		roomInfo.setRoomNo(this.roomCheckId);
 		roomInfo.setBeforeFirstStart(isBeforeFirstStart);
+		if(state == STATE.READYING){
+			roomInfo.setState(1);
+		}
+		if(state == STATE.QIANG_ZHUANG){
+			roomInfo.setState(2);
+		}
+		if(state == STATE.XUAN_BEI){
+			roomInfo.setState(3);
+		}
+		if(state == STATE.PKING){
+			roomInfo.setState(4);
+		}
 		return roomInfo;
     }
 	
@@ -253,10 +266,12 @@ public class RoomInfo {
 	
 	
 	public boolean isAllReady(){
+		int userNum = 0;
 		for (int i = 0; i < userStates.length; i++) {
 			UserState userState = userStates[i];
 			SceneUser sceneUser = users[i];
 			if(sceneUser!=null){
+				userNum++;
 				if(!sceneUser.isOnline()){
 					return false;
 				}
@@ -265,6 +280,9 @@ public class RoomInfo {
 				}
 			}
 			
+		}
+		if(userNum<=1){
+			return false;
 		}
 		return true;
 	}

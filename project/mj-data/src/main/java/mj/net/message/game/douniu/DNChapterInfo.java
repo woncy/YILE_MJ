@@ -16,11 +16,13 @@ public class DNChapterInfo extends AbstractMessage{
 	private static final int ID = 6;
 	private int zhuangIndex;//庄家位置
 	private int currentIndex;//当前正在操作的用户
+	private int currentChapterNum;//当前局数
 	private List<SeatUserInfo> seats = new ArrayList<SeatUserInfo>();//
 	@Override
 	public void decode(Input in) throws IOException, ProtocolException {
 		this.zhuangIndex = in.readInt();
 		this.currentIndex = in.readInt();
+		this.currentChapterNum = in.readInt();
 		MessageUtil.decodeList(in, seats, SeatUserInfo.class);
 		
 	}
@@ -28,12 +30,19 @@ public class DNChapterInfo extends AbstractMessage{
 	public void encode(Output out) throws IOException, ProtocolException {
 		out.writeInt(zhuangIndex);
 		out.writeInt(currentIndex);
+		out.writeInt(currentChapterNum);
 		MessageUtil.encodeList(out, seats);
 	}
 	@Override
 	public String toString() {
-		return "DNChapterInfo [zhuangIndex=" + zhuangIndex + ", currentIndex=" + currentIndex + ", seats=" + seats
-				+ "]";
+		return "DNChapterInfo [zhuangIndex=" + zhuangIndex + ", currentIndex=" + currentIndex + ", currentChapterNum="
+				+ currentChapterNum + ", seats=" + seats + "]";
+	}
+	public int getCurrentChapterNum() {
+		return currentChapterNum;
+	}
+	public void setCurrentChapterNum(int currentChapterNum) {
+		this.currentChapterNum = currentChapterNum;
 	}
 	public int getZhuangIndex() {
 		return zhuangIndex;
