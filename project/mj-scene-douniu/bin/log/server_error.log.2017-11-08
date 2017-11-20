@@ -1,0 +1,105 @@
+2017-11-08 14:40:40 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-5 --- game.scene.room.RoomService
+2017-11-08 14:42:30 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 14:42:30 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 14:44:17 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-10 --- game.scene.room.RoomService
+2017-11-08 14:47:17 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 14:47:17 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 14:55:22 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-29 --- game.scene.room.RoomService
+2017-11-08 14:57:16 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-10 --- game.scene.room.RoomService
+2017-11-08 14:59:00 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 14:59:00 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 15:36:41 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-16 --- game.scene.room.RoomService
+2017-11-08 15:36:55 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 15:36:55 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 15:40:16 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 15:40:16 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 15:40:26 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.lang.NullPointerException
+	at game.scene.room.Chapter.pk(Chapter.java:151)
+	at game.scene.room.RoomImpi.kaipai(RoomImpi.java:237)
+	at game.scene.handler.DNKaiPaiHandlerImpi.handler(DNKaiPaiHandlerImpi.java:14)
+	at game.scene.handler.DNKaiPaiHandlerImpi.handler(DNKaiPaiHandlerImpi.java:1)
+	at game.scene.room.Room.lambda$0(Room.java:60)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-08 15:41:37 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 15:41:37 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 15:48:51 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 15:48:51 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 15:55:05 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 15:55:05 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 15:59:31 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 15:59:31 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:02:58 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:02:58 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:07:13 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:07:13 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:10:37 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:10:37 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:14:33 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:14:33 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:15:05 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:15:05 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:16:04 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:16:04 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:16:46 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:16:46 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:19:38 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:19:38 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:20:14 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:20:14 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:20:34 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:20:34 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:23:30 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:23:30 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:23:43 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:23:43 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:24:09 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:24:09 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:24:29 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:24:29 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:24:42 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:24:42 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:24:51 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:24:51 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:26:29 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:26:29 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:26:57 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:26:57 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:35:14 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:35:14 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:35:58 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:35:58 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:35:58 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:35:58 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:48:01 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:48:01 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:48:35 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 16:48:35 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:00:37 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:00:37 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:01:20 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:01:20 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:01:59 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:01:59 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:01:59 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:01:59 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:02:27 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:02:27 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:03:03 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:03:03 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:03:03 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:03:03 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:30:54 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:30:54 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:31:21 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:31:21 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:31:21 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:31:21 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:31:51 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-08 17:31:51 ERROR (game.scene.room.UserSeat:56)- 

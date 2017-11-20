@@ -1,0 +1,70 @@
+2017-10-31 16:31:18 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-8 --- game.scene.room.RoomService
+2017-10-31 17:00:25 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-5 --- game.scene.room.RoomService
+2017-10-31 17:02:11 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-15 --- game.scene.room.RoomService
+2017-10-31 17:04:11 ERROR (game.scene.SceneMain:26)- 服务器启动错误,准备关闭
+java.util.concurrent.ExecutionException: java.net.BindException: Address already in use: bind
+	at io.netty.util.concurrent.AbstractFuture.get(AbstractFuture.java:41)
+	at com.isnowfox.game.proxy.PxServer.start(PxServer.java:78)
+	at game.scene.net.SceneServer.start(SceneServer.java:23)
+	at game.scene.StartWarp.start(StartWarp.java:20)
+	at game.scene.SceneMain.main(SceneMain.java:22)
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at io.netty.channel.socket.nio.NioServerSocketChannel.doBind(NioServerSocketChannel.java:127)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.bind(AbstractChannel.java:554)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.bind(DefaultChannelPipeline.java:1258)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:511)
+	at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:496)
+	at io.netty.channel.DefaultChannelPipeline.bind(DefaultChannelPipeline.java:980)
+	at io.netty.channel.AbstractChannel.bind(AbstractChannel.java:250)
+	at io.netty.bootstrap.AbstractBootstrap$2.run(AbstractBootstrap.java:363)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:418)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:440)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-10-31 17:30:25 ERROR (game.scene.net.SceneHandler:40)- 错误，断开网关！Session{channel=[id: 0x8654afdd, L:/127.0.0.1:12004 - R:/127.0.0.1:57467], value=Gateway [channel=[id: 0x8654afdd, L:/127.0.0.1:12004 - R:/127.0.0.1:57467]], info=null}
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1100)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:367)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:118)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:610)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:551)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:465)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:437)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-10-31 17:36:19 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:0 --- game.scene.room.RoomService
+2017-10-31 17:36:19 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+game.scene.ServerRuntimeException: 错误的消息
+	at game.scene.net.Gateway.checkMsg(Gateway.java:76)
+	at game.scene.net.Gateway.send(Gateway.java:65)
+	at game.scene.net.GatewayManager.sendMessage(GatewayManager.java:81)
+	at game.scene.net.SceneService.sendMessage(SceneService.java:62)
+	at game.scene.room.SceneUser.sendMessage(SceneUser.java:73)
+	at game.scene.room.RoomImpi.joinGame(RoomImpi.java:131)
+	at game.scene.handler.JoinGameImpi.handler(JoinGameImpi.java:14)
+	at game.scene.handler.JoinGameImpi.handler(JoinGameImpi.java:1)
+	at game.scene.room.Room.lambda$0(Room.java:58)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at game.scene.net.Gateway.checkMsg(Gateway.java:74)
+	... 15 more
+2017-10-31 18:12:31 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-8 --- game.scene.room.RoomService

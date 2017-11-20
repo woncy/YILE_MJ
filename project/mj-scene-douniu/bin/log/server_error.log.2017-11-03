@@ -1,0 +1,141 @@
+2017-11-03 16:24:04 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.lang.RuntimeException: gateway不存在,gatewayId:100
+	at game.scene.net.GatewayManager.sendMessage(GatewayManager.java:76)
+	at game.scene.net.SceneService.sendMessage(SceneService.java:62)
+	at game.scene.room.SceneUser.sendMessage(SceneUser.java:73)
+	at game.scene.room.Room.sendMessage(Room.java:115)
+	at game.scene.room.RoomImpi.ready(RoomImpi.java:157)
+	at game.scene.room.RoomImpi.lambda$0(RoomImpi.java:67)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-03 16:25:01 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.lang.RuntimeException: gateway不存在,gatewayId:100
+	at game.scene.net.GatewayManager.sendMessage(GatewayManager.java:76)
+	at game.scene.net.SceneService.sendMessage(SceneService.java:62)
+	at game.scene.room.SceneUser.sendMessage(SceneUser.java:73)
+	at game.scene.room.Room.sendMessage(Room.java:115)
+	at game.scene.room.RoomImpi.ready(RoomImpi.java:157)
+	at game.scene.room.RoomImpi.lambda$0(RoomImpi.java:67)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-03 16:26:47 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-03 16:26:47 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-03 16:47:53 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-03 16:47:53 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-03 16:49:29 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-14 --- game.scene.room.RoomService
+2017-11-03 16:49:29 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.lang.RuntimeException: gateway不存在,gatewayId:100
+	at game.scene.net.GatewayManager.sendMessage(GatewayManager.java:76)
+	at game.scene.net.SceneService.sendMessage(SceneService.java:62)
+	at game.scene.room.SceneUser.sendMessage(SceneUser.java:73)
+	at game.scene.room.Room.sendMessage(Room.java:115)
+	at game.scene.room.RoomImpi.ready(RoomImpi.java:157)
+	at game.scene.room.RoomImpi.lambda$0(RoomImpi.java:67)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-03 16:50:44 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.lang.RuntimeException: gateway不存在,gatewayId:100
+	at game.scene.net.GatewayManager.sendMessage(GatewayManager.java:76)
+	at game.scene.net.SceneService.sendMessage(SceneService.java:62)
+	at game.scene.room.SceneUser.sendMessage(SceneUser.java:73)
+	at game.scene.room.Room.sendMessage(Room.java:115)
+	at game.scene.room.RoomImpi.ready(RoomImpi.java:157)
+	at game.scene.room.RoomImpi.lambda$0(RoomImpi.java:67)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-03 16:52:22 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-03 16:52:22 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-03 16:52:22 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-03 18:03:37 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-10 --- game.scene.room.RoomService
+2017-11-03 18:03:37 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.lang.RuntimeException: gateway不存在,gatewayId:100
+	at game.scene.net.GatewayManager.sendMessage(GatewayManager.java:76)
+	at game.scene.net.SceneService.sendMessage(SceneService.java:62)
+	at game.scene.room.SceneUser.sendMessage(SceneUser.java:73)
+	at game.scene.room.Room.sendMessage(Room.java:115)
+	at game.scene.room.RoomImpi.ready(RoomImpi.java:157)
+	at game.scene.room.RoomImpi.lambda$0(RoomImpi.java:67)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-03 18:05:56 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-8 --- game.scene.room.RoomService
+2017-11-03 18:05:56 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.lang.RuntimeException: gateway不存在,gatewayId:100
+	at game.scene.net.GatewayManager.sendMessage(GatewayManager.java:76)
+	at game.scene.net.SceneService.sendMessage(SceneService.java:62)
+	at game.scene.room.SceneUser.sendMessage(SceneUser.java:73)
+	at game.scene.room.Room.sendMessage(Room.java:115)
+	at game.scene.room.RoomImpi.ready(RoomImpi.java:157)
+	at game.scene.room.RoomImpi.lambda$0(RoomImpi.java:67)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-03 18:06:12 ERROR (game.scene.DNSceneMain:26)- 服务器启动错误,准备关闭
+java.util.concurrent.ExecutionException: java.net.BindException: Address already in use: bind
+	at io.netty.util.concurrent.AbstractFuture.get(AbstractFuture.java:41)
+	at com.isnowfox.game.proxy.PxServer.start(PxServer.java:78)
+	at game.scene.net.SceneServer.start(SceneServer.java:23)
+	at game.scene.StartWarp.start(StartWarp.java:20)
+	at game.scene.DNSceneMain.main(DNSceneMain.java:22)
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at io.netty.channel.socket.nio.NioServerSocketChannel.doBind(NioServerSocketChannel.java:127)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.bind(AbstractChannel.java:554)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.bind(DefaultChannelPipeline.java:1258)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:511)
+	at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:496)
+	at io.netty.channel.DefaultChannelPipeline.bind(DefaultChannelPipeline.java:980)
+	at io.netty.channel.AbstractChannel.bind(AbstractChannel.java:250)
+	at io.netty.bootstrap.AbstractBootstrap$2.run(AbstractBootstrap.java:363)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:418)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:440)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-03 18:06:46 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.lang.RuntimeException: gateway不存在,gatewayId:100
+	at game.scene.net.GatewayManager.sendMessage(GatewayManager.java:76)
+	at game.scene.net.SceneService.sendMessage(SceneService.java:62)
+	at game.scene.room.SceneUser.sendMessage(SceneUser.java:73)
+	at game.scene.room.Room.sendMessage(Room.java:115)
+	at game.scene.room.RoomImpi.ready(RoomImpi.java:157)
+	at game.scene.room.RoomImpi.lambda$0(RoomImpi.java:67)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)

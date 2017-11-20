@@ -1,0 +1,192 @@
+2017-11-18 09:50:16 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 09:51:25 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 09:51:44 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 09:52:24 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 09:52:24 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 09:52:41 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 09:52:41 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 09:52:51 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 09:52:51 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 09:52:58 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 09:52:58 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 09:53:19 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 09:53:19 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 09:53:21 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 14:00:12 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-5 --- game.scene.room.RoomService
+2017-11-18 14:21:33 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-1 --- game.scene.room.RoomService
+2017-11-18 14:34:43 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 14:34:43 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 14:34:43 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 14:34:43 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 14:35:04 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 14:35:04 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 14:45:36 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 14:45:36 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 14:47:03 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 14:47:45 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 14:47:45 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 14:48:14 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 14:53:21 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 14:53:21 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 14:53:33 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 14:53:57 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 15:01:14 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:01:14 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:01:28 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 15:04:30 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:04:30 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:04:40 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 15:05:21 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:05:21 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:05:51 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:05:51 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:05:51 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:05:51 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:09:55 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:09:55 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:10:58 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 15:22:14 ERROR (game.scene.net.SceneHandler:40)- 错误，断开网关！Session{channel=[id: 0xa2a7d827, L:/127.0.0.1:12004 - R:/127.0.0.1:49429], value=Gateway [channel=[id: 0xa2a7d827, L:/127.0.0.1:12004 - R:/127.0.0.1:49429]], info=null}
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1100)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:367)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:118)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:610)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:551)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:465)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:437)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 15:27:50 ERROR (game.scene.room.RoomService:251)- 严重异常
+java.lang.RuntimeException: 未正确进入Room,消息不能执行! Message:DNGameStart [showQiangZhuang=false],sessionId:0,gatewayId:100
+	at game.scene.room.RoomService.lambda$3(RoomService.java:224)
+	at com.isnowfox.core.thread.FrameQueueThread.threadRunQueue(FrameQueueThread.java:31)
+	at com.isnowfox.core.thread.FrameQueueThread.frame(FrameQueueThread.java:21)
+	at com.isnowfox.core.thread.FrameQueueContainer$InnerFrameQueueThread.frame(FrameQueueContainer.java:48)
+	at com.isnowfox.core.thread.FrameThread.threadMethod(FrameThread.java:35)
+	at com.isnowfox.core.thread.FrameThread.run(FrameThread.java:23)
+2017-11-18 15:28:05 ERROR (game.scene.room.RoomService:251)- 严重异常
+java.lang.RuntimeException: 未正确进入Room,消息不能执行! Message:DNGameStart [showQiangZhuang=false],sessionId:0,gatewayId:100
+	at game.scene.room.RoomService.lambda$3(RoomService.java:224)
+	at com.isnowfox.core.thread.FrameQueueThread.threadRunQueue(FrameQueueThread.java:31)
+	at com.isnowfox.core.thread.FrameQueueThread.frame(FrameQueueThread.java:21)
+	at com.isnowfox.core.thread.FrameQueueContainer$InnerFrameQueueThread.frame(FrameQueueContainer.java:48)
+	at com.isnowfox.core.thread.FrameThread.threadMethod(FrameThread.java:35)
+	at com.isnowfox.core.thread.FrameThread.run(FrameThread.java:23)
+2017-11-18 15:28:43 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 15:29:33 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:29:33 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:29:33 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:29:33 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:30:04 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 15:33:19 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:33:19 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:33:28 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 15:34:55 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:34:55 ERROR (game.scene.room.UserSeat:57)- 
+2017-11-18 15:36:28 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-18 16:57:52 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+java.util.concurrent.CancellationException
+	at java.util.concurrent.FutureTask.report(FutureTask.java:121)
+	at java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	at com.isnowfox.core.thread.ScheduledExecutorsUtils$ErrorHandlerThreadPoolExecutor.afterExecute(ScheduledExecutorsUtils.java:55)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1150)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)

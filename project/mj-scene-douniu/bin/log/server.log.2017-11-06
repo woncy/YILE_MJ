@@ -1,0 +1,221 @@
+2017-11-06 09:12:40 INFO  (game.scene.net.BossClientHandler:35)- 错误!Session{channel=[id: 0x845aa58b, L:/127.0.0.1:61261 - R:/127.0.0.1:11031], value=null, info=null}
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1100)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:367)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:118)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:610)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:551)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:465)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:437)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-06 09:12:40 INFO  (game.scene.net.BossClientHandler:29)- boss服务器断开！
+2017-11-06 09:12:41 ERROR (game.scene.net.SceneHandler:40)- 错误，断开网关！Session{channel=[id: 0x1a76e63e, L:/127.0.0.1:12004 - R:/127.0.0.1:61336], value=Gateway [channel=[id: 0x1a76e63e, L:/127.0.0.1:12004 - R:/127.0.0.1:61336]], info=null}
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1100)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:367)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:118)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:610)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:551)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:465)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:437)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-06 09:12:41 INFO  (game.scene.net.GatewayManager:61)- 网关注销成功!Gateway [channel=[id: 0x1a76e63e, L:/127.0.0.1:12004 ! R:/127.0.0.1:61336]]
+2017-11-06 09:12:41 INFO  (game.scene.net.SceneHandler:35)- 网关断开!Session{channel=[id: 0x1a76e63e, L:/127.0.0.1:12004 ! R:/127.0.0.1:61336], value=Gateway [channel=[id: 0x1a76e63e, L:/127.0.0.1:12004 ! R:/127.0.0.1:61336]], info=null}
+2017-11-06 10:05:38 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Mon Nov 06 10:05:38 CST 2017]; root of context hierarchy
+2017-11-06 10:05:38 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-11-06 10:05:38 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-11-06 10:05:38 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-11-06 10:05:38 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-11-06 10:05:39 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-11-06 10:05:39 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-11-06 10:05:39 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-11-06 17:07:26 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x871855ab, L:/127.0.0.1:12004 - R:/127.0.0.1:54340], value=null, info=null}
+2017-11-06 17:07:26 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-11-06 17:07:26 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x871855ab, L:/127.0.0.1:12004 - R:/127.0.0.1:54340]
+2017-11-06 17:07:26 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-2 --- game.scene.room.RoomService
+2017-11-06 17:07:26 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=135]AbstractWrapper [session=null, msg=DNGameReady [index=0]]
+2017-11-06 17:09:52 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=137]AbstractWrapper [session=null, msg=DNGameReady [index=0]]
+2017-11-06 17:11:57 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=139]AbstractWrapper [session=null, msg=DNGameReady [index=0]]
+2017-11-06 17:12:53 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Mon Nov 06 17:12:53 CST 2017]; root of context hierarchy
+2017-11-06 17:12:53 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-11-06 17:12:53 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-11-06 17:12:53 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-11-06 17:12:54 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-11-06 17:12:54 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-11-06 17:12:54 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-11-06 17:12:54 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-11-06 17:17:55 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0xc25e3d61, L:/127.0.0.1:12004 - R:/127.0.0.1:55380], value=null, info=null}
+2017-11-06 17:17:55 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-11-06 17:17:55 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0xc25e3d61, L:/127.0.0.1:12004 - R:/127.0.0.1:55380]
+2017-11-06 17:17:55 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNGameReady [index=0]]
+2017-11-06 17:19:57 INFO  (game.scene.net.BossClientHandler:35)- 错误!Session{channel=[id: 0x1433abb3, L:/127.0.0.1:54925 - R:/127.0.0.1:11031], value=null, info=null}
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1100)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:367)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:118)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:610)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:551)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:465)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:437)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-06 17:19:57 INFO  (game.scene.net.BossClientHandler:29)- boss服务器断开！
+2017-11-06 17:20:09 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Mon Nov 06 17:20:09 CST 2017]; root of context hierarchy
+2017-11-06 17:20:09 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-11-06 17:20:09 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-11-06 17:20:09 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-11-06 17:20:09 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-11-06 17:20:10 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-11-06 17:20:10 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-11-06 17:20:10 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-11-06 17:20:20 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0xfd55b16d, L:/127.0.0.1:12004 - R:/127.0.0.1:55680], value=null, info=null}
+2017-11-06 17:20:20 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-11-06 17:20:20 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0xfd55b16d, L:/127.0.0.1:12004 - R:/127.0.0.1:55680]
+2017-11-06 17:20:21 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:20:21 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=510034, roomId=190, createUserId=667138, users=[GameUserInfo [userName=4bde0b3-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667138,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667138, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:22:34 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:22:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=2]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=490701, roomId=191, createUserId=667139, users=[GameUserInfo [userName=11fc6e4-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667139,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667139, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:31:41 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:31:41 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=3]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=487102, roomId=192, createUserId=667140, users=[GameUserInfo [userName=6bc2a5a-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667140,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667140, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:32:13 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:32:13 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=3]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=486354, roomId=193, createUserId=667140, users=[GameUserInfo [userName=6bc2a5a-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667140,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667140, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:34:34 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:34:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=4]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=484551, roomId=194, createUserId=667141, users=[GameUserInfo [userName=e232f96-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667141,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667141, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:35:13 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:35:13 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=5]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=473520, roomId=195, createUserId=667142, users=[GameUserInfo [userName=b1b42b4-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667142,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667142, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:39:42 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:39:42 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=23]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=470802, roomId=196, createUserId=667143, users=[GameUserInfo [userName=c213150-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667143,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667143, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:40:34 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:40:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=24]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=461471, roomId=197, createUserId=667144, users=[GameUserInfo [userName=aaa85af-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667144,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667144, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:41:16 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:41:16 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=25]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=450695, roomId=198, createUserId=667145, users=[GameUserInfo [userName=0a37495-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667145,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667145, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:42:04 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:42:04 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=27]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=449219, roomId=199, createUserId=667146, users=[GameUserInfo [userName=5c0cff6-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667146,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667146, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:42:28 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:42:28 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=28]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=449219, roomId=199, createUserId=667146, users=[GameUserInfo [userName=5c0cff6-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667146,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=1b5d273-,avatar=null,sex=0,gold=5,score=0,locationIndex=1,userId=667147,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=1, userId=667146, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=1, userId=667147, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:42:28 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=27]AbstractWrapper [session=null, msg=GameUserInfo [userName=1b5d273-,avatar=null,sex=0,gold=5,score=0,locationIndex=1,userId=667147,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 17:43:10 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:43:10 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=29]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=447147, roomId=200, createUserId=667148, users=[GameUserInfo [userName=0508cad-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667148,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667148, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:43:26 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:43:26 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=30]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=447147, roomId=200, createUserId=667148, users=[GameUserInfo [userName=0508cad-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667148,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=b84b1a4-,avatar=null,sex=0,gold=5,score=0,locationIndex=1,userId=667149,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=1, userId=667148, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=1, userId=667149, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:43:26 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=29]AbstractWrapper [session=null, msg=GameUserInfo [userName=b84b1a4-,avatar=null,sex=0,gold=5,score=0,locationIndex=1,userId=667149,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 17:44:14 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:44:14 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=31]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=447147, roomId=200, createUserId=667148, users=[GameUserInfo [userName=0508cad-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667148,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=b84b1a4-,avatar=null,sex=0,gold=5,score=0,locationIndex=1,userId=667149,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=67d0e8d-,avatar=null,sex=0,gold=5,score=0,locationIndex=2,userId=667150,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=2, userId=667148, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=2, userId=667149, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=2, userId=667150, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:44:14 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=29]AbstractWrapper [session=null, msg=GameUserInfo [userName=67d0e8d-,avatar=null,sex=0,gold=5,score=0,locationIndex=2,userId=667150,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 17:44:14 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=30]AbstractWrapper [session=null, msg=GameUserInfo [userName=67d0e8d-,avatar=null,sex=0,gold=5,score=0,locationIndex=2,userId=667150,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 17:44:34 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:44:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=32]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=447147, roomId=200, createUserId=667148, users=[GameUserInfo [userName=0508cad-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667148,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=b84b1a4-,avatar=null,sex=0,gold=5,score=0,locationIndex=1,userId=667149,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=67d0e8d-,avatar=null,sex=0,gold=5,score=0,locationIndex=2,userId=667150,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=06079bd-,avatar=null,sex=0,gold=5,score=0,locationIndex=3,userId=667151,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=3, userId=667148, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=3, userId=667149, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=3, userId=667150, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=3, userId=667151, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:44:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=29]AbstractWrapper [session=null, msg=GameUserInfo [userName=06079bd-,avatar=null,sex=0,gold=5,score=0,locationIndex=3,userId=667151,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 17:44:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=30]AbstractWrapper [session=null, msg=GameUserInfo [userName=06079bd-,avatar=null,sex=0,gold=5,score=0,locationIndex=3,userId=667151,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 17:44:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=31]AbstractWrapper [session=null, msg=GameUserInfo [userName=06079bd-,avatar=null,sex=0,gold=5,score=0,locationIndex=3,userId=667151,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 17:44:49 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:44:49 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=33]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=447147, roomId=200, createUserId=667148, users=[GameUserInfo [userName=0508cad-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667148,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=b84b1a4-,avatar=null,sex=0,gold=5,score=0,locationIndex=1,userId=667149,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=67d0e8d-,avatar=null,sex=0,gold=5,score=0,locationIndex=2,userId=667150,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=06079bd-,avatar=null,sex=0,gold=5,score=0,locationIndex=3,userId=667151,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=7c63027-,avatar=null,sex=0,gold=5,score=0,locationIndex=4,userId=667152,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=4, userId=667148, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=4, userId=667149, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=4, userId=667150, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=4, userId=667151, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=4, userId=667152, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:44:49 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=29]AbstractWrapper [session=null, msg=GameUserInfo [userName=7c63027-,avatar=null,sex=0,gold=5,score=0,locationIndex=4,userId=667152,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 17:44:49 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=30]AbstractWrapper [session=null, msg=GameUserInfo [userName=7c63027-,avatar=null,sex=0,gold=5,score=0,locationIndex=4,userId=667152,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 17:44:49 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=31]AbstractWrapper [session=null, msg=GameUserInfo [userName=7c63027-,avatar=null,sex=0,gold=5,score=0,locationIndex=4,userId=667152,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 17:44:49 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=32]AbstractWrapper [session=null, msg=GameUserInfo [userName=7c63027-,avatar=null,sex=0,gold=5,score=0,locationIndex=4,userId=667152,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 17:48:18 INFO  (game.scene.net.BossClientHandler:35)- 错误!Session{channel=[id: 0xe8071cc9, L:/127.0.0.1:55667 - R:/127.0.0.1:11031], value=null, info=null}
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1100)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:367)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:118)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:610)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:551)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:465)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:437)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-06 17:48:18 INFO  (game.scene.net.BossClientHandler:29)- boss服务器断开！
+2017-11-06 17:49:18 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Mon Nov 06 17:49:18 CST 2017]; root of context hierarchy
+2017-11-06 17:49:18 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-11-06 17:49:18 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-11-06 17:49:18 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-11-06 17:49:19 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-11-06 17:49:19 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-11-06 17:49:20 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-11-06 17:49:20 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-11-06 17:49:39 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0xf03612e9, L:/127.0.0.1:12004 - R:/127.0.0.1:58643], value=null, info=null}
+2017-11-06 17:49:39 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-11-06 17:49:39 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0xf03612e9, L:/127.0.0.1:12004 - R:/127.0.0.1:58643]
+2017-11-06 17:49:40 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:49:40 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=510034, roomId=203, createUserId=667154, users=[GameUserInfo [userName=8d4332b-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667154,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667154, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:50:29 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:50:29 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=2]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=490701, roomId=204, createUserId=667155, users=[GameUserInfo [userName=edfcc04-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667155,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667155, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:52:11 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:52:11 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=7]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=487102, roomId=205, createUserId=667156, users=[GameUserInfo [userName=a88d8f7-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667156,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667156, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:52:27 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 17:52:27 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=9]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=487102, roomId=205, createUserId=667156, users=[GameUserInfo [userName=a88d8f7-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667156,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=547b6f8-,avatar=null,sex=0,gold=5,score=0,locationIndex=1,userId=667157,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=1, userId=667156, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=1, userId=667157, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 17:52:27 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=7]AbstractWrapper [session=null, msg=GameUserInfo [userName=547b6f8-,avatar=null,sex=0,gold=5,score=0,locationIndex=1,userId=667157,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 18:05:06 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Mon Nov 06 18:05:06 CST 2017]; root of context hierarchy
+2017-11-06 18:05:06 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-11-06 18:05:06 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-11-06 18:05:07 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-11-06 18:05:07 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-11-06 18:05:08 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-11-06 18:05:08 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-11-06 18:05:08 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-11-06 18:05:17 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x082506bc, L:/127.0.0.1:12004 - R:/127.0.0.1:60708], value=null, info=null}
+2017-11-06 18:05:17 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-11-06 18:05:17 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x082506bc, L:/127.0.0.1:12004 - R:/127.0.0.1:60708]
+2017-11-06 18:05:17 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 18:05:17 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=510034, roomId=206, createUserId=667158, users=[GameUserInfo [userName=f2ba2ed-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667158,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667158, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 18:07:40 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-11-06 18:07:40 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=510034, roomId=206, createUserId=667158, users=[GameUserInfo [userName=f2ba2ed-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=667158,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ], GameUserInfo [userName=6483c08-,avatar=null,sex=0,gold=5,score=0,locationIndex=1,userId=667159,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=1, userId=667158, pais=[-2, -2, -2, -2, -2], paiType=-2, isKaiPai=false, zhu=0], SeatUserInfo [index=1, userId=667159, pais=[-2, -2, -2, -2, -2], paiType=-1, isKaiPai=false, zhu=0]]]]]
+2017-11-06 18:07:40 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=GameUserInfo [userName=6483c08-,avatar=null,sex=0,gold=5,score=0,locationIndex=1,userId=667159,online=true,ip=192.168.1.128,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]
+2017-11-06 18:07:46 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:DNGameStart [showQiangZhuang=true]
+2017-11-06 18:07:46 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNGameStart [showQiangZhuang=true]]
+2017-11-06 18:07:46 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNGameStart [showQiangZhuang=true]]
+2017-11-06 18:08:02 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNGameZhuang [index=0]]
+2017-11-06 18:08:02 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNGameZhuang [index=0]]
+2017-11-06 18:08:02 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNShowXiaZhu []]
+2017-11-06 18:08:18 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNXiaZhu [index=1, zhu=1]]
+2017-11-06 18:08:18 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNXiaZhu [index=1, zhu=1]]
+2017-11-06 18:08:18 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-06 18:08:18 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-06 18:08:18 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=0, userId=667158, pais=[22, 2, 1, 12, 4], paiType=0, isKaiPai=false, zhu=0], SeatUserInfo [index=0, userId=667159, pais=[-1, -1, -1, -1, -1], paiType=-1, isKaiPai=false, zhu=0]]]]
+2017-11-06 18:08:18 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNChapterInfo [zhuangIndex=0, currentIndex=0, seats=[SeatUserInfo [index=1, userId=667158, pais=[-1, -1, -1, -1, -1], paiType=-1, isKaiPai=false, zhu=0], SeatUserInfo [index=1, userId=667159, pais=[5, 16, 51, 8, 27], paiType=7, isKaiPai=false, zhu=0]]]]
+2017-11-06 18:08:18 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNXiaZhu [index=0, zhu=1]]
+2017-11-06 18:08:18 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNXiaZhu [index=0, zhu=1]]
+2017-11-06 18:08:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=SeatUserInfo [index=0, userId=667158, pais=[22, 2, 1, 12, 4], paiType=0, isKaiPai=true, zhu=0]]
+2017-11-06 18:08:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=SeatUserInfo [index=1, userId=667159, pais=[5, 16, 51, 8, 27], paiType=7, isKaiPai=true, zhu=0]]
+2017-11-06 18:08:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=SeatUserInfo [index=0, userId=667158, pais=[22, 2, 1, 12, 4], paiType=0, isKaiPai=true, zhu=0]]
+2017-11-06 18:08:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=SeatUserInfo [index=1, userId=667159, pais=[5, 16, 51, 8, 27], paiType=7, isKaiPai=true, zhu=0]]
+2017-11-06 18:08:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNChapterPKResult [zhuangIndex=0, pai=[22, 2, 1, 12, 4], paiType=0, socre=-2, userResults=[UserPkResult [index=1, score=2, pai=[5, 16, 51, 8, 27], paiType=7, pkResult=true, zhu=0]]]]
+2017-11-06 18:08:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNChapterPKResult [zhuangIndex=0, pai=[22, 2, 1, 12, 4], paiType=0, socre=-2, userResults=[UserPkResult [index=1, score=2, pai=[5, 16, 51, 8, 27], paiType=7, pkResult=true, zhu=0]]]]
+2017-11-06 18:08:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNChapterPKResult [zhuangIndex=0, pai=[22, 2, 1, 12, 4], paiType=0, socre=-2, userResults=[UserPkResult [index=1, score=2, pai=[5, 16, 51, 8, 27], paiType=7, pkResult=true, zhu=0]]]]
+2017-11-06 18:08:34 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNChapterPKResult [zhuangIndex=0, pai=[22, 2, 1, 12, 4], paiType=0, socre=-2, userResults=[UserPkResult [index=1, score=2, pai=[5, 16, 51, 8, 27], paiType=7, pkResult=true, zhu=0]]]]
+2017-11-06 18:09:06 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:mj.net.message.game.douniu.DNKaiPai@113bec8c
+2017-11-06 18:09:06 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=SeatUserInfo [index=0, userId=667158, pais=[22, 2, 1, 12, 4], paiType=0, isKaiPai=true, zhu=0]]
+2017-11-06 18:09:06 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=SeatUserInfo [index=0, userId=667158, pais=[22, 2, 1, 12, 4], paiType=0, isKaiPai=true, zhu=0]]
+2017-11-06 18:09:06 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNChapterPKResult [zhuangIndex=0, pai=[22, 2, 1, 12, 4], paiType=0, socre=-2, userResults=[UserPkResult [index=1, score=2, pai=[5, 16, 51, 8, 27], paiType=7, pkResult=true, zhu=0]]]]
+2017-11-06 18:09:06 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNChapterPKResult [zhuangIndex=0, pai=[22, 2, 1, 12, 4], paiType=0, socre=-2, userResults=[UserPkResult [index=1, score=2, pai=[5, 16, 51, 8, 27], paiType=7, pkResult=true, zhu=0]]]]

@@ -1,0 +1,38 @@
+2017-11-14 18:15:21 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-3 --- game.scene.room.RoomService
+2017-11-14 18:18:24 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:18:24 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:18:24 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:18:24 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:19:35 ERROR (game.scene.net.SceneHandler:40)- 错误，断开网关！Session{channel=[id: 0x3344fe45, L:/127.0.0.1:12004 - R:/127.0.0.1:60120], value=Gateway [channel=[id: 0x3344fe45, L:/127.0.0.1:12004 - R:/127.0.0.1:60120]], info=null}
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1100)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:367)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:118)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:610)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:551)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:465)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:437)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-14 18:21:59 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-12 --- game.scene.room.RoomService
+2017-11-14 18:24:05 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:24:05 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:24:25 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:24:25 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:24:47 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:24:47 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:26:08 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:26:08 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:26:34 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:26:34 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:27:24 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:27:24 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:27:24 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-14 18:27:24 ERROR (game.scene.room.UserSeat:56)- 

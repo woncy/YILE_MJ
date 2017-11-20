@@ -1,0 +1,339 @@
+2017-10-31 14:34:57 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 14:34:57 CST 2017]; root of context hierarchy
+2017-10-31 14:34:57 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 14:34:57 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 14:34:57 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 14:34:57 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 14:34:58 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 14:34:58 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 14:34:58 INFO  (game.scene.SceneMain:24)- 服务器启动完毕！
+2017-10-31 14:36:13 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4ae82894: startup date [Tue Oct 31 14:36:13 CST 2017]; root of context hierarchy
+2017-10-31 14:36:13 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 14:36:13 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 14:36:13 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 14:36:14 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 14:36:14 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 14:36:15 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 14:36:15 INFO  (game.scene.SceneMain:24)- 服务器启动完毕！
+2017-10-31 16:01:31 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 16:01:31 CST 2017]; root of context hierarchy
+2017-10-31 16:01:31 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 16:01:31 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 16:01:31 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 16:01:32 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 16:01:32 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 16:01:32 INFO  (game.scene.SceneMain:24)- 服务器启动完毕！
+2017-10-31 16:01:32 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 16:06:58 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 16:06:58 CST 2017]; root of context hierarchy
+2017-10-31 16:06:58 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 16:06:59 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 16:06:59 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 16:06:59 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 16:07:00 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 16:07:00 INFO  (game.scene.SceneMain:24)- 服务器启动完毕！
+2017-10-31 16:07:00 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 16:30:01 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 16:30:01 CST 2017]; root of context hierarchy
+2017-10-31 16:30:01 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 16:30:01 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 16:30:01 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 16:30:02 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 16:30:02 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 16:30:03 INFO  (game.scene.SceneMain:24)- 服务器启动完毕！
+2017-10-31 16:30:03 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 16:31:18 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x9a93a72a, L:/127.0.0.1:12004 - R:/127.0.0.1:56925], value=null, info=null}
+2017-10-31 16:31:18 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 16:31:18 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x9a93a72a, L:/127.0.0.1:12004 - R:/127.0.0.1:56925]
+2017-10-31 16:31:18 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-8 --- game.scene.room.RoomService
+2017-10-31 16:33:11 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 16:33:11 CST 2017]; root of context hierarchy
+2017-10-31 16:33:11 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 16:33:11 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 16:33:11 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 16:33:12 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 16:33:12 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 16:33:13 INFO  (game.scene.SceneMain:24)- 服务器启动完毕！
+2017-10-31 16:33:13 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 16:33:21 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x81468d2e, L:/127.0.0.1:12004 - R:/127.0.0.1:57034], value=null, info=null}
+2017-10-31 16:33:21 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 16:33:21 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x81468d2e, L:/127.0.0.1:12004 - R:/127.0.0.1:57034]
+2017-10-31 16:35:07 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:GameJoinRoom [ ]
+2017-10-31 16:35:07 INFO  (game.scene.net.GatewayMessageManager:105)- 没有处理器的消息:GameJoinRoom [ ]
+2017-10-31 16:35:25 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:GameJoinRoom [ ]
+2017-10-31 16:35:25 INFO  (game.scene.net.GatewayMessageManager:105)- 没有处理器的消息:GameJoinRoom [ ]
+2017-10-31 16:38:14 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 16:38:14 CST 2017]; root of context hierarchy
+2017-10-31 16:38:14 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 16:38:14 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 16:38:14 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 16:38:14 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 16:38:15 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 16:38:15 INFO  (game.scene.SceneMain:24)- 服务器启动完毕！
+2017-10-31 16:38:15 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 17:00:25 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x7422e144, L:/127.0.0.1:12004 - R:/127.0.0.1:57191], value=null, info=null}
+2017-10-31 17:00:25 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 17:00:25 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x7422e144, L:/127.0.0.1:12004 - R:/127.0.0.1:57191]
+2017-10-31 17:00:25 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-5 --- game.scene.room.RoomService
+2017-10-31 17:02:01 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 17:02:01 CST 2017]; root of context hierarchy
+2017-10-31 17:02:01 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 17:02:01 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 17:02:01 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 17:02:02 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 17:02:02 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 17:02:03 INFO  (game.scene.SceneMain:24)- 服务器启动完毕！
+2017-10-31 17:02:03 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 17:02:11 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x142105ed, L:/127.0.0.1:12004 - R:/127.0.0.1:57319], value=null, info=null}
+2017-10-31 17:02:11 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 17:02:11 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x142105ed, L:/127.0.0.1:12004 - R:/127.0.0.1:57319]
+2017-10-31 17:02:11 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-15 --- game.scene.room.RoomService
+2017-10-31 17:02:12 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone [getMessageId()=4, getMessageType()=2]
+2017-10-31 17:02:12 INFO  (game.scene.net.GatewayMessageManager:105)- 没有处理器的消息:JoinDouniuRoomReadyDone [getMessageId()=4, getMessageType()=2]
+2017-10-31 17:04:10 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 17:04:10 CST 2017]; root of context hierarchy
+2017-10-31 17:04:10 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 17:04:10 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 17:04:10 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 17:04:11 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 17:04:11 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 17:04:11 ERROR (game.scene.SceneMain:26)- 服务器启动错误,准备关闭
+java.util.concurrent.ExecutionException: java.net.BindException: Address already in use: bind
+	at io.netty.util.concurrent.AbstractFuture.get(AbstractFuture.java:41)
+	at com.isnowfox.game.proxy.PxServer.start(PxServer.java:78)
+	at game.scene.net.SceneServer.start(SceneServer.java:23)
+	at game.scene.StartWarp.start(StartWarp.java:20)
+	at game.scene.SceneMain.main(SceneMain.java:22)
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at io.netty.channel.socket.nio.NioServerSocketChannel.doBind(NioServerSocketChannel.java:127)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.bind(AbstractChannel.java:554)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.bind(DefaultChannelPipeline.java:1258)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:511)
+	at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:496)
+	at io.netty.channel.DefaultChannelPipeline.bind(DefaultChannelPipeline.java:980)
+	at io.netty.channel.AbstractChannel.bind(AbstractChannel.java:250)
+	at io.netty.bootstrap.AbstractBootstrap$2.run(AbstractBootstrap.java:363)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:418)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:440)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-10-31 17:04:11 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:987)- Closing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 17:04:10 CST 2017]; root of context hierarchy
+2017-10-31 17:04:57 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 17:04:57 CST 2017]; root of context hierarchy
+2017-10-31 17:04:57 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 17:04:58 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 17:04:58 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 17:04:58 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 17:04:59 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 17:04:59 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-10-31 17:04:59 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 17:05:12 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x8654afdd, L:/127.0.0.1:12004 - R:/127.0.0.1:57467], value=null, info=null}
+2017-10-31 17:05:12 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 17:05:12 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x8654afdd, L:/127.0.0.1:12004 - R:/127.0.0.1:57467]
+2017-10-31 17:05:12 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone [getMessageId()=4, getMessageType()=2]
+2017-10-31 17:05:12 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=JoinDouniuRoomReadyDone [getMessageId()=4, getMessageType()=2]]
+2017-10-31 17:30:22 INFO  (game.scene.net.BossClientHandler:35)- 错误!Session{channel=[id: 0x031004b4, L:/127.0.0.1:57411 - R:/127.0.0.1:11031], value=null, info=null}
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1100)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:367)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:118)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:610)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:551)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:465)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:437)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-10-31 17:30:22 INFO  (game.scene.net.BossClientHandler:29)- boss服务器断开！
+2017-10-31 17:30:25 ERROR (game.scene.net.SceneHandler:40)- 错误，断开网关！Session{channel=[id: 0x8654afdd, L:/127.0.0.1:12004 - R:/127.0.0.1:57467], value=Gateway [channel=[id: 0x8654afdd, L:/127.0.0.1:12004 - R:/127.0.0.1:57467]], info=null}
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1100)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:367)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:118)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:610)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:551)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:465)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:437)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-10-31 17:30:25 INFO  (game.scene.net.GatewayManager:61)- 网关注销成功!Gateway [channel=[id: 0x8654afdd, L:/127.0.0.1:12004 ! R:/127.0.0.1:57467]]
+2017-10-31 17:30:25 INFO  (game.scene.net.SceneHandler:35)- 网关断开!Session{channel=[id: 0x8654afdd, L:/127.0.0.1:12004 ! R:/127.0.0.1:57467], value=Gateway [channel=[id: 0x8654afdd, L:/127.0.0.1:12004 ! R:/127.0.0.1:57467]], info=null}
+2017-10-31 17:34:44 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 17:34:44 CST 2017]; root of context hierarchy
+2017-10-31 17:34:44 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 17:34:44 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 17:34:44 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 17:34:45 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 17:34:45 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 17:34:46 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-10-31 17:34:46 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 17:35:04 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0xd91d94bc, L:/127.0.0.1:12004 - R:/127.0.0.1:57799], value=null, info=null}
+2017-10-31 17:35:04 INFO  (game.scene.net.GatewayManager:61)- 网关注销成功!null
+2017-10-31 17:35:04 INFO  (game.scene.net.SceneHandler:35)- 网关断开!Session{channel=[id: 0xd91d94bc, L:/127.0.0.1:12004 ! R:/127.0.0.1:57799], value=null, info=null}
+2017-10-31 17:36:02 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 17:36:02 CST 2017]; root of context hierarchy
+2017-10-31 17:36:02 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 17:36:02 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 17:36:02 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 17:36:03 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 17:36:03 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 17:36:04 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-10-31 17:36:04 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 17:36:19 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:0 --- game.scene.room.RoomService
+2017-10-31 17:36:19 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x22cef839, L:/127.0.0.1:12004 - R:/127.0.0.1:57908], value=null, info=null}
+2017-10-31 17:36:19 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 17:36:19 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x22cef839, L:/127.0.0.1:12004 - R:/127.0.0.1:57908]
+2017-10-31 17:36:19 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-10-31 17:36:19 ERROR (com.isnowfox.service.AbstractScheduledAsyncService:49)- 线程池错误，会恢复！
+game.scene.ServerRuntimeException: 错误的消息
+	at game.scene.net.Gateway.checkMsg(Gateway.java:76)
+	at game.scene.net.Gateway.send(Gateway.java:65)
+	at game.scene.net.GatewayManager.sendMessage(GatewayManager.java:81)
+	at game.scene.net.SceneService.sendMessage(SceneService.java:62)
+	at game.scene.room.SceneUser.sendMessage(SceneUser.java:73)
+	at game.scene.room.RoomImpi.joinGame(RoomImpi.java:131)
+	at game.scene.handler.JoinGameImpi.handler(JoinGameImpi.java:14)
+	at game.scene.handler.JoinGameImpi.handler(JoinGameImpi.java:1)
+	at game.scene.room.Room.lambda$0(Room.java:58)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at game.scene.net.Gateway.checkMsg(Gateway.java:74)
+	... 15 more
+2017-10-31 17:37:19 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 17:37:19 CST 2017]; root of context hierarchy
+2017-10-31 17:37:19 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 17:37:19 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 17:37:20 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 17:37:20 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 17:37:20 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 17:37:21 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 17:37:21 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-10-31 17:37:27 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x887f3187, L:/127.0.0.1:12004 - R:/127.0.0.1:58019], value=null, info=null}
+2017-10-31 17:37:27 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 17:37:27 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x887f3187, L:/127.0.0.1:12004 - R:/127.0.0.1:58019]
+2017-10-31 17:37:28 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-10-31 17:37:28 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNGameRoomInfo [users=[GameUserInfo [userName=a3ce207-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=666906,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]]]]
+2017-10-31 18:10:59 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 18:10:59 CST 2017]; root of context hierarchy
+2017-10-31 18:10:59 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 18:10:59 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 18:10:59 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 18:11:00 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 18:11:00 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 18:11:00 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-10-31 18:11:00 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 18:11:08 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x55d06897, L:/127.0.0.1:12004 - R:/127.0.0.1:58253], value=null, info=null}
+2017-10-31 18:11:08 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 18:11:08 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x55d06897, L:/127.0.0.1:12004 - R:/127.0.0.1:58253]
+2017-10-31 18:11:09 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-10-31 18:11:09 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=850042, roomId=33, createUserId=666908, users=[GameUserInfo [userName=469d955-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=666908,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, BeiShu=5, currentIndex=0, seats=[SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7]]]]]
+2017-10-31 18:12:23 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 18:12:23 CST 2017]; root of context hierarchy
+2017-10-31 18:12:23 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 18:12:23 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 18:12:23 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 18:12:24 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 18:12:24 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 18:12:25 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-10-31 18:12:25 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 18:12:31 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x972cb7f4, L:/127.0.0.1:12004 - R:/127.0.0.1:58369], value=null, info=null}
+2017-10-31 18:12:31 INFO  (game.scene.net.GatewayManager:61)- 网关注销成功!null
+2017-10-31 18:12:31 INFO  (game.scene.net.SceneHandler:35)- 网关断开!Session{channel=[id: 0x972cb7f4, L:/127.0.0.1:12004 ! R:/127.0.0.1:58369], value=null, info=null}
+2017-10-31 18:12:31 ERROR (com.isnowfox.core.thread.FrameThread:40)- 帧延迟:-8 --- game.scene.room.RoomService
+2017-10-31 18:13:05 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 18:13:05 CST 2017]; root of context hierarchy
+2017-10-31 18:13:05 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 18:13:05 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 18:13:05 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 18:13:06 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 18:13:06 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 18:13:07 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-10-31 18:13:07 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 18:13:13 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0xd302fcbd, L:/127.0.0.1:12004 - R:/127.0.0.1:58482], value=null, info=null}
+2017-10-31 18:13:13 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 18:13:13 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0xd302fcbd, L:/127.0.0.1:12004 - R:/127.0.0.1:58482]
+2017-10-31 18:13:14 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-10-31 18:13:14 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=850042, roomId=35, createUserId=666910, users=[GameUserInfo [userName=1303960-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=666910,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, BeiShu=5, currentIndex=0, seats=[SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7]]]]]
+2017-10-31 18:15:07 INFO  (game.scene.net.BossClientHandler:35)- 错误!Session{channel=[id: 0x95cb7d87, L:/127.0.0.1:58426 - R:/127.0.0.1:11031], value=null, info=null}
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:192)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:380)
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288)
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1100)
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:367)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:118)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:610)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:551)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:465)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:437)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-10-31 18:15:07 INFO  (game.scene.net.BossClientHandler:29)- boss服务器断开！
+2017-10-31 18:15:27 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 18:15:27 CST 2017]; root of context hierarchy
+2017-10-31 18:15:27 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 18:15:28 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 18:15:28 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 18:15:28 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 18:15:29 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 18:15:29 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-10-31 18:15:29 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 18:15:37 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0xec8173f7, L:/127.0.0.1:12004 - R:/127.0.0.1:58597], value=null, info=null}
+2017-10-31 18:15:37 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 18:15:37 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0xec8173f7, L:/127.0.0.1:12004 - R:/127.0.0.1:58597]
+2017-10-31 18:15:37 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-10-31 18:15:38 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=850042, roomId=36, createUserId=666911, users=[GameUserInfo [userName=54d28e4-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=666911,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, BeiShu=5, currentIndex=0, seats=[SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7]]]]]
+2017-10-31 18:17:07 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 18:17:07 CST 2017]; root of context hierarchy
+2017-10-31 18:17:07 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 18:17:07 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 18:17:07 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 18:17:07 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 18:17:08 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 18:17:08 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-10-31 18:17:08 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 18:17:14 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x8f888bcd, L:/127.0.0.1:12004 - R:/127.0.0.1:58708], value=null, info=null}
+2017-10-31 18:17:14 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 18:17:14 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x8f888bcd, L:/127.0.0.1:12004 - R:/127.0.0.1:58708]
+2017-10-31 18:17:14 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-10-31 18:17:14 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=850042, roomId=37, createUserId=666912, users=[GameUserInfo [userName=0948d8a-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=666912,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, BeiShu=5, currentIndex=0, seats=[SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7]]]]]
+2017-10-31 18:17:55 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 18:17:55 CST 2017]; root of context hierarchy
+2017-10-31 18:17:55 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 18:17:55 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 18:17:55 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 18:17:56 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 18:17:56 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 18:17:57 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-10-31 18:17:57 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 18:18:04 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x41d754ca, L:/127.0.0.1:12004 - R:/127.0.0.1:58818], value=null, info=null}
+2017-10-31 18:18:04 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 18:18:04 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x41d754ca, L:/127.0.0.1:12004 - R:/127.0.0.1:58818]
+2017-10-31 18:18:04 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-10-31 18:18:04 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=850042, roomId=38, createUserId=666913, users=[GameUserInfo [userName=cb0d17c-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=666913,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, BeiShu=5, currentIndex=0, seats=[SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7]]]]]
+2017-10-31 18:21:34 INFO  (org.springframework.context.support.ClassPathXmlApplicationContext:582)- Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3a4afd8d: startup date [Tue Oct 31 18:21:34 CST 2017]; root of context hierarchy
+2017-10-31 18:21:34 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from class path resource [SceneContext.xml]
+2017-10-31 18:21:34 INFO  (org.springframework.beans.factory.xml.XmlBeanDefinitionReader:317)- Loading XML bean definitions from URL [file:/D:/wangxi/workspace/yile_github/project/mj-dao/target/classes/game/boss/dao/DaoContext.xml]
+2017-10-31 18:21:34 INFO  (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer:172)- Loading properties file from class path resource [SceneConfig.xml]
+2017-10-31 18:21:35 INFO  (com.alibaba.druid.pool.DruidDataSource:722)- {dataSource-1} inited
+2017-10-31 18:21:35 INFO  (com.isnowfox.game.proxy.PxServer:69)- 启动端口监听！12004
+2017-10-31 18:21:36 INFO  (game.scene.DNSceneMain:24)- 服务器启动完毕！
+2017-10-31 18:21:36 INFO  (game.scene.net.BossClientHandler:23)- 连接boss服务器成功！
+2017-10-31 18:21:42 INFO  (game.scene.net.SceneHandler:27)- 收到网关连接!Session{channel=[id: 0x0e9687db, L:/127.0.0.1:12004 - R:/127.0.0.1:58980], value=null, info=null}
+2017-10-31 18:21:42 INFO  (game.scene.net.GatewayMessageManager:43)- 注册网关
+2017-10-31 18:21:42 INFO  (game.scene.net.GatewayManager:40)- 网关注册成功:[id: 0x0e9687db, L:/127.0.0.1:12004 - R:/127.0.0.1:58980]
+2017-10-31 18:21:42 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-10-31 18:21:42 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=0]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=850042, roomId=39, createUserId=666914, users=[GameUserInfo [userName=f2db62b-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=666914,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, BeiShu=5, currentIndex=0, seats=[SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7]]]]]
+2017-10-31 18:28:50 INFO  (game.scene.net.GatewayMessageManager:87)- 收到消息:JoinDouniuRoomReadyDone []
+2017-10-31 18:28:50 INFO  (game.scene.net.Gateway:67)- 发送SinglePxMsg.Wrapper [sessionId=1]AbstractWrapper [session=null, msg=DNGameRoomInfo [maxChapterNum=0, currentChapterNum=0, roomNo=845624, roomId=40, createUserId=666915, users=[GameUserInfo [userName=6ab5df1-,avatar=null,sex=0,gold=5,score=0,locationIndex=0,userId=666915,online=true,ip=127.0.0.1,user0Distance=null,user1Distance=null,user2Distance=null,user3Distance=null, ]], chapterInfo=DNChapterInfo [zhuangIndex=0, BeiShu=5, currentIndex=0, seats=[SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7], SeatUserInfo [pais=[1, 2, 3, 5, 6], paiType=7]]]]]

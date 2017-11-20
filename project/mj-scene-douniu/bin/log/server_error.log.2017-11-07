@@ -1,0 +1,137 @@
+2017-11-07 09:39:05 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 09:39:05 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:17:33 ERROR (game.scene.net.GatewayMessageManager:62)- 严重消息错误 SinglePxMsg [sessionId=23]PxMsg [buf=[6,14,4,-3], bufOffset=0, bufLen=4, session=Session{channel=[id: 0x696d7b8c, L:/127.0.0.1:12004 - R:/127.0.0.1:49201], value=Gateway [channel=[id: 0x696d7b8c, L:/127.0.0.1:12004 - R:/127.0.0.1:49201]], info=null}]
+java.lang.ArrayIndexOutOfBoundsException: 10
+	at mj.net.handler.MessageHandlerFactory.getHandler(MessageHandlerFactory.java:179)
+	at game.scene.net.GatewayMessageManager.handlerMessage(GatewayMessageManager.java:89)
+	at game.scene.net.GatewayMessageManager.handler(GatewayMessageManager.java:53)
+	at game.scene.net.SceneHandler.onMessage(SceneHandler.java:56)
+	at com.isnowfox.game.proxy.PxMsgChannelHandler.channelRead0(PxMsgChannelHandler.java:22)
+	at com.isnowfox.game.proxy.PxMsgChannelHandler.channelRead0(PxMsgChannelHandler.java:8)
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:105)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:372)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:358)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:350)
+	at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:293)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:267)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:372)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:358)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:350)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1334)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:372)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:358)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:926)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:129)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:610)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:551)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:465)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:437)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-07 14:17:33 ERROR (game.scene.net.GatewayMessageManager:66)- 踢掉session:23
+2017-11-07 14:18:00 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:18:00 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:18:00 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:18:00 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:22:29 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:22:29 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:31:25 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:31:25 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:43:26 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:43:26 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:49:59 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:49:59 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:53:48 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 14:53:48 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:19:46 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:19:46 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:25:57 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:25:57 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:43:40 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:43:40 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:46:17 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:46:17 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:51:10 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:51:10 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:54:49 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:54:49 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:59:10 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 15:59:10 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 16:08:29 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 16:08:29 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 16:16:52 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 16:16:52 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 16:22:48 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 16:22:48 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 16:27:47 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 16:27:47 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 16:32:59 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 16:32:59 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 16:56:10 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 16:56:10 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:00:12 ERROR (game.scene.DNSceneMain:26)- 服务器启动错误,准备关闭
+java.util.concurrent.ExecutionException: java.net.BindException: Address already in use: bind
+	at io.netty.util.concurrent.AbstractFuture.get(AbstractFuture.java:41)
+	at com.isnowfox.game.proxy.PxServer.start(PxServer.java:78)
+	at game.scene.net.SceneServer.start(SceneServer.java:23)
+	at game.scene.StartWarp.start(StartWarp.java:20)
+	at game.scene.DNSceneMain.main(DNSceneMain.java:22)
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at io.netty.channel.socket.nio.NioServerSocketChannel.doBind(NioServerSocketChannel.java:127)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.bind(AbstractChannel.java:554)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.bind(DefaultChannelPipeline.java:1258)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:511)
+	at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:496)
+	at io.netty.channel.DefaultChannelPipeline.bind(DefaultChannelPipeline.java:980)
+	at io.netty.channel.AbstractChannel.bind(AbstractChannel.java:250)
+	at io.netty.bootstrap.AbstractBootstrap$2.run(AbstractBootstrap.java:363)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:418)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:440)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at io.netty.util.concurrent.DefaultThreadFactory$DefaultRunnableDecorator.run(DefaultThreadFactory.java:144)
+	at java.lang.Thread.run(Thread.java:745)
+2017-11-07 17:00:17 WARN  (org.springframework.context.annotation.CommonAnnotationBeanPostProcessor:162)- Invocation of destroy method failed on bean with name 'game.scene.room.RoomAsyncService#56aac163': java.lang.NullPointerException
+2017-11-07 17:00:17 WARN  (org.springframework.beans.factory.support.DisposableBeanAdapter:374)- Invocation of destroy method 'close' failed on bean with name 'bossClient': java.lang.NullPointerException
+2017-11-07 17:01:43 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:01:43 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:28:18 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:28:18 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:28:31 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:28:31 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:31:41 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:31:41 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:31:56 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:31:56 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:34:29 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:34:29 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:34:42 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:34:42 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:36:06 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:36:06 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:36:20 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:36:20 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:40:42 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:40:42 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:40:53 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:40:53 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:44:33 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:44:33 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:44:47 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:44:47 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:51:38 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:51:38 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:54:04 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:54:04 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:54:04 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:54:26 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:54:26 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:54:26 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:54:28 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:54:28 ERROR (game.scene.room.UserSeat:56)- 
+2017-11-07 17:54:28 ERROR (game.scene.room.UserSeat:56)- 
