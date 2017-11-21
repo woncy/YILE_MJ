@@ -784,7 +784,7 @@ public class RoomService extends FrameQueueContainer implements BaseService {
         	ResultSet rs = null;
 			String querySql = "select id,room_check_id from room "
 					+ "where (user0=? or user1=? or user2=? or user3=?) and start=? and end=? "
-					+ "order by "+RoomUserDO.Table.START_DATE;
+					+ "order by id desc";
 			String updateSql = "update room set start=?, end=?,version=? where id=?";
         	try {
         		conn = roomDao.getDataSource().getConnection();
