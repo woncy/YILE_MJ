@@ -55,6 +55,7 @@ public class RoomInfo {
 	private boolean ready[];
 	private boolean isProxy;
 	private boolean dingPaoChache[];//配合state==1用
+	private int chapterNum;
 	
 	
 	
@@ -67,6 +68,7 @@ public class RoomInfo {
         dingPaoChache = new boolean[userNum];
         this.userNum = userNum;
         isProxy = room.getConfig().getInt("isProxy")==1;
+        this.chapterNum = 0;
     }
   
 
@@ -75,6 +77,16 @@ public class RoomInfo {
 	}
     
    
+    
+	public int getChapterNum() {
+		return chapterNum;
+	}
+
+
+	public void addChapterNum() {
+		this.chapterNum++;
+	}
+
 
 	public boolean isProxy() {
 		return isProxy;

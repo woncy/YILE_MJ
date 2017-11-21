@@ -233,7 +233,7 @@ public class RoomImpi extends Room {
 			}
 			
 		}
-        if(count>=roomInfo.getUserNum()&&roomInfo.getState()<1){
+        if(count>=roomInfo.getUserNum()&&roomInfo.getChapterNum()==0){
         	roomInfo.getUsers()[0].sendMessage(new ShowStartGame());
         }
         
@@ -337,6 +337,7 @@ public class RoomImpi extends Room {
                     MajiangChapter chapter = roomInfo.getChapter();
                     chapter.start();
                     roomInfo.setChapterStart(true);
+                    roomInfo.addChapterNum();
                     for (SceneUser u : roomInfo.getUsers()) {
                         if (u != null && u.isJoinGame()) {
                             u.sendMessage(chapter.toMessage(u.getLocationIndex(),roomInfo.getState()));
