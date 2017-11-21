@@ -214,6 +214,11 @@ public class RoomImpi extends Room {
 							qiangzhuang(new DNQiangZhuang(sceneUser.getLocationIndex(), true), sceneUser);
 						}
 					}
+				}else if(zhuang!=null&&"kpqz".equals(zhuang)){
+					roomInfo.gameStartClear();
+					roomInfo.getChapter().startGame(true);
+					sendMessage(new DNGameStart(true));
+					executeQiangZhuangTimer();
 				}else{
 					sendMessage(new DNGameStart(true));
 					executeQiangZhuangTimer(); 
@@ -394,7 +399,7 @@ public class RoomImpi extends Room {
 		boolean isAll = roomInfo.getChapter().xiazhu(msg,user);
 		if(isAll){
 			roomInfo.gameStartClear();
-			roomInfo.getChapter().startGame();
+			roomInfo.getChapter().startGame(false);
 			roomInfo.setState(STATE.PKING);
 			executePkTimer();
 		}

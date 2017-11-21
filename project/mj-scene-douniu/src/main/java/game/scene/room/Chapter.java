@@ -22,6 +22,7 @@ public class Chapter {
 	private int[] zhus;
 	private int zhuangIndex;
 	private int currentIndex;
+	private boolean qiangzhuang;
 	private List<Integer> qiangZhuangChache = new ArrayList<Integer>();
 	Random random = new Random();
 	Room room;
@@ -30,6 +31,7 @@ public class Chapter {
 		this.seats = new UserSeat[userNum];
 		this.zhus = new int[userNum];
 		this.room = room;
+		this.qiangzhuang =false;
 	} 
 	public UserSeat[] getSeats() {
 		return seats;
@@ -51,7 +53,7 @@ public class Chapter {
 			userSeat.setIndex(index);
 		}
 	}
-	public DNChapterInfo toMessage(int index){
+	public DNChapterInfo toMessage(int index,boolean isKPQZ){
 		DNChapterInfo info = new DNChapterInfo();
 		info.setCurrentIndex(currentIndex);
 		info.setZhuangIndex(zhuangIndex);
@@ -60,7 +62,7 @@ public class Chapter {
 		for (int i = 0; i < seats.length; i++) {
 			UserSeat userSeat = seats[i];
 			if(userSeat!=null){
-				SeatUserInfo seatInfo = userSeat.toMessage(index);
+				SeatUserInfo seatInfo = userSeat.toMessage(index,isKPQZ);
 				seatsInfos.add(seatInfo);
 			}
 			
@@ -86,14 +88,18 @@ public class Chapter {
 		return zhuangIndex;
 	}
 	
-	public void startGame() {
+	public void startGame(boolean isKPQZ) {
 		try {
 			startClear();
 			room.getRoomInfo().setBeforeFirstStart(false);
-			DNFaPaiUtil.faPai(seats);
+			if(!qiangzhuang){
+				DNFaPaiUtil.faPai(seats);
+			}
+			
+			qiangzhuang = isKPQZ;
 			
 			for (int i = 0; i < seats.length; i++) {
-				room.sendMessage(i, this.toMessage(i));
+				room.sendMessage(i, this.toMessage(i,isKPQZ));
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -141,7 +147,7 @@ public class Chapter {
 			return false;
 		}
 		userSeat.setKaiPai(true);
-		room.sendMessage(seats[user.getLocationIndex()].toMessage(user.getLocationIndex()),null);
+		room.sendMessage(seats[user.getLocationIndex()].toMessage(user.getLocationIndex(),false),null);
 		boolean isAll = true;
 		for (int i = 0; i < seats.length; i++) {
 			UserSeat u = seats[i];

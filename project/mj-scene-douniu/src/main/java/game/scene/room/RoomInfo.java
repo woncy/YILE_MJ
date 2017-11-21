@@ -57,6 +57,7 @@ public class RoomInfo {
 	private UserState[] userStates;
 	private STATE state;
 	private boolean isBeforeFirstStart = true;
+	private String zhuang;
 	
 	private DNChapterPKResult[] pkResults;
     public Chapter getChapter() {
@@ -74,6 +75,7 @@ public class RoomInfo {
 		}
         Config config = room.getConfig();
         this.maxChapterNum = config.getInt("jushu");
+        this.zhuang = config.getString("zhuang");
 //        System.out.println("最大局数是："+maxChapterNum);
         this.currentChapterNum = 0;
         pkResults = new DNChapterPKResult[maxChapterNum];
@@ -91,7 +93,12 @@ public class RoomInfo {
 			}
 			
 		}
-		roomInfo.setChapterInfo(chapter.toMessage(index));
+		if("kpqz".equals(zhuang)&&(state!=STATE.PKING)){
+			roomInfo.setChapterInfo(chapter.toMessage(index,true));
+			
+		}else{
+			roomInfo.setChapterInfo(chapter.toMessage(index,false));
+		}
 		roomInfo.setUsers(userInfos);
 		roomInfo.setCreateUserId(createUserId);
 		roomInfo.setCurrentChapterNum(currentChapterNum);

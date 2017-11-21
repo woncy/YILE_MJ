@@ -2,6 +2,7 @@ package game.scene.room;
 
 import org.slf4j.Logger;
 
+import mj.data.poker.Poker;
 import mj.data.poker.douniu.DouniuPai;
 import mj.data.poker.douniu.DouniuPoker;
 import mj.net.message.game.douniu.SeatUserInfo;
@@ -69,14 +70,26 @@ public class UserSeat {
 	public void setKaiPai(boolean isKaiPai) {
 		this.isKaiPai = isKaiPai;
 	}
-	public SeatUserInfo toMessage(int index) {
+	public SeatUserInfo toMessage(int index,boolean isKPQZ) {
 		SeatUserInfo info = new SeatUserInfo();
 		if(index == this.index){
 			if(pokers[0]==null){
-				info.setPais(new int[]{-2,-2,-2,-2,-2,});
+				if(isKPQZ){
+					info.setPais(new int[]{-2,-2,-2,-2});
+				}else{
+					info.setPais(new int[]{-2,-2,-2,-2,-2,});
+				}
 			}else{
-				info.setPais(DouniuPoker.toIntArrayFromDouniuArray(pokers));
-				info.setPaiType(pai.getType().getIndex());
+				if(isKPQZ){
+					DouniuPoker[] poker = new DouniuPoker[4];
+					for (int i = 0; i < pokers.length; i++) {
+						poker[i] = pokers[i];
+					}
+					info.setPais(DouniuPoker.toIntArrayFromDouniuArray(poker));
+				}else{
+					info.setPais(DouniuPoker.toIntArrayFromDouniuArray(pokers));
+					info.setPaiType(pai.getType().getIndex());
+				}
 			}
 		}else{
 			if(isKaiPai){
@@ -84,8 +97,12 @@ public class UserSeat {
 				info.setPaiType(pai.getType().getIndex());
 			}else{
 				if(pokers[0] != null){
-					info.setPais(new int[]{-1,-1,-1,-1,-1});
-					info.setPaiType(-1);
+					if(isKPQZ){
+						info.setPais(new int[]{-1,-1,-1,-1});
+					}else{
+						info.setPais(new int[]{-1,-1,-1,-1,-1});
+						info.setPaiType(-1);
+					}
 				}
 				else{
 					info.setPais(new int[]{-2,-2,-2,-2,-2});
