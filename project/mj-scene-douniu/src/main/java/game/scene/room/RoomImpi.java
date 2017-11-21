@@ -214,8 +214,6 @@ public class RoomImpi extends Room {
 							qiangzhuang(new DNQiangZhuang(sceneUser.getLocationIndex(), true), sceneUser);
 						}
 					}
-				}else if(zhuang!=null&&"kpqz".equals(zhuang)){
-					
 				}else{
 					sendMessage(new DNGameStart(true));
 					executeQiangZhuangTimer(); 
