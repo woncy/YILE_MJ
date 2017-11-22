@@ -56,14 +56,14 @@ public class IndexController {
     @Value("${site.serverUrl}")
     private String serverUrl;
 
-    @Autowired
-    private WeiXinService weiXinService;
 
     @Autowired
     private WeixinLoginService weiXinLoginService;
-
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private WeiXinService weiXinService;
+
     
 
     @GetMapping({"/", "/index"})
