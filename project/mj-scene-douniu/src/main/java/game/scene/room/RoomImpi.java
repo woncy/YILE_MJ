@@ -199,34 +199,50 @@ public class RoomImpi extends Room {
 	}
 	public void gameStart(SceneUser user) {
 		if(user.getLocationIndex()==0){
-			ready(new DNGameReady(0),user);
-			if(roomInfo.isAllReady()){
-//				roomInfo.addCurrentChapter();
-				roomInfo.setBeforeFirstStart(false);
-				String zhuang = config.getString("zhuang");
-				System.out.println(zhuang);
-				if(zhuang!=null&&"lunzhuang".equals(zhuang)){
-					SceneUser[] users = roomInfo.getUsers();
-					for (int i = 0; i < users.length; i++) {
-						SceneUser sceneUser = users[i];
-						if(sceneUser!=null){
-							sendMessage(new DNGameStart(false));
-							qiangzhuang(new DNQiangZhuang(sceneUser.getLocationIndex(), true), sceneUser);
-						}
-					}
-				}else if(zhuang!=null&&"kpqz".equals(zhuang)){
-					roomInfo.gameStartClear();
-					roomInfo.getChapter().startGame(true);
-					sendMessage(new DNGameStart(true));
-					executeQiangZhuangTimer();
-				}else{
-					sendMessage(new DNGameStart(true));
-					executeQiangZhuangTimer(); 
-				}
-				gameStartToBoss();
-			}else{
-				sendMessage(new DNGameStart(false)); 
+			boolean aa = true;
+			if(roomInfo.getCurrentChapterNum()==0){
+				aa = roomInfo.isAllReady2();
 			}
+			if(aa){
+				ready(new DNGameReady(0),user);
+				if(roomInfo.isAllReady()){
+//				roomInfo.addCurrentChapter();
+					roomInfo.setBeforeFirstStart(false);
+					String zhuang = config.getString("zhuang");
+					if(zhuang!=null&&"lunzhuang".equals(zhuang)){
+						int userNum=0;
+						SceneUser[] users = roomInfo.getUsers();
+						for (int i = 0; i < users.length; i++) {
+							SceneUser sceneUser = users[i];
+							if(sceneUser!=null){
+								sendMessage(new DNGameStart(false));
+								qiangzhuang(new DNQiangZhuang(sceneUser.getLocationIndex(), true), sceneUser);
+							}
+						}
+						int chapterNum = roomInfo.getCurrentChapterNum()%roomInfo.get;
+						SceneUser[] users = roomInfo.getUsers();
+						for (int i = 0; i < users.length; i++) {
+							SceneUser sceneUser = users[i];
+							if(sceneUser!=null){
+								sendMessage(new DNGameStart(false));
+								qiangzhuang(new DNQiangZhuang(sceneUser.getLocationIndex(), true), sceneUser);
+							}
+						}
+					}else if(zhuang!=null&&"KPQZ".equals(zhuang)){
+						roomInfo.gameStartClear();
+						roomInfo.getChapter().startGame(true);
+						sendMessage(new DNGameStart(true));
+						executeQiangZhuangTimer();
+					}else{
+						sendMessage(new DNGameStart(true));
+						executeQiangZhuangTimer(); 
+					}
+					gameStartToBoss();
+				}
+			}
+//			}else{
+//				sendMessage(new DNGameStart(false)); 
+//			}
 		}
 	}
 	public void ready(DNGameReady msg,SceneUser user) {

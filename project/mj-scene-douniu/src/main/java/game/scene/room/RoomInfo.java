@@ -93,7 +93,7 @@ public class RoomInfo {
 			}
 			
 		}
-		if("kpqz".equals(zhuang)&&(state!=STATE.PKING)){
+		if("KPQZ".equals(zhuang)&&(state!=STATE.PKING)){
 			roomInfo.setChapterInfo(chapter.toMessage(index,true));
 			
 		}else{
@@ -493,6 +493,28 @@ public class RoomInfo {
 		}
 		return true;
 		
+	}
+
+	public boolean isAllReady2() {
+		int userNum = 0;
+		for (int i = 1; i < userStates.length; i++) {
+			UserState userState = userStates[i];
+			SceneUser sceneUser = users[i];
+			if(sceneUser!=null){
+				userNum++;
+				if(!sceneUser.isOnline()){
+					return false;
+				}
+				if(!userState.isReady()){
+					return false;
+				}
+			}
+			
+		}
+		if(userNum<1){
+			return false;
+		}
+		return true;
 	}
 	
 	

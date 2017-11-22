@@ -22,7 +22,6 @@ public class Chapter {
 	private int[] zhus;
 	private int zhuangIndex;
 	private int currentIndex;
-	private boolean qiangzhuang;
 	private List<Integer> qiangZhuangChache = new ArrayList<Integer>();
 	Random random = new Random();
 	Room room;
@@ -31,7 +30,6 @@ public class Chapter {
 		this.seats = new UserSeat[userNum];
 		this.zhus = new int[userNum];
 		this.room = room;
-		this.qiangzhuang =false;
 	} 
 	public UserSeat[] getSeats() {
 		return seats;
@@ -92,12 +90,9 @@ public class Chapter {
 		try {
 			startClear();
 			room.getRoomInfo().setBeforeFirstStart(false);
-			if(!qiangzhuang){
+			if(isKPQZ){
 				DNFaPaiUtil.faPai(seats);
 			}
-			
-			qiangzhuang = isKPQZ;
-			
 			for (int i = 0; i < seats.length; i++) {
 				room.sendMessage(i, this.toMessage(i,isKPQZ));
 			}

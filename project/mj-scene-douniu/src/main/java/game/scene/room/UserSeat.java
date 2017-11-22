@@ -74,18 +74,14 @@ public class UserSeat {
 		SeatUserInfo info = new SeatUserInfo();
 		if(index == this.index){
 			if(pokers[0]==null){
-				if(isKPQZ){
-					info.setPais(new int[]{-2,-2,-2,-2});
-				}else{
-					info.setPais(new int[]{-2,-2,-2,-2,-2,});
-				}
+				info.setPais(new int[]{-2,-2,-2,-2,-2,});
 			}else{
 				if(isKPQZ){
-					DouniuPoker[] poker = new DouniuPoker[4];
-					for (int i = 0; i < pokers.length; i++) {
-						poker[i] = pokers[i];
-					}
-					info.setPais(DouniuPoker.toIntArrayFromDouniuArray(poker));
+					int[] poker = DouniuPoker.toIntArrayFromDouniuArray(pokers);
+					poker[3] = -1;
+					poker[4] = -1;
+					info.setPais(poker);
+					info.setPaiType(-1);
 				}else{
 					info.setPais(DouniuPoker.toIntArrayFromDouniuArray(pokers));
 					info.setPaiType(pai.getType().getIndex());
@@ -97,12 +93,8 @@ public class UserSeat {
 				info.setPaiType(pai.getType().getIndex());
 			}else{
 				if(pokers[0] != null){
-					if(isKPQZ){
-						info.setPais(new int[]{-1,-1,-1,-1});
-					}else{
-						info.setPais(new int[]{-1,-1,-1,-1,-1});
-						info.setPaiType(-1);
-					}
+					info.setPais(new int[]{-1,-1,-1,-1,-1});
+					info.setPaiType(-1);
 				}
 				else{
 					info.setPais(new int[]{-2,-2,-2,-2,-2});
