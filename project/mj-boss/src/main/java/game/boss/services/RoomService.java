@@ -246,7 +246,7 @@ public class RoomService extends FrameQueueContainer implements BaseService {
             asyncDbService.excuete(user, () -> {
             	
                 RoomDO room = checkUserCreateRoom(user);
-                if (room != null) {
+                if (room != null&&"0".equals(room.getConfig().getString("isProxy"))) {
                 	closeRoom(room, user);
                 }
                 

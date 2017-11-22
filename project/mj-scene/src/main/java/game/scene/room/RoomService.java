@@ -187,6 +187,12 @@ public class RoomService extends FrameQueueContainer implements ApplicationConte
                     }
                     msg.setResult(ret);
                     bossClient.writeAndFlush(msg);
+                    if(room.checkDElRoom()){
+                    	RoomEndMsg m = new RoomEndMsg();
+                        m.setCrateUserId(room.getRoomInfo().getCreateUserId());
+                        m.setRoomId(room.getRoomInfo().getRoomId());
+                        bossClient.writeAndFlush(m);
+                    }
                 });
             });
         });

@@ -584,4 +584,19 @@ public class RoomImpi extends Room {
 	public void voice(Voice msg) {
 		sendMessage(msg);
 	}
+
+	public boolean checkDElRoom() {
+		SceneUser[] users = roomInfo.getUsers();
+		int userNum = 0;
+		for (int i = 0; i < users.length; i++) {
+			SceneUser sceneUser = users[i];
+			if(sceneUser!=null){
+				userNum++;
+			}
+		}
+		if(userNum==0){
+			return true;
+		}
+		return false;
+	}
 }
