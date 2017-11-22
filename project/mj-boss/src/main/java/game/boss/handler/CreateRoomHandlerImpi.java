@@ -25,9 +25,11 @@ public class CreateRoomHandlerImpi implements CreateRoomHandler<User> {
     	
     	
     	if(profile.equals("DK")){
-    		roomService.proxyCreateRoom(msg, user);
+    		roomService.proxyCreateRoom(msg, user,1000);
     	}else if(profile.equals("DN")){
     		roomService.createRoom2(msg, user,1003);
+    	}else if(profile.equals("DNK")){
+    		roomService.proxyCreateRoom(msg, user,1003);
     	}else{
     		roomService.createRoom2(msg, user,1000);
     	}

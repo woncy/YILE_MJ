@@ -18,12 +18,14 @@ public class DNChapterInfo extends AbstractMessage{
 	private int currentIndex;//当前正在操作的用户
 	private int currentChapterNum;//当前局数
 	private List<SeatUserInfo> seats = new ArrayList<SeatUserInfo>();//
+	private boolean isShowLP;
 	@Override
 	public void decode(Input in) throws IOException, ProtocolException {
 		this.zhuangIndex = in.readInt();
 		this.currentIndex = in.readInt();
 		this.currentChapterNum = in.readInt();
 		MessageUtil.decodeList(in, seats, SeatUserInfo.class);
+		this.isShowLP = in.readBoolean();
 		
 	}
 	@Override
@@ -32,11 +34,18 @@ public class DNChapterInfo extends AbstractMessage{
 		out.writeInt(currentIndex);
 		out.writeInt(currentChapterNum);
 		MessageUtil.encodeList(out, seats);
+		out.writeBoolean(isShowLP);
 	}
 	@Override
 	public String toString() {
 		return "DNChapterInfo [zhuangIndex=" + zhuangIndex + ", currentIndex=" + currentIndex + ", currentChapterNum="
-				+ currentChapterNum + ", seats=" + seats + "]";
+				+ currentChapterNum + ", seats=" + seats + ", isShowLP=" + isShowLP + "]";
+	}
+	public boolean isShowLP() {
+		return isShowLP;
+	}
+	public void setShowLP(boolean isShowLP) {
+		this.isShowLP = isShowLP;
 	}
 	public int getCurrentChapterNum() {
 		return currentChapterNum;

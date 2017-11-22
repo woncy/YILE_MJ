@@ -66,6 +66,7 @@ public class Chapter {
 			
 		}
 		info.setSeats(seatsInfos);
+		info.setShowLP(!isKPQZ);
 		return info;
 		
 	}
@@ -86,11 +87,16 @@ public class Chapter {
 		return zhuangIndex;
 	}
 	
-	public void startGame(boolean isKPQZ) {
+	public void startGame(String str,boolean isKPQZ) {
 		try {
-			startClear();
 			room.getRoomInfo().setBeforeFirstStart(false);
-			if(isKPQZ){
+			if("KPQZ".equals(str)){
+				if(isKPQZ){
+					startClear();
+					DNFaPaiUtil.faPai(seats);
+				}
+			}else{
+				startClear();
 				DNFaPaiUtil.faPai(seats);
 			}
 			for (int i = 0; i < seats.length; i++) {
@@ -126,7 +132,7 @@ public class Chapter {
 		if(isall){
 			if(qiangZhuangChache.size()>0){
 				int r = random.nextInt(qiangZhuangChache.size());
-				this.zhuangIndex = r;
+				this.zhuangIndex = qiangZhuangChache.get(r);
 				return r;
 			}else{
 				int r = random.nextInt(userNum());

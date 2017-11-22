@@ -354,8 +354,9 @@ public class RoomService extends FrameQueueContainer implements BaseService {
     }
     
 
-    public void proxyCreateRoom(CreateRoom msg,User user){
+    public void proxyCreateRoom(CreateRoom msg,User user,int sceneId){
     	 run(() -> {
+    		String typeName = msg.getProfile();
          	UserDO userDO = userDao.get(user.getUserId());
          	if(userDO.getLevel()<=0){
          		ProxyRoom pmsg = new ProxyRoom("您还不是代理，不能代开房间");
@@ -370,7 +371,12 @@ public class RoomService extends FrameQueueContainer implements BaseService {
              	 */
                    {
                        int max = config.getInt(Config.CHAPTER_MAX);
-                       int gold = max / 8;
+                       int gold = 0;
+                       if("DK".equals(typeName)){
+                    	   gold = max / 8;
+                       }else{
+                    	   gold = max / 20;
+                       }
                        UserDO userDO2 = userDao.get(user.getUserId());
                        if (userDO2.getGold()< gold) {
                            sendNoGold(user);
@@ -385,7 +391,6 @@ public class RoomService extends FrameQueueContainer implements BaseService {
              }
              //鐢熸垚roomCheckId
              String roomCheckId = getBufferId();
-             int sceneId = 1000;
              asyncDbService.excuete(user, () -> {
                  Room2DO room = checkUserCreateRoom(user);
                  room = new Room2DO();

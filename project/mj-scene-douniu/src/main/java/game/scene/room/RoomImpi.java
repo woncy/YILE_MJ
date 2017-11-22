@@ -215,22 +215,29 @@ public class RoomImpi extends Room {
 						for (int i = 0; i < users.length; i++) {
 							SceneUser sceneUser = users[i];
 							if(sceneUser!=null){
-								sendMessage(new DNGameStart(false));
-								qiangzhuang(new DNQiangZhuang(sceneUser.getLocationIndex(), true), sceneUser);
+								userNum++;
 							}
 						}
-						int chapterNum = roomInfo.getCurrentChapterNum()%roomInfo.get;
-						SceneUser[] users = roomInfo.getUsers();
+						int chapterNum = roomInfo.getCurrentChapterNum();
+						int zhuangIndex = 0;
+						if(userNum!=0){
+							zhuangIndex = (chapterNum-1)%userNum;
+						}
+						System.out.println("用户数量:"+userNum+"局数："+chapterNum+"庄位置："+zhuangIndex);
 						for (int i = 0; i < users.length; i++) {
 							SceneUser sceneUser = users[i];
 							if(sceneUser!=null){
 								sendMessage(new DNGameStart(false));
-								qiangzhuang(new DNQiangZhuang(sceneUser.getLocationIndex(), true), sceneUser);
+								if(sceneUser.getLocationIndex()==zhuangIndex){
+									qiangzhuang(new DNQiangZhuang(sceneUser.getLocationIndex(), true), sceneUser);
+								}else{
+									qiangzhuang(new DNQiangZhuang(sceneUser.getLocationIndex(), false), sceneUser);
+								}
 							}
 						}
 					}else if(zhuang!=null&&"KPQZ".equals(zhuang)){
 						roomInfo.gameStartClear();
-						roomInfo.getChapter().startGame(true);
+						roomInfo.getChapter().startGame(zhuang,true);
 						sendMessage(new DNGameStart(true));
 						executeQiangZhuangTimer();
 					}else{
@@ -415,7 +422,8 @@ public class RoomImpi extends Room {
 		boolean isAll = roomInfo.getChapter().xiazhu(msg,user);
 		if(isAll){
 			roomInfo.gameStartClear();
-			roomInfo.getChapter().startGame(false);
+			String str = config.getString("zhuang");
+			roomInfo.getChapter().startGame(str,false);
 			roomInfo.setState(STATE.PKING);
 			executePkTimer();
 		}

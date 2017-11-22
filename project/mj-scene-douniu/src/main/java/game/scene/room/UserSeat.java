@@ -74,7 +74,7 @@ public class UserSeat {
 		SeatUserInfo info = new SeatUserInfo();
 		if(index == this.index){
 			if(pokers[0]==null){
-				info.setPais(new int[]{-2,-2,-2,-2,-2,});
+				info.setPais(new int[]{-2,-2,-2,-2,-2});
 			}else{
 				if(isKPQZ){
 					int[] poker = DouniuPoker.toIntArrayFromDouniuArray(pokers);
