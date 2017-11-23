@@ -64,7 +64,7 @@ public class SceneMessageManager {
                 }
                 case RoomEndMsg.ID:{
                     RoomEndMsg endMsg = (RoomEndMsg) msg;
-                    roomService.delRoom(endMsg.getCrateUserId(), null, true);
+                    roomService.delRoom(endMsg.getCrateUserId(),endMsg.getRoomId(), null, true);
                     break;
                 }
                 case ChapterStartMsg.ID:{

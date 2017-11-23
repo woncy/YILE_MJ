@@ -453,13 +453,14 @@ public class RoomService extends FrameQueueContainer implements BaseService {
         });
 	}
 
-    public void delRoom(int userId, User user, boolean isEnd) {
+    public void delRoom(int userId, int roomId,User user, boolean isEnd) {
         asyncDbService.excuete(userId, () -> {
-            RoomDO room = roomDao.findObject(
-                    RoomDO.Table.CREATE_USER_ID, userId,
-                    RoomDO.Table.START, true
-            );
-            if (room != null) {
+//            RoomDO room = roomDao.findObject(
+//                    RoomDO.Table.CREATE_USER_ID, userId,
+//                    RoomDO.Table.START, true
+//            );
+        	RoomDO room = roomDao.get(roomId);
+            if (room != null&&room.getStart()==true) {
                 run(() -> {
                     bossService.startDelRoomScene(userId, room, isEnd);
                 });

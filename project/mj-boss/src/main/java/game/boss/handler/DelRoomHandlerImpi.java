@@ -17,7 +17,7 @@ public class DelRoomHandlerImpi implements DelRoomHandler<User> {
 
     @Override
     public boolean handler(DelRoom msg, User user) {
-        roomService.delRoom(user.getUserId(), user, false);
+//        roomService.delRoom(user.getUserId(), user, false);
         return false;
     }
 }
