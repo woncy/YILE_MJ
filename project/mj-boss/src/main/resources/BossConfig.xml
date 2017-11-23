@@ -3,7 +3,7 @@
 <properties>
     <entry key="net.gatewayListenServerPort">11030</entry>
     <entry key="net.sceneListenServerPort">11031</entry>
-    <entry key="net.adminListenServerPort">11032</entry>
+    <entry key="net.adminListenServerPort">11002</entry>
     <entry key="net.zjhSceneListenServerPort">11034</entry>
     <entry key="net.douniuSceneListenServerPort">11036</entry>
     <entry key="gatewayUserMaxConnect">8000</entry>
