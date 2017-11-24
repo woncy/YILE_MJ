@@ -3,8 +3,13 @@
 <properties>
     <entry key="net.gatewayListenServerPort">11030</entry>
     <entry key="net.sceneListenServerPort">11031</entry>
+<<<<<<< HEAD
     <entry key="net.adminListenServerPort">11002</entry>
     <!-- <entry key="net.zjhSceneListenServerPort">11034</entry> -->
+=======
+    <entry key="net.adminListenServerPort">11032</entry>
+    <entry key="net.zjhSceneListenServerPort">11034</entry>
+>>>>>>> parent of efdc39a... 整理client
     <entry key="net.douniuSceneListenServerPort">11036</entry>
     <entry key="gatewayUserMaxConnect">8000</entry>
     <!--#jdbc.url=jdbc:mysql://192.168.8.200:3306/tr_test?autoReconnect=true&amp;characterEncoding=utf-8-->
