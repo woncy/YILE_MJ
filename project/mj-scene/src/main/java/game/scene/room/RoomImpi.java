@@ -762,4 +762,23 @@ public class RoomImpi extends Room {
 		msg.setUserId(user.getUserId());
 		bossClient.writeAndFlush(msg);
 	}
+
+	public void checkDelRoom() {
+		SceneUser[] users = roomInfo.getUsers();
+		int userNum = 0;
+		for (int i = 0; i < users.length; i++) {
+			SceneUser sceneUser = users[i];
+			if(sceneUser!=null){
+				userNum++;
+			}
+		}
+		if(userNum==0){
+			DelRoom2Msg msg = new DelRoom2Msg();
+			msg.setCreateUserId(roomInfo.getCreateUserId());
+			msg.setInfos(null);
+			msg.setRoomId(roomInfo.getRoomId());
+			msg.setSceneId(roomInfo.getSceneId());
+			bossClient.writeAndFlush(msg);
+		}
+	}
 }

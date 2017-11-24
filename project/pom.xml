@@ -17,7 +17,7 @@
         <module>mj-client</module>
         <module>mj-manager</module>
         <module>mj-scene-douniu</module>
-        <module>testMessage</module>
+		<module>testMessage</module>
     	<module>distribution</module>
 	
   </modules>

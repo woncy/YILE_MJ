@@ -107,7 +107,6 @@ public class MessageManager {
                     return;
                 }
                 if(((JoinRoomMsg) msg).getSceneId()==1002){
-                	userImpi.send(new JoinPdkRoomReady());
                 }else{
                 	roomService.joinRoomGatewaySuccess(userImpi);
                 }

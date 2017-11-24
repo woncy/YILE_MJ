@@ -1,9 +1,9 @@
 package game.boss.dao.dao;
 
 import  org.forkjoin.core.dao.impi.BaseDaoImpi;
-import org.springframework.stereotype.Component;
-
 import game.boss.dao.entity.AdminDO;
+
+import org.springframework.stereotype.Component;
 
 @Component
 public class AdminDao extends BaseDaoImpi<AdminDO,AdminDO.Key>  {

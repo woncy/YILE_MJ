@@ -246,6 +246,10 @@ public class RoomService extends FrameQueueContainer implements BaseService {
     
     public void joinRoom2(String roomNO,User user){
     	run(()->{
+    		Room2DO roomDo2 = room2Dao.findObject(Room2DO.Table.ROOM_CHECK_ID,roomNO,Room2DO.Table.START,true);
+    		if(roomDo2==null){
+    			return;
+    		}
     		Room2 room2 = checkIdRoom2Map.get(roomNO);
     		if(room2!=null){
     			if(room2.isStart()){

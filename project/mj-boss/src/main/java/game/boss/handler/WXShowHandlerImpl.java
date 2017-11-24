@@ -7,7 +7,6 @@ import game.boss.model.User;
 import game.boss.services.UserService;
 import mj.net.handler.login.WXShowHandler;
 import mj.net.message.login.WXPayQuery;
-import mj.net.message.login.WXShow;
 
 /**
     * @ClassName: WXShowHandlerImpl

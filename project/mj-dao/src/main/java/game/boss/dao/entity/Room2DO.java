@@ -1,5 +1,4 @@
 package  game.boss.dao.entity;
-
 import java.beans.Transient;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,8 +14,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-
-import mj.data.Config;
 
 import  org.forkjoin.core.dao.EntityObject;
 import  org.forkjoin.core.dao.KeyObject;
@@ -35,7 +32,7 @@ public class Room2DO extends EntityObject<Room2DO, Room2DO.Key>{
 	private Boolean start;
 	private Boolean end;
 	private Integer sceneId;
-	private mj.data.Config config;
+	private String config;
 
 	public static class Key implements KeyObject<Room2DO, Room2DO.Key>{
     	private int id;
@@ -88,11 +85,6 @@ public class Room2DO extends EntityObject<Room2DO, Room2DO.Key>{
 				return id;
 			}
 
-			public void setId(int id) {
-				Room2DO.this.id  = id;
-				Room2DO.this.changeProperty("id",id);
-			}
-
 			@Override
 			public String toString() {
 				return "Room2[id:"+ id+ "]";
@@ -106,8 +98,7 @@ public class Room2DO extends EntityObject<Room2DO, Room2DO.Key>{
 	public Room2DO() {
     }
 
-	public Room2DO(int id,int createUserId,Integer userMax,String roomCheckId,java.util.Date startDate,java.util.Date endDate,Boolean start,Boolean end,Integer sceneId,mj.data.Config config) {
-		this.id = id;
+	public Room2DO(int createUserId,Integer userMax,String roomCheckId,java.util.Date startDate,java.util.Date endDate,Boolean start,Boolean end,Integer sceneId,String config) {
 		this.createUserId = createUserId;
 		this.userMax = userMax;
 		this.roomCheckId = roomCheckId;
@@ -221,11 +212,11 @@ public class Room2DO extends EntityObject<Room2DO, Room2DO.Key>{
 		changeProperty("sceneId",sceneId);
 	}
 
-	public Config getConfig() {
+	public String getConfig() {
 		return config;
 	}
 
-	public void setConfig(Config config) {
+	public void setConfig(String config) {
 		this.config = config;
 		changeProperty("config",config);
 	}
@@ -290,13 +281,17 @@ public class Room2DO extends EntityObject<Room2DO, Room2DO.Key>{
 			sceneId = (Integer)obj;
 			return true;
 		case "config":
-			config = (Config)obj;
+			config = (String)obj;
 			return true;
 		default :
 			return false;
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Room2[id:"+ id+",createUserId:"+ createUserId+",userMax:"+ userMax+",roomCheckId:"+ (roomCheckId == null ?"null":roomCheckId.substring(0, Math.min(roomCheckId.length(), 64)))+",startDate:"+ startDate+",endDate:"+ endDate+",start:"+ start+",end:"+ end+",sceneId:"+ sceneId+",config:"+ (config == null ?"null":config.substring(0, Math.min(config.length(), 64)))+ "]";
+	}
 
 	@Override
 	@JsonIgnore
@@ -365,9 +360,6 @@ public class Room2DO extends EntityObject<Room2DO, Room2DO.Key>{
 			Object idPtr;
 			idPtr = t.getId();
 
-			if(isSetUnique){
-				ps.setObject(i++, idPtr);
-			}
 			Object createUserIdPtr;
 			createUserIdPtr = t.getCreateUserId();
 
@@ -401,11 +393,8 @@ public class Room2DO extends EntityObject<Room2DO, Room2DO.Key>{
 
 			ps.setObject(i++, sceneIdPtr);
 			Object configPtr;
-			if(t.getConfig() != null){
-				configPtr = com.isnowfox.util.JsonUtils.serialize(t.getConfig());
-			}else{
-				configPtr = null;
-			}
+			configPtr = t.getConfig();
+
 			ps.setObject(i++, configPtr);
 			return i;
 		}
@@ -449,7 +438,7 @@ public class Room2DO extends EntityObject<Room2DO, Room2DO.Key>{
 
 			ps.setObject(i++,  sceneIdPtr);
 			Object configPtr;
-			configPtr = t.getConfig();
+				configPtr = t.getConfig();
 
 			ps.setObject(i++,  configPtr);
         	return i;
@@ -468,7 +457,7 @@ public class Room2DO extends EntityObject<Room2DO, Room2DO.Key>{
 		}
 
 		@Override public String getInsertSql(){
-			return "INSERT INTO `room2` (`id`,`create_user_id`,`user_max`,`room_check_id`,`start_date`,`end_date`,`start`,`end`,`scene_id`,`config`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+			return "INSERT INTO `room2` (`create_user_id`,`user_max`,`room_check_id`,`start_date`,`end_date`,`start`,`end`,`scene_id`,`config`) VALUES (?,?,?,?,?,?,?,?,?)";
 		}
 
 		@Override public String getReplaceSql(){
@@ -476,13 +465,13 @@ public class Room2DO extends EntityObject<Room2DO, Room2DO.Key>{
         }
 
 		@Override public String getFastInsertPrefixSql(){
-			return "INSERT INTO `room2` (`id`,`create_user_id`,`user_max`,`room_check_id`,`start_date`,`end_date`,`start`,`end`,`scene_id`,`config`) VALUES ";
+			return "INSERT INTO `room2` (`create_user_id`,`user_max`,`room_check_id`,`start_date`,`end_date`,`start`,`end`,`scene_id`,`config`) VALUES ";
 		}
 		@Override public String getFastInsertValueItemsSql(){
-			return " (?,?,?,?,?,?,?,?,?,?) ";
+			return " (?,?,?,?,?,?,?,?,?) ";
 		}
 		@Override public String getUpdateSql(){
-			return "UPDATE `room2` SET `id`=?,`create_user_id`=?,`user_max`=?,`room_check_id`=?,`start_date`=?,`end_date`=?,`start`=?,`end`=?,`scene_id`=?,`config`=? WHERE `id`=?";
+			return "UPDATE `room2` SET `create_user_id`=?,`user_max`=?,`room_check_id`=?,`start_date`=?,`end_date`=?,`start`=?,`end`=?,`scene_id`=?,`config`=? WHERE `id`=?";
 		}
 
 		@Override public String getSelectByKeySql(){
@@ -521,12 +510,7 @@ public class Room2DO extends EntityObject<Room2DO, Room2DO.Key>{
 					o.start = rs.getBoolean("start");
 					o.end = rs.getBoolean("end");
 					o.sceneId = rs.getInt("scene_id");
-					String configStr = rs.getString("config");
-					if (com.isnowfox.util.StringExpandUtils.isNotEmpty(configStr)) {
-						o.config =  com.isnowfox.util.JsonUtils.deserialize(configStr,new com.fasterxml.jackson.core.type.TypeReference<mj.data.Config>(){});
-					}else{
-						o.config = null;
-					}
+					o.config = rs.getString("config");
 					return o;
 				}
 			};
@@ -548,12 +532,7 @@ public class Room2DO extends EntityObject<Room2DO, Room2DO.Key>{
 						o.setStart(rs.getBoolean("start"));
 						o.setEnd(rs.getBoolean("end"));
 						o.setSceneId(rs.getInt("scene_id"));
-						String configStr = rs.getString("config");
-						if (com.isnowfox.util.StringExpandUtils.isNotEmpty(configStr)) {
-							o.setConfig(com.isnowfox.util.JsonUtils.deserialize(configStr,new com.fasterxml.jackson.core.type.TypeReference<mj.data.Config>(){}));
-						}else{
-							o.setConfig(null);
-						}
+						o.setConfig(rs.getString("config"));
                         return o;
 					} catch (InstantiationException | IllegalAccessException e) {
 						throw new SQLException("必须实现默认构造函数",e);

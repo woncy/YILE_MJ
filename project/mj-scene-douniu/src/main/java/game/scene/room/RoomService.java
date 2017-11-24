@@ -182,6 +182,7 @@ public class RoomService extends FrameQueueContainer implements ApplicationConte
                         gatewayIdUnionSessionIdMap.remove(gatewayIdUnionSessionId);
                         gatewayIdUnionSessionIdUserMap.remove(gatewayIdUnionSessionId);
                         room.sendMessage(new ExitDouniuRoomResult(msg.getUserId()),null);
+//                        room.checkDelRoom();
                     }
                 });
             });

@@ -179,6 +179,7 @@ public class RoomService extends FrameQueueContainer implements ApplicationConte
                     }
                     msg.setResult(ret);
                     bossClient.writeAndFlush(msg);
+                    room.checkDelRoom();
                 });
             });
         });

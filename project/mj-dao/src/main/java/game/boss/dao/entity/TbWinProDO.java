@@ -1,5 +1,4 @@
 package  game.boss.dao.entity;
-
 import java.beans.Transient;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
